@@ -1,0 +1,47 @@
+{
+  "albums": [
+    {
+      "id": "375344f5-1ced-4160-994c-77d0240336be",
+      "name": "logo",
+      "eventDate": "2025-10-01",
+      "description": "dsfvcxz",
+      "photos": [
+        {
+          "id": "f7b99087-b003-4c45-8cd4-6946af58daf7",
+          "src": "/uploads/1759525657592-607832939.png",
+          "caption": "Screenshot 2025-05-16 001239.png"
+        },
+        {
+          "id": "ea6436e7-1037-423a-896d-64f1aa676927",
+          "src": "/uploads/1759525657607-885156460.png",
+          "caption": "Screenshot 2025-05-29 023832.png"
+        },
+        {
+          "id": "6b68eb14-2aad-467a-bc42-663b077d301c",
+          "src": "/uploads/1759525657608-651437602.png",
+          "caption": "Screenshot 2025-05-29 023935.png"
+        },
+        {
+          "id": "cc720541-5fc0-4aa6-8930-a1b2f255b5ce",
+          "src": "/uploads/1759525657609-692375178.png",
+          "caption": "Screenshot 2025-05-29 024051.png"
+        },
+        {
+          "id": "c29f38c3-02a4-40c0-84ba-fd08d7969641",
+          "src": "/uploads/1759525657612-864723658.png",
+          "caption": "Screenshot 2025-05-29 024141.png"
+        },
+        {
+          "id": "6a28f161-8aa7-4622-b5a8-bad3371fb28e",
+          "src": "/uploads/1759525518848-733520023.png",
+          "caption": "Screenshot 2025-05-31 015026.png"
+        },
+        {
+          "id": "26068abb-7c98-4636-87ea-f3df5a739ea9",
+          "src": "/uploads/1759525499127-579139556.png",
+          "caption": "Screenshot 2025-05-31 015026.png"
+        }
+      ]
+    }
+  ]
+}

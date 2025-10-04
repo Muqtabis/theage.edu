@@ -1,0 +1,149 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.main-header {
+    background: #0073e6;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.album-grid, .photo-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.album-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.album-card, .photo-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.album-card img, .photo-item img {
+    width: 100%;
+    display: block;
+}
+
+.album-info {
+    padding: 0.5rem;
+}
+
+.photo-delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255,0,0,0.8);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* FAB */
+.admin-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #0073e6;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* Modal */
+.modal-container {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.tab {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.tab-link {
+    flex: 1;
+    padding: 0.5rem;
+    cursor: pointer;
+    background: #eee;
+    border: none;
+    outline: none;
+}
+
+.tab-link.active {
+    background: #0073e6;
+    color: #fff;
+}
+
+/* Lightbox */
+.lightbox-container {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 2000;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80%;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: 20px; right: 30px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
