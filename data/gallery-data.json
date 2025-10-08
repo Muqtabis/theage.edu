@@ -1,6 +1,34 @@
 {
   "albums": [
     {
+      "id": "b22e0ed6-90eb-4e92-b957-b68295bbf4e4",
+      "name": "ss",
+      "eventDate": "2025-10-01",
+      "description": "",
+      "photos": [
+        {
+          "id": "85262f24-750f-43d3-a5e8-7cdd74202ed6",
+          "src": "/uploads/1759695270584-471748291.png",
+          "caption": "kcet scorecard ghufraan.png"
+        },
+        {
+          "id": "80b15cd2-d0eb-4d79-911b-e3d48ee697b8",
+          "src": "/uploads/1759695270589-723141657.png",
+          "caption": "Screenshot 2024-11-23 005201.png"
+        },
+        {
+          "id": "b30e289b-ce2b-4d57-b861-75bdc1185688",
+          "src": "/uploads/1759695270606-480571238.png",
+          "caption": "Screenshot 2025-02-03 233917.png"
+        },
+        {
+          "id": "12bb2369-6e9b-4dff-a3d1-db1cf77e8586",
+          "src": "/uploads/1759695270607-106404286.png",
+          "caption": "Screenshot 2025-02-03 233945.png"
+        }
+      ]
+    },
+    {
       "id": "375344f5-1ced-4160-994c-77d0240336be",
       "name": "logo",
       "eventDate": "2025-10-01",

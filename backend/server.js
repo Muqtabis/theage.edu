@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs').promises; // Use the promise-based version of fs
 const multer = require('multer');
@@ -7,12 +9,14 @@ const sanitizeHtml = require('sanitize-html');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
+const adminRoutes = require('./routes/adminRoutes');
 const PORT = process.env.PORT || 3000;
 
 const DATA_FILE = path.join(__dirname, 'gallery-data.json');
 const UPLOADS_DIR = path.join(__dirname, '..', 'uploads');
 const galleryRoutes = require('./routes/galleryRoutes');
 // --- Middleware ---
+
 // NOTE: Make sure you have a 'frontend' folder for your HTML/CSS/JS files
 app.use(express.static(path.join(__dirname, '..', 'frontend'))); // Adjusted path for better structure
 app.use('/uploads', express.static(UPLOADS_DIR));
@@ -192,9 +196,55 @@ app.get('/api/featured-photos', async (req, res) => {
         res.status(500).json({ error: 'Failed to get featured photos.' });
     }
 });
+// Middleware
+app.use(bodyParser.json());
+app.use(session({
+    secret: 'supersecretkey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}));
 
+app.use(express.static(path.join(__dirname, '../frontend')));
 
-// --- Start Server ---
+// --- Hardcoded Admin User ---
+const ADMIN_USER = { username: 'admin', password: 'admin123' };
+
+// --- Admin Login API ---
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === ADMIN_USER.username && password === ADMIN_USER.password) {
+        req.session.admin = true;
+        return res.json({ success: true });
+    }
+    res.status(401).json({ success: false });
+});
+
+// Admin logout
+app.post('/admin/logout', (req, res) => {
+    req.session.destroy();
+    res.json({ success: true });
+});
+
+// Protect Admin Dashboard
+app.get('/admin/dashboard', (req, res) => {
+    if (req.session.admin) {
+        res.sendFile(path.join(__dirname,'../frontend/admin.html'));
+    } else {
+        res.redirect('/admin/login');
+    }
+});
+
+// Serve Login Page
+app.get('/admin/login', (req, res) => {
+    res.sendFile(path.join(__dirname,'../frontend/login.html'));
+});
+
+// Serve Home Page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'../frontend/home.html'));
+});
+
 app.listen(PORT, () => {
- console.log(`Server is running! Open http://localhost:${PORT}/gallery.html`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
