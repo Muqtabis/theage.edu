@@ -1,0 +1,185 @@
+/* =========================================
+   1. FONTS & TAILWIND IMPORTS
+   ========================================= */
+/* Poppins: For Headings (Professional, Bold, School-Friendly)
+   Open Sans: For Body Text (Highly Readable) 
+*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   2. GLOBAL BASE STYLES
+   ========================================= */
+@layer base {
+  html {
+    /* Default body font */
+    font-family: 'Open Sans', sans-serif; 
+    scroll-behavior: smooth;
+  }
+  
+  /* Apply Poppins to headings, nav, and buttons for the premium look */
+  h1, h2, h3, h4, h5, h6, nav, button, a, .font-bold {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-slate-800 antialiased;
+  }
+}
+
+/* =========================================
+   3. CUSTOM ANIMATIONS
+   ========================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; 
+}
+
+/* Staggered Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* Standard Spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* =========================================
+   4. CUSTOM SCROLLBAR (Deep Purple Theme)
+   ========================================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a78bfa; /* Violet-400 */
+  border-radius: 5px;
+  border: 2px solid #f1f5f9; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed; /* Violet-600 */
+}
+
+/* =========================================
+   5. COLOR PALETTE OVERRIDES
+   ========================================= */
+
+/* --- PRIMARY: DEEP INDIGO (The "Deep Purple" Base) --- */
+/* Replaces the old Standard Blue with Deep Indigo for a regal look */
+.text-school-blue-50 { color: #eef2ff; }
+.text-school-blue-100 { color: #e0e7ff; }
+.text-school-blue-200 { color: #c7d2fe; } /* Lavender Tint */
+.text-school-blue-500 { color: #6366f1; } 
+.text-school-blue-600 { color: #4f46e5; } 
+.text-school-blue-700 { color: #4338ca; }
+.text-school-blue-800 { color: #3730a3; }
+.text-school-blue-900 { color: #312e81; } /* Deep Indigo */
+.text-school-blue-950 { color: #1e1b4b; } /* Darkest Indigo (Footer BG) */
+
+.bg-school-blue-50 { background-color: #eef2ff; }
+.bg-school-blue-100 { background-color: #e0e7ff; }
+.bg-school-blue-200 { background-color: #c7d2fe; }
+.bg-school-blue-500 { background-color: #6366f1; }
+.bg-school-blue-600 { background-color: #4f46e5; }
+.bg-school-blue-700 { background-color: #4338ca; }
+.bg-school-blue-800 { background-color: #3730a3; }
+.bg-school-blue-900 { background-color: #312e81; }
+.bg-school-blue-950 { background-color: #1e1b4b; }
+
+/* --- ACCENT: VIBRANT VIOLET (Lavender/Purple) --- */
+/* This replaces the 'Yellow' variables so your buttons turn Purple */
+.text-school-yellow-100 { color: #ede9fe; }
+.text-school-yellow-200 { color: #ddd6fe; }
+.text-school-yellow-300 { color: #c4b5fd; }
+.text-school-yellow-400 { color: #a78bfa; }
+.text-school-yellow-500 { color: #8b5cf6; } /* Main Button Color (Violet) */
+.text-school-yellow-600 { color: #7c3aed; }
+.text-school-yellow-700 { color: #6d28d9; }
+
+.bg-school-yellow-100 { background-color: #ede9fe; }
+.bg-school-yellow-200 { background-color: #ddd6fe; }
+.bg-school-yellow-300 { background-color: #c4b5fd; }
+.bg-school-yellow-400 { background-color: #a78bfa; }
+.bg-school-yellow-500 { background-color: #8b5cf6; } /* Main Button Color (Violet) */
+.bg-school-yellow-600 { background-color: #7c3aed; }
+.bg-school-yellow-700 { background-color: #6d28d9; }
+
+/* --- COMPATIBILITY MAPPING --- */
+/* Forces old 'Gold' classes to use the new Violet color */
+.text-school-gold-500 { color: #8b5cf6; } 
+.bg-school-gold-500 { background-color: #8b5cf6; }
+.border-school-gold-500 { border-color: #8b5cf6; }
+.hover\:bg-school-gold-600:hover { background-color: #7c3aed; }
+
+/* Forces old 'Magenta' classes to Fuchsia (compliments purple) */
+.text-school-magenta-700 { color: #c026d3; }
+.bg-school-magenta-700 { background-color: #c026d3; }
+
+/* --- General Text/Backgrounds (Neutral) --- */
+.text-gray-50 { color: #f9fafb; }
+.text-gray-100 { color: #f3f4f6; }
+.text-gray-500 { color: #6b7280; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-700 { color: #374151; }
+.text-gray-800 { color: #1f2937; }
+.text-gray-900 { color: #111827; }
+
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-gray-100 { background-color: #f3f4f6; }
+
+/* =========================================
+   6. UTILITIES
+   ========================================= */
+.hero-bg {
+    background-size: cover;
+    background-position: center bottom; 
+    background-repeat: no-repeat;
+    image-rendering: -webkit-optimize-contrast; /* Sharpens images */
+}
+
+/* Clean Glass Effect (High Opacity to prevent blurriness) */
+.glass {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+/* default header-height fallback so layout isn't broken before JS runs */
+:root {
+  --header-height: 128px; /* fallback initial value (you can change if you want) */
+}
+
+/* ensure no accidental horizontal scroll from odd elements */
+html, body {
+  overflow-x: hidden;
+}
+
+/* optional: ensure top spacing responds smoothly if header height animates */
+main {
+  transition: padding-top 160ms ease;
+}
