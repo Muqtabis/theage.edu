@@ -6,7 +6,7 @@ import heroBg from '../assets/theageheader.jpg'; // Ensure this path is correct
 // ==========================================
 // CONFIGURATION & LOGIC (UNCHANGED)
 // ==========================================
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = '/api';
 
 const useTopContent = () => {
     const [data, setData] = useState({

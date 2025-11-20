@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Loader2, ArrowLeft, Image as ImageIcon, Maximize2, Share2 } from 'lucide-react'; 
 
-const ALBUM_API_URL = 'http://localhost:5000/api/albums'; 
+const ALBUM_API_URL = '/api/albums'; 
 
 const AlbumPage = () => {
     const { albumId } = useParams(); 

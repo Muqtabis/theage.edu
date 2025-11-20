@@ -4,7 +4,7 @@ import { FileText, Download, Loader2, BookOpen, ChevronDown, ChevronUp, Trending
 // ==========================================
 // CONFIGURATION & LOGIC (UNCHANGED)
 // ==========================================
-const RESULT_API_URL = 'http://localhost:5000/api/results';
+const RESULT_API_URL = '/api/results';
 
 const schoolLevels = [
     { 

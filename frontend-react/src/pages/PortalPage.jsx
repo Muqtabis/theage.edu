@@ -5,12 +5,12 @@ import {
 } from 'lucide-react';
 
 // --- API Constants ---
-const NEWS_API_URL = 'http://localhost:5000/api/news';
-const ALBUM_API_URL = 'http://localhost:5000/api/albums';
-const EVENT_API_URL = 'http://localhost:5000/api/events';
-const RESULT_API_URL = 'http://localhost:5000/api/results';
-const STUDENT_API_URL = 'http://localhost:5000/api/students';
-const TEACHER_API_URL = 'http://localhost:5000/api/teachers';
+const NEWS_API_URL = '/api/news';
+const ALBUM_API_URL = '/api/albums';
+const EVENT_API_URL = '/api/events';
+const RESULT_API_URL = '/api/results';
+const STUDENT_API_URL = '/api/students';
+const TEACHER_API_URL = '/api/teachers';
 
 const PortalPage = () => {
     // --- UI State ---

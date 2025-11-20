@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Loader2, Calendar, ArrowRight, Newspaper, Clock, Bell } from 'lucide-react';
 
-const NEWS_API_URL = 'http://localhost:5000/api/news'; 
+const NEWS_API_URL = '/api/news'; 
 
 const NewsPage = () => {
     const [newsItems, setNewsItems] = useState([]);

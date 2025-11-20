@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Music, Users, Zap, Palette, Mic2, Globe, Cpu, Camera, ArrowRight, Image as ImageIcon, Loader2, FolderOpen, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
-const ALBUM_API_URL = 'http://localhost:5000/api/albums';
+const ALBUM_API_URL = '/api/albums';
 
 const StudentLifePage = () => {
     // --- 1. DATA STATE ---
