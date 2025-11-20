@@ -72,11 +72,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(frontendPath));
 
     // 3. Serve index.html for all other GET requests (Catch-all route for React Router)
-    app.get('*', (req, res) => {
+    app.get(/^\/(?!api).*/, (req, res) => {
         res.sendFile(path.resolve(frontendPath, 'index.html'));
     });
 } else {
-    // Development route placeholder for the root '/' endpoint
+    
     app.get('/', (req, res) => {
         res.send('API is running...');
     });
