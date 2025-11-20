@@ -75,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(frontendPath));
 
     // 3. Handle React Routing, return all requests to React app
-    app.get('*', (req, res) => {
+    app.get(/(.*)/, (req, res) => {
         res.sendFile(path.resolve(frontendPath, 'index.html'));
     });
 } else {
