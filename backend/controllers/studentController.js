@@ -15,16 +15,28 @@ const getStudents = async (req, res) => {
 // @route   POST /api/students
 const createStudent = async (req, res) => {
     const { name, grade, admissionId, parentEmail, status } = req.body;
+    
+    // --- 1. Get Cloudinary URL ---
+    // If a file was uploaded, req.file.path contains the Cloudinary URL
+    const image = req.file ? req.file.path : null; 
 
     if (!name || !grade || !admissionId) {
         return res.status(400).json({ message: 'Name, Grade, and Admission ID are required.' });
     }
 
     try {
-        const student = await Student.create({ name, grade, admissionId, parentEmail, status });
+        // --- 2. Save URL to Database ---
+        const student = await Student.create({ 
+            name, 
+            grade, 
+            admissionId, 
+            parentEmail, 
+            status,
+            image // <--- Add this line! (Assumes your Schema has an 'image' field)
+        });
+        
         res.status(201).json(student);
     } catch (error) {
-        // Log Mongoose validation error
         console.error("Student Creation Failed:", error.message);
         res.status(400).json({ message: 'Validation failed or Admission ID already exists.' });
     }

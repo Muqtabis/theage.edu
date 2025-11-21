@@ -23,6 +23,9 @@ const StudentSchema = mongoose.Schema(
         type: String,
         enum: ['Active', 'Graduated', 'Alumni'],
         default: 'Active',
+    }, // <--- THIS COMMA WAS MISSING
+    image: { 
+        type: String 
     }
   },
   {
