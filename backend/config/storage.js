@@ -12,27 +12,29 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// 2. Storage Config (Split logic for PDF vs Image)
+// 2. Storage Config
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: async (req, file) => {
-        // Create a clean, unique filename
+        // Clean filename logic
         const safeName = file.originalname.split('.')[0].replace(/[^a-zA-Z0-9]/g, "_");
         const uniqueId = `${safeName}_${Date.now()}`;
 
-        // CHECK FILE TYPE
+        // ---------------------------------------------------------
+        // FIX: Revert to 'auto' now that size limits are fixed
+        // ---------------------------------------------------------
         if (file.mimetype === 'application/pdf') {
             return {
                 folder: 'theage_edu_uploads',
-                // FIX: 'raw' prevents Cloudinary from corrupting the PDF
-                resource_type: 'raw', 
-                // IMPORTANT: We must manually add .pdf extension for raw files
-                public_id: uniqueId + '.pdf',
+                // 'auto' allows Cloudinary to serve it as 'application/pdf' (Viewable)
+                resource_type: 'auto', 
+                allowed_formats: ['pdf'],
+                // Do NOT add .pdf extension manually here, Cloudinary does it for 'auto'
+                public_id: uniqueId, 
             };
         } else {
             return {
                 folder: 'theage_edu_uploads',
-                // Images are processed normally
                 resource_type: 'image',
                 allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
                 public_id: uniqueId,
@@ -44,9 +46,4 @@ const storage = new CloudinaryStorage({
 // 3. Initialize Multer
 const upload = multer({ storage: storage });
 
-// 4. Export Object
-module.exports = {
-    cloudinary,
-    storage,
-    upload
-};
+module.exports = { cloudinary, storage, upload };
