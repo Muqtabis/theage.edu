@@ -22,7 +22,8 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// --- 2. Middleware & Dynamic CORS Configuration ---
+// --- 2. PREDICTED ERROR FIX: CORS ---
+// Ensures your live frontend can talk to this backend
 const allowedOrigins = process.env.NODE_ENV === 'production'
     ? [
         'https://theage-edu-16ah.onrender.com',
@@ -42,13 +43,15 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// --- 3. PREDICTED ERROR FIX: PAYLOAD TOO LARGE ---
+// This prevents PDF corruption. Without this, Express cuts off large files.
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Serve Static Uploads
+// Serve Static Uploads (Local fallback)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// --- 3. Integrate Backend API Routes ---
+// --- 4. Integrate Backend API Routes ---
 app.use('/api/news', newsRoutes);
 app.use('/api/albums', albumRoutes);
 app.use('/api/events', eventRoutes);
@@ -57,20 +60,20 @@ app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/admin', adminRoutes);
 
-// --- 4. Health Check Route ---
+// --- 5. Health Check Route ---
 app.get('/health', (req, res) => {
     res.status(200).send('API is awake');
 });
 
-// --- 5. Monolithic / Production Deployment Setup ---
+// --- 6. PREDICTED ERROR FIX: DEPLOYMENT PATHS ---
 if (process.env.NODE_ENV === 'production') {
-    // FIX 1: Use '../' to step out of backend folder to find frontend
+    // FIX A: Use '../' to step out of backend folder to find frontend
     const frontendPath = path.join(__dirname, '../frontend-react/dist');
 
     // Serve static files
     app.use(express.static(frontendPath));
 
-    // FIX 2: Reverted to regex /(.*)/ to avoid PathError on your specific Node version
+    // FIX B: Use Regex wildcard to handle React Routing without crashing Node 22
     app.get(/(.*)/, (req, res) => {
         res.sendFile(path.join(frontendPath, 'index.html'));
     });
@@ -80,7 +83,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-// --- 6. Start Server ---
+// --- 7. Start Server ---
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`Mode: ${process.env.NODE_ENV || 'Development'}`);
