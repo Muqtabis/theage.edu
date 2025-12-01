@@ -64,18 +64,14 @@ app.get('/health', (req, res) => {
 
 // --- 5. Monolithic / Production Deployment Setup ---
 if (process.env.NODE_ENV === 'production') {
-    // ----------------------------------------------------
-    // CRITICAL FIX: The path must step OUT of 'backend'
-    // using '..' to find 'frontend-react'
-    // ----------------------------------------------------
+    // FIX 1: Use '../' to step out of backend folder to find frontend
     const frontendPath = path.join(__dirname, '../frontend-react/dist');
 
-    // 1. Serve static files (JS, CSS, Images)
+    // Serve static files
     app.use(express.static(frontendPath));
 
-    // 2. Handle React Routing (Wildcard)
-    // If a request doesn't match an API route or static file, send index.html
-    app.get('*', (req, res) => {
+    // FIX 2: Reverted to regex /(.*)/ to avoid PathError on your specific Node version
+    app.get(/(.*)/, (req, res) => {
         res.sendFile(path.join(frontendPath, 'index.html'));
     });
 } else {
