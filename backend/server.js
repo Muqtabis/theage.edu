@@ -1,11 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const path = require('path'); 
+const path = require('path');
 const connectDB = require('./config/db');
 
 // Import Routes
-const newsRoutes = require('./routes/newsRoutes'); 
+const newsRoutes = require('./routes/newsRoutes');
 const albumRoutes = require('./routes/albumRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const resultRoutes = require('./routes/resultRoutes');
@@ -14,22 +14,21 @@ const teacherRoutes = require('./routes/teacherRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 // --- 1. Load Environment Variables ---
-// CHANGED: Your .env is in the CURRENT folder (backend), not the parent
-dotenv.config({ path: path.resolve(__dirname, '.env') }); 
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Connect to MongoDB
-connectDB(); 
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // --- 2. Middleware & Dynamic CORS Configuration ---
-const allowedOrigins = process.env.NODE_ENV === 'production' 
+const allowedOrigins = process.env.NODE_ENV === 'production'
     ? [
-        'https://theage-edu-16ah.onrender.com', 
-        'https://theage.edu' 
+        'https://theage-edu-16ah.onrender.com',
+        'https://theage.edu'
       ]
-    : ['http://localhost:3000', 'http://localhost:5173']; 
+    : ['http://localhost:3000', 'http://localhost:5173'];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -43,15 +42,14 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve Static Uploads
-// CHANGED: Your uploads folder is in the CURRENT folder (backend)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- 3. Integrate Backend API Routes ---
-app.use('/api/news', newsRoutes); 
+app.use('/api/news', newsRoutes);
 app.use('/api/albums', albumRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/results', resultRoutes);
@@ -66,16 +64,19 @@ app.get('/health', (req, res) => {
 
 // --- 5. Monolithic / Production Deployment Setup ---
 if (process.env.NODE_ENV === 'production') {
-    // 1. Path to frontend build
-    // CHANGED: Your frontend-react folder is inside backend, so we don't use '..'
-    const frontendPath = path.join(__dirname, 'frontend-react', 'dist');
+    // ----------------------------------------------------
+    // CRITICAL FIX: The path must step OUT of 'backend'
+    // using '..' to find 'frontend-react'
+    // ----------------------------------------------------
+    const frontendPath = path.join(__dirname, '../frontend-react/dist');
 
-    // 2. Serve static files
+    // 1. Serve static files (JS, CSS, Images)
     app.use(express.static(frontendPath));
 
-    // 3. Handle React Routing
-    app.get(/(.*)/, (req, res) => {
-        res.sendFile(path.resolve(frontendPath, 'index.html'));
+    // 2. Handle React Routing (Wildcard)
+    // If a request doesn't match an API route or static file, send index.html
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(frontendPath, 'index.html'));
     });
 } else {
     app.get('/', (req, res) => {
