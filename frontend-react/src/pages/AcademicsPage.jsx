@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, Loader2, BookOpen, ChevronDown, ChevronUp, TrendingUp, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react';
+// Added 'Image as ImageIcon' to imports for the image badge
+import { FileText, Download, Loader2, BookOpen, ChevronDown, ChevronUp, TrendingUp, GraduationCap, ArrowRight, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 
 // ==========================================
 // CONFIGURATION & LOGIC (UNCHANGED)
@@ -48,23 +49,17 @@ const AcademicsPage = () => {
     };
 
     return (
-        // Ensure main wrapper is full width
         <div className="font-sans text-slate-800 bg-gray-50 w-full overflow-x-hidden">
-            {/* Animation Styles (unchanged) */}
-            <style>{`/* ... unchanged styles ... */`}</style>
-
             {/* ==========================================
-                1. HERO SECTION (Full Width Background, Centered Content)
+                1. HERO SECTION
             ========================================== */}
             <section className="relative py-24 md:py-32 bg-indigo-950 overflow-hidden w-full">
-                {/* Abstract Background Shapes (unchanged) */}
                 <div className="absolute top-0 left-0 w-full h-full z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-violet-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-pulse"></div>
                     <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
                 </div>
 
-                {/* Content: Constrained only for text readability using mx-auto, removed outer px-6 */}
                 <div className="relative z-10 w-full text-center"> 
                     <div className="max-w-7xl mx-auto px-6">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-900/50 border border-indigo-700/50 backdrop-blur-md mb-6">
@@ -82,9 +77,9 @@ const AcademicsPage = () => {
             </section>
 
             {/* ==========================================
-                2. EDUCATIONAL LEVELS (Accordion - Edge-to-Edge)
+                2. EDUCATIONAL LEVELS (Accordion)
             ========================================== */}
-            <section className="w-full py-20 -mt-10 relative z-20"> {/* Removed container and px-6 */}
+            <section className="w-full py-20 -mt-10 relative z-20"> 
                 <div className="w-full"> 
                     <div className="space-y-4">
                         {schoolLevels.map((level) => {
@@ -100,7 +95,6 @@ const AcademicsPage = () => {
                                             : 'bg-white/80 hover:bg-white shadow-md border-transparent hover:shadow-lg'
                                     }`}
                                 >
-                                    {/* Accordion Header - Added internal padding for text safety */}
                                     <button 
                                         onClick={() => toggleSection(level.id)}
                                         className="w-full px-6 md:p-8 flex items-center justify-between cursor-pointer outline-none group"
@@ -129,7 +123,6 @@ const AcademicsPage = () => {
                                         </div>
                                     </button>
                                     
-                                    {/* Accordion Content - Internal Padding */}
                                     <div className={`transition-all duration-500 ease-in-out ${
                                         isActive ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                                     }`}>
@@ -162,11 +155,10 @@ const AcademicsPage = () => {
             </section>
 
             {/* ==========================================
-                3. EXAM RESULTS (Full Width Content)
+                3. EXAM RESULTS (UPDATED SECTION)
             ========================================== */}
             <section className="py-24 bg-slate-50 relative w-full"> 
                 <div className="w-full"> 
-                    {/* Inner Content Wrapper: Removed container and mx-auto */}
                     <div className="w-full px-6"> 
                         <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-200 pb-6">
                             <div>
@@ -190,33 +182,62 @@ const AcademicsPage = () => {
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {results.map((res) => (
-                                    <div key={res._id} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1 group">
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="p-3 bg-violet-50 text-violet-600 rounded-lg group-hover:bg-violet-500 group-hover:text-white transition-colors">
-                                                <FileText size={24} />
+                                {/* ==========================================
+                                    UPDATED MAP LOGIC STARTS HERE
+                                ========================================== */}
+                                {results.map((res) => {
+                                    // CHECK: Is this file a PDF?
+                                    const isPdf = res.fileUrl && res.fileUrl.toLowerCase().includes('.pdf');
+
+                                    return (
+                                        <div key={res._id} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1 group">
+                                            
+                                            {/* Header: Icon & Badge */}
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div className={`p-3 rounded-lg transition-colors ${
+                                                    isPdf 
+                                                    ? "bg-violet-50 text-violet-600 group-hover:bg-violet-500 group-hover:text-white"
+                                                    : "bg-blue-50 text-blue-600 group-hover:bg-blue-500 group-hover:text-white"
+                                                }`}>
+                                                    {isPdf ? <FileText size={24} /> : <ImageIcon size={24} />}
+                                                </div>
+                                                <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded uppercase">
+                                                    {isPdf ? "PDF" : "IMAGE"}
+                                                </span>
                                             </div>
-                                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded uppercase">
-                                                PDF
-                                            </span>
+
+                                            {/* Preview: Only show if it is NOT a PDF */}
+                                            {!isPdf && (
+                                                <div className="mb-4 h-40 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                                                    <img 
+                                                        src={res.fileUrl} 
+                                                        alt={res.title} 
+                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                                    />
+                                                </div>
+                                            )}
+                                            
+                                            <h4 className="text-lg font-bold text-slate-800 mb-1 group-hover:text-indigo-700 transition-colors">
+                                                {res.title}
+                                            </h4>
+                                            <p className="text-sm text-slate-500 mb-6">
+                                                Grade: <span className="font-medium text-slate-700">{res.grade}</span>
+                                            </p>
+                                            
+                                            <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                                                <span className="text-xs text-gray-400">{res.date}</span>
+                                                <a 
+                                                    href={res.fileUrl} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-800 transition-colors"
+                                                >
+                                                    {isPdf ? "Download PDF" : "View Image"} <ArrowRight size={16} />
+                                                </a>
+                                            </div>
                                         </div>
-                                        
-                                        <h4 className="text-lg font-bold text-slate-800 mb-1 group-hover:text-indigo-700 transition-colors">{res.title}</h4>
-                                        <p className="text-sm text-slate-500 mb-6">Grade: <span className="font-medium text-slate-700">{res.grade}</span></p>
-                                        
-                                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                                            <span className="text-xs text-gray-400">{res.date}</span>
-                                            <a 
-                                                href={res.fileUrl} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-800 transition-colors"
-                                            >
-                                                Download <ArrowRight size={16} />
-                                            </a>
-                                        </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
