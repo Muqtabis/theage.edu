@@ -3,7 +3,7 @@ const router = express.Router();
 const { getStudents, createStudent, deleteStudent } = require('../controllers/studentController');
 
 // 1. Import the Cloudinary upload config
-const upload = require('../config/storage');
+const {upload} = require('../config/storage');
 
 router.route('/')
     .get(getStudents)

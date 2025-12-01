@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { getResults, uploadResult, deleteResult } = require('../controllers/resultController');
 
-// IMPORTANT: Import the Cloudinary storage config
-const upload = require('../config/storage');
+// FIX: Destructure { upload } because we exported an object in storage.js
+const { upload } = require('../config/storage');
 
 router.route('/')
     .get(getResults)
-    // Cloudinary middleware handles the file (PDF, Doc, or Image)
+    // upload.single('file') handles the image/PDF upload to Cloudinary
     .post(upload.single('file'), uploadResult); 
 
 router.route('/:id').delete(deleteResult);

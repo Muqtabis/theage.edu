@@ -3,7 +3,7 @@ const router = express.Router();
 const { getNews, createNews, deleteNews } = require('../controllers/newsController');
 
 // IMPORTANT: Import the Cloudinary storage config we created earlier
-const upload = require('../config/storage'); 
+const {upload}= require('../config/storage'); 
 
 // 1. Base Routes
 router.route('/')

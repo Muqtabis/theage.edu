@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // 1. Import Cloudinary Config
-const upload = require('../config/storage');
+const {upload} = require('../config/storage');
 
 const { 
     getAlbums, 

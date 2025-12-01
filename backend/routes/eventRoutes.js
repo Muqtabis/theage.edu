@@ -3,7 +3,7 @@ const router = express.Router();
 const { getEvents, createEvent } = require('../controllers/eventController');
 
 // Import Cloudinary config
-const upload = require('../config/storage');
+const {upload}= require('../config/storage');
 
 router.route('/')
     .get(getEvents) 
