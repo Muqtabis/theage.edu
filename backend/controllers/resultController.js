@@ -1,5 +1,4 @@
 const Result = require('../models/ResultModel');
-const fs = require('fs');
 
 // @desc Get all results
 const getResults = async (req, res) => {
@@ -11,27 +10,28 @@ const getResults = async (req, res) => {
     }
 };
 
-// @desc Upload a result file (PDF/Image)
+// @desc Upload a result file (PDF/Image/Doc)
 const uploadResult = async (req, res) => {
     const { title, grade } = req.body;
-    const file = req.file;
+    
+    // 1. Get Cloudinary URL
+    // Since we updated storage.js, this handles 'raw' files (PDFs) too!
+    const fileUrl = req.file ? req.file.path : null;
 
-    if (!file || !title || !grade) {
-        if (file) fs.unlinkSync(file.path);
+    if (!fileUrl || !title || !grade) {
         return res.status(400).json({ message: 'Please provide title, grade, and file.' });
     }
 
     try {
-        const publicUrl = `http://localhost:5000/uploads/${file.filename}`;
         const result = await Result.create({
             title,
             grade,
-            fileUrl: publicUrl,
+            fileUrl: fileUrl, // Save Cloudinary URL
             date: new Date().toLocaleDateString(),
         });
         res.status(201).json(result);
     } catch (error) {
-        if (file) fs.unlinkSync(file.path);
+        console.error("DB Error:", error.message);
         res.status(500).json({ message: error.message });
     }
 };
@@ -41,7 +41,8 @@ const deleteResult = async (req, res) => {
     try {
         const result = await Result.findByIdAndDelete(req.params.id);
         if (!result) return res.status(404).json({ message: 'Not found' });
-        // Optional: Add logic here to fs.unlinkSync the file from /uploads if you want to clean up storage
+        
+        // We delete the database entry. The file stays on Cloudinary.
         res.status(200).json({ message: 'Result deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -14,8 +14,8 @@ const teacherRoutes = require('./routes/teacherRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 // --- 1. Load Environment Variables ---
-// Load .env relative to the deployment root directory
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') }); 
+// CHANGED: Your .env is in the CURRENT folder (backend), not the parent
+dotenv.config({ path: path.resolve(__dirname, '.env') }); 
 
 // Connect to MongoDB
 connectDB(); 
@@ -26,14 +26,13 @@ const PORT = process.env.PORT || 5000;
 // --- 2. Middleware & Dynamic CORS Configuration ---
 const allowedOrigins = process.env.NODE_ENV === 'production' 
     ? [
-        'https://theage-edu-16ah.onrender.com', // Your actual Render URL
-        'https://theage.edu' // Add custom domain here if you buy one later
+        'https://theage-edu-16ah.onrender.com', 
+        'https://theage.edu' 
       ]
     : ['http://localhost:3000', 'http://localhost:5173']; 
 
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         if (allowedOrigins.includes(origin)) {
             return callback(null, true);
@@ -47,8 +46,9 @@ app.use(cors({
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
 
-// Serve Static Uploads (for images stored in root/uploads)
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+// Serve Static Uploads
+// CHANGED: Your uploads folder is in the CURRENT folder (backend)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- 3. Integrate Backend API Routes ---
 app.use('/api/news', newsRoutes); 
@@ -67,14 +67,13 @@ app.get('/health', (req, res) => {
 // --- 5. Monolithic / Production Deployment Setup ---
 if (process.env.NODE_ENV === 'production') {
     // 1. Path to frontend build
-    // IMPORTANT: Ensure your frontend folder is named 'frontend-react'
-    // and the build output folder is named 'dist' (Vite default) or 'build' (CRA default)
-    const frontendPath = path.join(__dirname, '..', 'frontend-react', 'dist');
+    // CHANGED: Your frontend-react folder is inside backend, so we don't use '..'
+    const frontendPath = path.join(__dirname, 'frontend-react', 'dist');
 
     // 2. Serve static files
     app.use(express.static(frontendPath));
 
-    // 3. Handle React Routing, return all requests to React app
+    // 3. Handle React Routing
     app.get(/(.*)/, (req, res) => {
         res.sendFile(path.resolve(frontendPath, 'index.html'));
     });

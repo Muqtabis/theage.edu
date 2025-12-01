@@ -1,5 +1,4 @@
 const Album = require('../models/AlbumModel');
-const fs = require('fs');
 
 // @desc    Get all albums
 const getAlbums = async (req, res) => {
@@ -24,7 +23,14 @@ const getAlbumById = async (req, res) => {
 
 // @desc    Create a new album
 const createAlbum = async (req, res) => {
-    const { title, description, coverImage } = req.body;
+    const { title, description } = req.body;
+
+    // 1. Handle Cover Image Upload
+    // If a file named 'coverImage' is uploaded, use its Cloudinary URL
+    let coverUrl;
+    if (req.file && req.file.path) {
+        coverUrl = req.file.path;
+    }
 
     if (!title || !description) {
         return res.status(400).json({ message: 'Please include a title and description.' });
@@ -34,7 +40,8 @@ const createAlbum = async (req, res) => {
         const album = await Album.create({
             title,
             description,
-            coverImage: coverImage || 'https://placehold.co/600x400/b9e5fd/0c457e?text=No+Cover',
+            // Use uploaded URL, or the default placeholder
+            coverImage: coverUrl || 'https://placehold.co/600x400/b9e5fd/0c457e?text=No+Cover',
             timestamp: Date.now(),
         });
         res.status(201).json(album);
@@ -57,36 +64,35 @@ const deleteAlbum = async (req, res) => {
 
 // @desc    Upload photo to album (The specific Drag & Drop handler)
 const uploadPhoto = async (req, res) => {
+    // req.file contains the Cloudinary info now
     const file = req.file; 
     const { albumId } = req.body; 
 
     if (!file) return res.status(400).json({ message: 'No image file uploaded.' });
+    
     if (!albumId) {
-        if (file) fs.unlinkSync(file.path); 
         return res.status(400).json({ message: 'Album ID is required.' });
     }
 
     try {
         const album = await Album.findById(albumId);
         if (!album) {
-            fs.unlinkSync(file.path);
             return res.status(404).json({ message: 'Album not found.' });
         }
 
-        // Generate Public URL
-        const publicUrl = `http://localhost:5000/uploads/${file.filename}`;
+        // 1. Get Cloudinary URL directly
+        const publicUrl = file.path; 
         
+        // 2. Push to album array
         album.images.push({ src: publicUrl, alt: file.originalname });
         await album.save();
 
         res.status(200).json({ message: 'Photo saved.', url: publicUrl });
     } catch (error) {
-        if (file) fs.unlinkSync(file.path); 
         res.status(500).json({ message: error.message });
     }
 };
 
-// 🚨 EXPORT EVERYTHING
 module.exports = { 
     getAlbums, 
     getAlbumById, 

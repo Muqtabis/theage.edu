@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ImageSchema = mongoose.Schema({
-    src: { type: String, required: true }, // The URL to the uploaded file
+    src: { type: String, required: true }, // Cloudinary URL
     alt: { type: String, default: 'Gallery Photo' }
 });
 

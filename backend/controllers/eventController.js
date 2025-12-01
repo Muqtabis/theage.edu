@@ -1,14 +1,13 @@
 const Event = require('../models/EventModel');
 
-// @desc    Get all current and future events (sorted by nearest date)
+// @desc    Get all current and future events
 // @route   GET /api/events
-// @access  Public
 const getEvents = async (req, res) => {
     try {
         const now = new Date();
-        // 🚨 CRITICAL LOGIC: Fetch only events whose eventDate is NOW or in the FUTURE
+        // Fetch only events whose eventDate is NOW or in the FUTURE
         const events = await Event.find({ eventDate: { $gte: now } })
-                                  .sort({ eventDate: 1 }); // Sort by nearest event date (ascending)
+                                  .sort({ eventDate: 1 }); 
         res.status(200).json(events);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -17,21 +16,26 @@ const getEvents = async (req, res) => {
 
 // @desc    Create a new event
 // @route   POST /api/events
-// @access  Private
 const createEvent = async (req, res) => {
-    const { title, location, eventDate, imageUrl } = req.body;
+    const { title, location, eventDate } = req.body;
+
+    // 1. Get Cloudinary URL if file exists
+    let imageUrl;
+    if (req.file && req.file.path) {
+        imageUrl = req.file.path;
+    }
 
     if (!title || !eventDate) {
-        res.status(400).json({ message: 'Please include a title and event date.' });
-        return;
+        return res.status(400).json({ message: 'Please include a title and event date.' });
     }
 
     try {
         const event = await Event.create({
             title,
             location,
-            eventDate: new Date(eventDate), // Convert string input to Date object
-            imageUrl,
+            eventDate: new Date(eventDate),
+            // Use uploaded URL or let Mongoose use the default
+            imageUrl: imageUrl, 
             timestamp: Date.now(),
         });
         res.status(201).json(event);
@@ -43,5 +47,4 @@ const createEvent = async (req, res) => {
 module.exports = {
     getEvents,
     createEvent,
-    // Add deleteEvent logic here later
 };

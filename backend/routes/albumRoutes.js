@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../config/multerConfig'); // Import Multer
 
-// Import ONLY the functions that actually exist in the controller
+// 1. Import Cloudinary Config
+const upload = require('../config/storage');
+
 const { 
     getAlbums, 
     getAlbumById, 
@@ -11,18 +12,20 @@ const {
     uploadPhoto 
 } = require('../controllers/albumController');
 
-// 1. Routes for "/"
+// 2. Routes for "/"
 router.route('/')
     .get(getAlbums)
-    .post(createAlbum);
+    // ✅ NEW: Allow uploading a cover image when creating the album
+    .post(upload.single('coverImage'), createAlbum);
 
-// 2. Routes for "/:id"
+// 3. Routes for "/:id"
 router.route('/:id')
     .get(getAlbumById)
     .delete(deleteAlbum);
 
-// 3. Route for Drag-and-Drop Upload
+// 4. Route for Drag-and-Drop Photo Upload
 router.route('/upload-photo')
+    // ✅ Uses Cloudinary storage
     .post(upload.single('image'), uploadPhoto);
 
 module.exports = router;

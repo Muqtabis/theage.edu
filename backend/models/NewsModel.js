@@ -12,20 +12,21 @@ const NewsSchema = mongoose.Schema(
     },
     imageUrl: {
       type: String,
+      // Default image if upload fails or is skipped
       default: 'https://placehold.co/600x400/e0f1fe/08539c?text=Default+News',
     },
     date: {
-      type: String, // Storing the formatted date string (e.g., NOV 10, 2025)
+      type: String, 
       required: true,
     },
     timestamp: {
-      type: Number, // Storing the numerical timestamp for sorting (Date.now())
+      type: Number, 
       required: true,
-      default: Date.now(),
+      default: Date.now,
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields automatically
+    timestamps: true,
   }
 );
 
