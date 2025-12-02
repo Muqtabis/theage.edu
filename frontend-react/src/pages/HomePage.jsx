@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Award, Calendar, Loader2, ChevronLeft, ChevronRight, Camera, Image as ImageIcon, ExternalLink, ArrowRight, Clock } from 'lucide-react';
-import heroBg from '../assets/theageheader.jpg'; // Ensure this path is correct
+import { 
+    Sparkles, 
+    Calendar, 
+    Loader2, 
+    ChevronLeft, 
+    ChevronRight, 
+    Camera, 
+    Image as ImageIcon, 
+    ArrowRight, 
+    Clock,
+    BookOpen,
+    Globe,
+    Heart,
+    Zap,
+    MapPin,
+    GraduationCap,
+    Shapes,
+    BrainCircuit
+} from 'lucide-react';
+import heroBg from '../assets/theageheader.jpg';
 
 // ==========================================
-// CONFIGURATION & LOGIC (UNCHANGED)
+// 1. CONFIGURATION & LOGIC (UNCHANGED)
 // ==========================================
 const API_BASE_URL = '/api';
 
@@ -62,14 +80,15 @@ const useTopContent = () => {
     return data;
 };
 
+// ==========================================
+// 2. MAIN COMPONENT
+// ==========================================
 const HomePage = () => {
-    // Logic Hooks
     const { latestNews, nearestEvent, isLoading } = useTopContent(); 
     const [albums, setAlbums] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isGalleryLoading, setIsGalleryLoading] = useState(true);
 
-    // Album Fetching Logic
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
@@ -89,7 +108,6 @@ const HomePage = () => {
         fetchAlbums();
     }, []);
 
-    // Auto-Play Logic
     useEffect(() => {
         if (albums.length < 3) return; 
         const timer = setInterval(() => {
@@ -97,11 +115,10 @@ const HomePage = () => {
                 const nextIndex = prevIndex + 2;
                 return nextIndex >= albums.length ? 0 : nextIndex;
             });
-        }, 5000); 
+        }, 6000); 
         return () => clearInterval(timer);
     }, [albums.length]);
 
-    // Manual Controls
     const prevSlide = () => {
         setCurrentIndex((prev) => {
             const next = prev - 2;
@@ -123,15 +140,16 @@ const HomePage = () => {
     };
 
     return (
-        <div className="font-sans text-slate-800 bg-gray-50">
-            {/* Custom Animation Styles */}
+        <div className="font-sans text-slate-600 bg-white selection:bg-indigo-50 selection:text-indigo-600">
+            
+            {/* CSS Animation Styles */}
             <style>{`
-                @keyframes fadeInUp {
+                @keyframes fadeUp {
                     from { opacity: 0; transform: translateY(20px); }
                     to { opacity: 1; transform: translateY(0); }
                 }
-                .animate-fade-in-up {
-                    animation: fadeInUp 0.8s ease-out forwards;
+                .animate-fade-up {
+                    animation: fadeUp 0.8s ease-out forwards;
                 }
                 .delay-100 { animation-delay: 0.1s; }
                 .delay-200 { animation-delay: 0.2s; }
@@ -139,309 +157,304 @@ const HomePage = () => {
             `}</style>
 
             {/* ==========================================
-                SECTION 1: MODERN HERO WITH CURVE
+                1. HERO SECTION
             ========================================== */}
-            <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden bg-indigo-950">
-                {/* Background Image */}
+            <section className="relative w-full h-[90vh] flex flex-col justify-center pb-12 overflow-hidden bg-slate-900">
                 <div className="absolute inset-0 z-0">
                     <img 
                         src={heroBg} 
-                        alt="The Age School" 
-                        className="w-full h-full object-cover object-center scale-105 animate-[pulse_10s_ease-in-out_infinite]" 
+                        alt="The Age School Campus" 
+                        className="w-full h-full object-cover object-center opacity-90 animate-[pulse_10s_ease-in-out_infinite]" 
                     />
-                    {/* Deep Purple Gradient Overlay - Pure and Dark */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/90 via-indigo-950/80 to-indigo-950/95 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/30" />
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 container mx-auto px-6 text-center">
-                    {/* Badge: Lavender / Light Violet */}
-                    <span className="inline-block py-1 px-3 rounded-full bg-indigo-500/20 border border-indigo-400/50 text-indigo-200 text-sm font-bold tracking-wider mb-6 animate-fade-in-up backdrop-blur-sm">
-                        EST. 2012 • EXCELLENCE IN EDUCATION
-                    </span>
-                    
-                    {/* Headline: White to Lavender Gradient */}
-                    <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-lg animate-fade-in-up delay-100">
-                        Welcome to <br/>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-violet-200 to-violet-400">
-                            The Age School
-                        </span>
-                    </h1>
-                    
-                    <p className="text-lg md:text-2xl text-indigo-100 mb-10 max-w-2xl mx-auto font-light animate-fade-in-up delay-200">
-                        Nurturing young minds to ask big questions and build a brighter future.
-                    </p>
-                    
-                    <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up delay-300">
-                        {/* Primary Action: Bright Violet/Purple Button */}
-                        <Link to="/admissions" className="group relative px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:shadow-[0_0_30px_rgba(124,58,237,0.6)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                            Apply Now
-                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                        <Link to="/about" className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-1">
-                            Discover More
-                        </Link>
+                <div className="relative z-10 container mx-auto px-6 text-center animate-fade-up">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8">
+                            <Sparkles size={14} className="text-yellow-300 fill-yellow-300" />
+                            <span className="text-xs font-bold text-white tracking-widest uppercase">Admissions Open 2025</span>
+                        </div>
+
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.1] tracking-tight delay-100 animate-fade-up">
+                            The future <br />
+                            <span className="font-light text-indigo-200">begins here.</span>
+                        </h1>
+
+                        <p className="text-lg md:text-xl text-slate-200 font-light max-w-2xl mx-auto mb-10 leading-relaxed delay-200 animate-fade-up">
+                            From Kindergarten to Class 10, we nurture curiosity and empower the next generation of leaders.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 delay-300 animate-fade-up">
+                            <Link to="/admissions" className="px-8 py-4 bg-white text-slate-900 rounded-full text-sm font-bold hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+                                Apply Now <ArrowRight size={16} />
+                            </Link>
+                            <Link to="/academics" className="px-8 py-4 bg-transparent border border-white/30 text-white rounded-full text-sm font-bold hover:bg-white/10 backdrop-blur-sm transition-colors text-center">
+                                View Curriculum
+                            </Link>
+                        </div>
                     </div>
-                </div>
-
-                {/* Decorative Curve Bottom */}
-                <div className="absolute bottom-0 left-0 w-full leading-none z-20">
-                    <svg className="block w-full h-24 md:h-48 text-gray-100" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                        <path fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
                 </div>
             </section>
 
             {/* ==========================================
-                SECTION 2: FLOATING FEATURES
+                2. ACADEMIC PILLARS
             ========================================== */}
-            <section className="relative z-30 -mt-20 pb-20">
+            <section className="py-24 px-6 container mx-auto">
+                <div className="mb-16 text-center animate-fade-up">
+                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4">Why choose us?</h2>
+                    <div className="h-1 w-20 bg-indigo-600 rounded-full mx-auto"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {/* Card 1 */}
+                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-100/50 transition-all duration-300 bg-white text-left">
+                        <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:scale-110 transition-transform">
+                            <BookOpen size={28} strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Expert Faculty</h3>
+                        <p className="text-sm text-slate-500 font-light leading-relaxed">Dedicated educators with years of experience mentoring students up to Class 10.</p>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-violet-100 hover:shadow-xl hover:shadow-violet-100/50 transition-all duration-300 bg-white text-left">
+                        <div className="w-14 h-14 bg-violet-50 rounded-2xl flex items-center justify-center mb-6 text-violet-600 group-hover:scale-110 transition-transform">
+                            <Globe size={28} strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Modern Curriculum</h3>
+                        <p className="text-sm text-slate-500 font-light leading-relaxed">A balanced blend of academics, technology, and life skills.</p>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-pink-100 hover:shadow-xl hover:shadow-pink-100/50 transition-all duration-300 bg-white text-left">
+                        <div className="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 text-pink-600 group-hover:scale-110 transition-transform">
+                            <Heart size={28} strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Student Care</h3>
+                        <p className="text-sm text-slate-500 font-light leading-relaxed">A safe, inclusive environment focused on mental and physical well-being.</p>
+                    </div>
+
+                    {/* Card 4 */}
+                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-amber-100 hover:shadow-xl hover:shadow-amber-100/50 transition-all duration-300 bg-white text-left">
+                        <div className="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 text-amber-600 group-hover:scale-110 transition-transform">
+                            <Zap size={28} strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Innovation Lab</h3>
+                        <p className="text-sm text-slate-500 font-light leading-relaxed">Facilities for STEM and creative arts to spark imagination.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* ==========================================
+                3. LEARNING JOURNEY (K-10 Structure)
+            ========================================== */}
+            <section className="py-24 bg-slate-50 border-t border-slate-100">
                 <div className="container mx-auto px-6">
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4">The Learning Journey</h2>
+                        <p className="text-slate-500 font-light text-lg">Tailored educational pathways from Kindergarten to Class 10.</p>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Feature 1: Indigo Accent */}
-                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-indigo-500 group">
-                            <div className="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <Sparkles size={28} className="text-indigo-600" />
+                        {/* Stage 1: Kindergarten (Teal Theme) */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-teal-200 transition-all hover:shadow-lg hover:shadow-teal-100/50 text-left">
+                            <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 text-teal-600">
+                                <Shapes size={32} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Curiosity First</h3>
-                            <p className="text-gray-600 leading-relaxed">Inspiring students to ask the "why" and "how," fostering a lifelong love for discovery.</p>
+                            <h3 className="text-xl font-bold text-slate-900 mb-3">Kindergarten</h3>
+                            <p className="text-xs font-bold text-teal-600 uppercase tracking-widest mb-4">LKG - UKG</p>
+                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
+                                Focused on play-based learning, social development, and foundational literacy in a nurturing environment.
+                            </p>
+                            <Link to="/academics" className="text-teal-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Discover Early Years <ArrowRight size={14} />
+                            </Link>
                         </div>
 
-                        {/* Feature 2: Violet Accent */}
-                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-violet-600 group">
-                            <div className="w-14 h-14 bg-violet-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <Award size={28} className="text-violet-600" />
+                        {/* Stage 2: Primary (Indigo Theme) */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-indigo-200 transition-all hover:shadow-lg hover:shadow-indigo-100/50 relative transform md:-translate-y-4 text-left">
+                            <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600">
+                                <BrainCircuit size={32} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Holistic Growth</h3>
-                            <p className="text-gray-600 leading-relaxed">Academics, arts, and athletics integrated perfectly to shape well-rounded individuals.</p>
+                            <h3 className="text-xl font-bold text-slate-900 mb-3">Primary School</h3>
+                            <p className="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Class 1 - Class 5</p>
+                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
+                                Building strong fundamentals in Math, Science, and Languages while encouraging curiosity and critical thinking.
+                            </p>
+                            <Link to="/academics" className="text-indigo-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Explore Primary <ArrowRight size={14} />
+                            </Link>
                         </div>
 
-                        {/* Feature 3: Slate/Blue Accent */}
-                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-slate-600 group">
-                            <div className="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <Calendar size={28} className="text-slate-700" />
+                        {/* Stage 3: Secondary (Violet Theme) */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-violet-200 transition-all hover:shadow-lg hover:shadow-violet-100/50 text-left">
+                            <div className="w-14 h-14 bg-violet-50 rounded-2xl flex items-center justify-center mb-6 text-violet-600">
+                                <GraduationCap size={32} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Active Community</h3>
-                            <p className="text-gray-600 leading-relaxed">A vibrant ecosystem of students, teachers, and parents working together.</p>
+                            <h3 className="text-xl font-bold text-slate-900 mb-3">Secondary School</h3>
+                            <p className="text-xs font-bold text-violet-600 uppercase tracking-widest mb-4">Class 6 - Class 10</p>
+                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
+                                Advanced concepts and rigorous academic preparation for Board examinations and future studies.
+                            </p>
+                            <Link to="/academics" className="text-violet-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                View Syllabus <ArrowRight size={14} />
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* ==========================================
-                SECTION 3: NEWS & EVENTS
+                4. NEWS & EVENTS (Left Aligned Headers)
             ========================================== */}
-            <section className="py-20 bg-gray-50">
+            <section className="py-24 bg-white">
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-                        <div className="max-w-2xl">
-                            <h2 className="text-4xl font-bold text-indigo-900 mb-4 tracking-tight">Latest Updates</h2>
-                            <p className="text-lg text-gray-600">Stay informed with the most recent announcements and upcoming schedule.</p>
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                        <div className="text-left w-full">
+                            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-3">Campus Board</h2>
+                            <p className="text-slate-500 font-light">Latest announcements and upcoming events.</p>
                         </div>
-                        <Link to="/news" className="hidden md:flex items-center text-violet-700 font-bold hover:text-violet-800 transition-colors mt-4 md:mt-0">
-                            View All Updates <ArrowRight size={18} className="ml-2" />
+                        <Link to="/news" className="text-indigo-600 text-sm font-bold flex items-center hover:underline whitespace-nowrap">
+                            View Archive <ArrowRight size={16} className="ml-1" />
                         </Link>
                     </div>
 
                     {isLoading ? (
-                        <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
-                            <Loader2 className="animate-spin text-indigo-600 mb-4" size={48} />
-                            <p className="text-gray-500">Loading updates...</p>
+                        <div className="h-64 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+                            <Loader2 className="animate-spin text-indigo-600" />
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             
-                            {/* LEFT: LATEST NEWS (Large Card) */}
-                            <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group border border-gray-100">
-                                <div className="absolute top-0 left-0 w-2 h-full bg-violet-600"></div>
-                                <div className="p-8 h-full flex flex-col">
-                                    <div className="flex items-center justify-between mb-6">
-                                        <span className="px-4 py-1 rounded-full bg-violet-100 text-violet-700 text-xs font-bold uppercase tracking-wide">News</span>
-                                        <span className="text-gray-400 text-sm flex items-center">
-                                            <Clock size={14} className="mr-1" />
+                            {/* LEFT: NEWS (2/3 Width) */}
+                            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between h-full text-left">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <span className="px-3 py-1 bg-white text-indigo-600 border border-indigo-100 text-[10px] font-bold uppercase tracking-wider rounded-full">News</span>
+                                        <span className="text-slate-400 text-xs flex items-center gap-1">
+                                            <Clock size={12} />
                                             {latestNews ? (latestNews.date || new Date(latestNews.createdAt).toLocaleDateString()) : '-'}
                                         </span>
                                     </div>
-                                    
-                                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-violet-700 transition-colors">
+                                    <h3 className="text-2xl md:text-3xl font-medium text-slate-900 mb-4 leading-tight">
                                         {latestNews ? latestNews.title : 'No Recent News'}
                                     </h3>
-                                    
-                                    <p className="text-gray-600 mb-8 line-clamp-3 flex-grow leading-relaxed">
-                                        {latestNews ? (latestNews.content || latestNews.description) : 'No content available at the moment.'}
+                                    <p className="text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                                        {latestNews ? (latestNews.content || latestNews.description) : 'No updates available.'}
                                     </p>
-                                    
-                                    <Link to="/news" className="inline-flex items-center font-bold text-violet-600 hover:text-violet-800 transition-colors">
-                                        Read Full Story <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
                                 </div>
+                                <Link to="/news" className="text-indigo-600 text-sm font-bold flex items-center gap-2 group">
+                                    Read Full Article <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                </Link>
                             </div>
 
-                            {/* RIGHT: UPCOMING EVENT (Large Card) */}
-                            <div className="relative bg-indigo-950 text-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group flex flex-col">
-                                {/* Abstract Decoration */}
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600 opacity-20 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-                                <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-600 opacity-30 rounded-full translate-y-1/3 -translate-x-1/3 blur-3xl"></div>
-                                
-                                <div className="p-8 relative z-10 h-full flex flex-col">
-                                    <div className="flex items-center justify-between mb-6">
-                                        <span className="px-4 py-1 rounded-full bg-indigo-600 text-indigo-100 text-xs font-bold uppercase tracking-wide shadow-lg border border-indigo-500">Upcoming Event</span>
-                                        <span className="text-indigo-200 text-sm font-medium">
-                                            Don't miss out
-                                        </span>
+                            {/* RIGHT: EVENT (1/3 Width) */}
+                            <div className="lg:col-span-1 bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200 flex flex-col justify-between relative overflow-hidden text-left">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+                                <div className="relative z-10">
+                                    <div className="flex items-center justify-between mb-8">
+                                        <span className="text-xs font-bold uppercase tracking-widest text-indigo-200">Upcoming</span>
+                                        <Calendar size={18} className="text-indigo-200" />
                                     </div>
-
-                                    <div className="flex items-start gap-6 mb-6">
-                                        {nearestEvent && (
-                                            <div className="flex-shrink-0 bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/10 min-w-[80px]">
-                                                <span className="block text-3xl font-bold text-violet-300">
-                                                    {new Date(nearestEvent.eventDate).getDate()}
-                                                </span>
-                                                <span className="block text-xs uppercase text-indigo-200 tracking-wider">
-                                                    {new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'short' })}
-                                                </span>
+                                    {nearestEvent ? (
+                                        <div className="mb-6">
+                                            <div className="text-5xl font-medium mb-1">{new Date(nearestEvent.eventDate).getDate()}</div>
+                                            <div className="text-lg text-indigo-200 mb-6">{new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'long' })}</div>
+                                            <h4 className="text-xl font-medium leading-snug">{nearestEvent.title}</h4>
+                                            <div className="flex items-center mt-2 text-indigo-200 text-sm">
+                                                <MapPin size={14} className="mr-2" />
+                                                {nearestEvent.location || 'Main Campus'}
                                             </div>
-                                        )}
-                                        <div>
-                                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                                                {nearestEvent ? nearestEvent.title : 'No Events Scheduled'}
-                                            </h3>
-                                            <p className="text-indigo-200 text-sm flex items-center">
-                                                <Calendar size={14} className="mr-2" />
-                                                {nearestEvent ? new Date(nearestEvent.eventDate).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}) : ''}
-                                            </p>
                                         </div>
-                                    </div>
-
-                                    <p className="text-indigo-100 mb-8 line-clamp-2 flex-grow leading-relaxed opacity-90">
-                                        {nearestEvent ? (nearestEvent.location || nearestEvent.description) : 'Check back later for updates.'}
-                                    </p>
-
-                                    <Link to="/news" className="w-full py-3 bg-white text-indigo-950 rounded-xl font-bold text-center hover:bg-indigo-50 transition-colors shadow-lg">
-                                        View Calendar
-                                    </Link>
+                                    ) : (
+                                        <div className="mb-6">
+                                            <h4 className="text-xl font-medium">No Events</h4>
+                                        </div>
+                                    )}
                                 </div>
+                                <Link to="/news" className="relative z-10 w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-center text-sm font-semibold hover:bg-white/20 transition-colors">
+                                    View Calendar
+                                </Link>
                             </div>
-
                         </div>
                     )}
-                    
-                    <div className="md:hidden text-center mt-8">
-                        <Link to="/news" className="text-violet-700 font-bold hover:underline">View All Updates</Link>
-                    </div>
                 </div>
             </section>
 
             {/* ==========================================
-                SECTION 4: ALBUMS (Light Theme)
+                5. GALLERY SLIDER (Fixed Alignment)
             ========================================== */}
-            <section className="py-24 bg-gray-100 text-slate-800 relative overflow-hidden">
-                {/* Subtle Background Pattern */}
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#000000 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }}></div>
-                
-                <div className="container relative z-10 mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-                        <div>
-                            <h2 className="text-4xl font-bold mb-4 text-indigo-900"><span className="text-violet-600">Campus</span> Moments</h2>
-                            <p className="text-gray-700 max-w-xl">A glimpse into the vibrant life at The Age School. From cultural fests to science fairs.</p>
+            <section className="py-24 bg-white overflow-hidden">
+                <div className="container mx-auto px-6">
+                    {/* Fixed Alignment: Items Center */}
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+                        <div className="text-left w-full">
+                            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-2">School Life</h2>
+                            <p className="text-slate-500 font-light">Moments captured.</p>
                         </div>
-                        
-                        {/* Navigation Arrows */}
                         {albums.length > 2 && (
-                            <div className="flex gap-3 mt-6 md:mt-0">
-                                <button onClick={prevSlide} className="p-3 rounded-full bg-white border border-gray-300 text-indigo-600 shadow-sm hover:bg-gray-50 hover:border-violet-400 hover:text-violet-600 transition-all">
-                                    <ChevronLeft size={24} />
-                                </button>
-                                <button onClick={nextSlide} className="p-3 rounded-full bg-white border border-gray-300 text-indigo-600 shadow-sm hover:bg-gray-50 hover:border-violet-400 hover:text-violet-600 transition-all">
-                                    <ChevronRight size={24} />
-                                </button>
+                            <div className="flex gap-2 shrink-0">
+                                <button onClick={prevSlide} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors"><ChevronLeft size={20}/></button>
+                                <button onClick={nextSlide} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors"><ChevronRight size={20}/></button>
                             </div>
                         )}
                     </div>
 
                     {isGalleryLoading ? (
-                        <div className="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
-                            <Loader2 className="animate-spin mx-auto text-violet-600 mb-4" size={40} />
-                            <p className="text-gray-600">Loading albums...</p>
-                        </div>
+                        <div className="h-80 bg-slate-50 rounded-2xl animate-pulse"></div>
                     ) : albums.length > 0 ? (
-                        <div className="flex flex-col md:flex-row gap-8">
-                            {/* SLIDE 1 */}
+                        <div className="flex flex-col md:flex-row gap-6">
+                            {/* Primary Image */}
                             {getAlbumAtIndex(currentIndex) && (
-                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex)._id || getAlbumAtIndex(currentIndex).id}`} className="w-full md:w-1/2 group relative rounded-2xl overflow-hidden h-[400px] cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200">
+                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex)._id || getAlbumAtIndex(currentIndex).id}`} className="block w-full md:w-2/3 h-[450px] rounded-3xl overflow-hidden relative group cursor-pointer">
                                     {getAlbumAtIndex(currentIndex).images?.length > 0 ? (
-                                        <img src={getAlbumAtIndex(currentIndex).images[0].src || getAlbumAtIndex(currentIndex).images[0]} alt={getAlbumAtIndex(currentIndex).title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <img src={getAlbumAtIndex(currentIndex).images[0].src || getAlbumAtIndex(currentIndex).images[0]} alt="Album" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     ) : (
-                                        <div className="w-full h-full bg-gray-200 flex items-center justify-center"><ImageIcon className="text-gray-500" size={64} /></div>
+                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300"><ImageIcon size={48} /></div>
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                        <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                            {getAlbumAtIndex(currentIndex).title}
-                                            <ExternalLink size={18} className="opacity-0 group-hover:opacity-100 transition-opacity text-violet-300" />
-                                        </h3>
-                                        <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
-                                            <span className="text-gray-300 text-sm flex items-center gap-2"><Camera size={16} /> {getAlbumAtIndex(currentIndex).images?.length || 0} Photos</span>
-                                            <span className="text-violet-300 text-sm font-bold flex items-center gap-1">View Album <ArrowRight size={14} /></span>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 text-left">
+                                        <div>
+                                            <h3 className="text-white text-xl font-medium">{getAlbumAtIndex(currentIndex).title}</h3>
+                                            <p className="text-slate-300 text-sm">{getAlbumAtIndex(currentIndex).images?.length || 0} Photos</p>
                                         </div>
                                     </div>
                                 </Link>
                             )}
-
-                            {/* SLIDE 2 */}
+                            
+                            {/* Secondary Image */}
                             {getAlbumAtIndex(currentIndex + 1) && (
-                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex + 1)._id || getAlbumAtIndex(currentIndex + 1).id}`} className="w-full md:w-1/2 group relative rounded-2xl overflow-hidden h-[400px] cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200 hidden md:block">
+                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex + 1)._id || getAlbumAtIndex(currentIndex + 1).id}`} className="hidden md:block w-1/3 h-[450px] rounded-3xl overflow-hidden relative group cursor-pointer">
                                     {getAlbumAtIndex(currentIndex + 1).images?.length > 0 ? (
-                                        <img src={getAlbumAtIndex(currentIndex + 1).images[0].src || getAlbumAtIndex(currentIndex + 1).images[0]} alt={getAlbumAtIndex(currentIndex + 1).title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <img src={getAlbumAtIndex(currentIndex + 1).images[0].src || getAlbumAtIndex(currentIndex + 1).images[0]} alt="Album" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     ) : (
-                                        <div className="w-full h-full bg-gray-200 flex items-center justify-center"><ImageIcon className="text-gray-500" size={64} /></div>
+                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300"><ImageIcon size={48} /></div>
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                        <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                            {getAlbumAtIndex(currentIndex + 1).title}
-                                            <ExternalLink size={18} className="opacity-0 group-hover:opacity-100 transition-opacity text-violet-300" />
-                                        </h3>
-                                        <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
-                                            <span className="text-gray-300 text-sm flex items-center gap-2"><Camera size={16} /> {getAlbumAtIndex(currentIndex + 1).images?.length || 0} Photos</span>
-                                            <span className="text-violet-300 text-sm font-bold flex items-center gap-1">View Album <ArrowRight size={14} /></span>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 text-left">
+                                        <div>
+                                            <h3 className="text-white text-lg font-medium">{getAlbumAtIndex(currentIndex + 1).title}</h3>
                                         </div>
                                     </div>
                                 </Link>
                             )}
                         </div>
                     ) : (
-                        <div className="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300 shadow-sm">
-                            <Camera size={48} className="mx-auto text-gray-500 mb-4" />
-                            <p className="text-gray-600">No albums uploaded yet.</p>
-                        </div>
+                        <div className="text-center py-20 bg-slate-50 rounded-3xl border border-dashed border-slate-200 text-slate-400">Gallery Empty</div>
                     )}
-                    
-                    <div className="text-center mt-12">
-                        <Link to="/student-life" className="inline-block px-8 py-3 rounded-full border border-indigo-300 text-indigo-700 hover:bg-indigo-600 hover:text-white transition-colors font-semibold shadow-md">
-                            Explore Full Gallery
-                        </Link>
-                    </div>
-                    {/* Section 5: FINAL CALL TO ACTION (Contact Us) */}
-            <section className="py-20 bg-indigo-900 w-full relative overflow-hidden">
-                <div className="max-w-4xl mx-auto px-6 text-center z-10 relative">
-                    <h2 className="text-4xl font-extrabold text-white mb-4">
-                        Ready to Join The Age School?
-                    </h2>
-                    <p className="text-indigo-200 text-lg mb-8 max-w-3xl mx-auto">
-                        We're here to answer your questions about admissions, academics, and campus life.
-                    </p>
-                    
-                    {/* Contact Button */}
-                    <Link 
-                        to="/contact" 
-                        className="inline-flex items-center gap-3 px-10 py-4 bg-violet-600 text-white text-xl font-bold rounded-full shadow-xl hover:bg-violet-700 hover:shadow-violet-500/50 transition-all duration-300 hover:-translate-y-1"
-                    >
-                        Contact Our Team
-                        <ArrowRight size={24} />
-                    </Link>
                 </div>
-                {/* Decorative Element */}
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
             </section>
+
+            {/* ==========================================
+                6. FOOTER CTA (Centered)
+            ========================================== */}
+            <section className="bg-white py-24 px-6 text-center border-t border-slate-100">
+                <div className="max-w-xl mx-auto animate-fade-up">
+                    <h2 className="text-3xl font-medium text-slate-900 mb-4">Ready to shape the future?</h2>
+                    <p className="text-slate-500 font-light mb-8">
+                        Join a community dedicated to excellence. Admissions open for the upcoming academic year.
+                    </p>
+                    <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-indigo-600 transition-colors">
+                        Get Started <ArrowRight size={16} />
+                    </Link>
                 </div>
             </section>
         </div>

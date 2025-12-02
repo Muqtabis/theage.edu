@@ -3,101 +3,121 @@ import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-indigo-950 text-indigo-100 pt-16 pb-8 border-t border-indigo-900">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+    // Changed bg-white to bg-slate-900 (Dark) and text colors to white/gray
+    <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-indigo-500">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           
-          {/* Column 1: Brand and Contact */}
-          <div className="space-y-5">
-            <Link to="/home" className="flex items-center space-x-3 group">
-              {/* Your Logo */}
-              <img src="src\assets\theagelogo.jpg" alt="The Age School Logo" className="h-10 w-auto" /> 
-              <span className="text-2xl font-bold text-white tracking-tighter">The Age School</span>
+          {/* 1. Brand & Socials */}
+          <div className="md:col-span-2 space-y-6">
+            <Link to="/home" className="flex items-center gap-3 group">
+              {/* Added brightness filter so logo pops on dark bg */}
+              <img src="src/assets/theagelogo.jpg" alt="Logo" className="h-10 w-auto brightness-200 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 transition-all" /> 
+              
+              {/* White Text for Dark Mode */}
+              <span className="text-2xl font-serif font-bold text-white tracking-tight">
+                The Age School
+              </span>
             </Link>
-            <p className="text-indigo-300 text-sm leading-relaxed">
-            </p>
             
-            <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-3 text-indigo-300">
-                    <MapPin size={16} className="mt-0.5 text-teal-500 flex-shrink-0" />
-                    <span>Basavakalyan, Bidar, Karnataka, 585327</span>
-                </div>
-                <a href="tel:+911234567890" className="flex items-center gap-3 text-indigo-300 hover:text-white transition-colors">
-                    <Phone size={16} className="text-pink-500" /> (+91) 12345 67890
-                </a>
-                <a href="mailto:info@theageschool.edu" className="flex items-center gap-3 text-indigo-300 hover:text-white transition-colors">
-                    <Mail size={16} className="text-teal-500" /> info@theageschool.edu
-                </a>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-sans">
+              Empowering the next generation with knowledge, character, and leadership skills in the heart of Karnataka.
+            </p>
+
+            {/* Dark Mode Social Icons */}
+            <div className="flex gap-4">
+              <SocialIcon 
+                href="https://facebook.com" 
+                icon={<Facebook size={20} />} 
+                colorClass="hover:text-white hover:bg-blue-600 bg-slate-800" 
+              />
+              <SocialIcon 
+                href="https://twitter.com" 
+                icon={<Twitter size={20} />} 
+                colorClass="hover:text-white hover:bg-sky-500 bg-slate-800" 
+              />
+              <SocialIcon 
+                href="https://instagram.com" 
+                icon={<Instagram size={20} />} 
+                colorClass="hover:text-white hover:bg-pink-600 bg-slate-800" 
+              />
+              <SocialIcon 
+                href="https://linkedin.com" 
+                icon={<Linkedin size={20} />} 
+                colorClass="hover:text-white hover:bg-blue-700 bg-slate-800" 
+              />
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* 2. Quick Links */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-5 bg-teal-500 rounded-full"></span>
-                Quick Links
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="hover:text-teal-400 transition-colors">About Us</Link></li>
-              <li><Link to="/admissions" className="hover:text-teal-400 transition-colors">Admissions</Link></li>
-              <li><Link to="/academics" className="hover:text-teal-400 transition-colors">Academics</Link></li>
-              <li><Link to="/contact" className="hover:text-teal-400 transition-colors">Contact Us</Link></li>
+            <h4 className="font-bold text-white mb-6 font-sans">Explore</h4>
+            <ul className="space-y-4 text-sm text-slate-400 font-sans">
+              <li><Link to="/about" className="hover:text-indigo-400 hover:translate-x-1 transition-all inline-block">About Us</Link></li>
+              <li><Link to="/admissions" className="hover:text-indigo-400 hover:translate-x-1 transition-all inline-block">Admissions</Link></li>
+              <li><Link to="/academics" className="hover:text-indigo-400 hover:translate-x-1 transition-all inline-block">Academics</Link></li>
+              <li><Link to="/campus" className="hover:text-indigo-400 hover:translate-x-1 transition-all inline-block">Campus Life</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: Social Media */}
+          {/* 3. Contact */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-5 bg-purple-500 rounded-full"></span>
-                Follow Us
-            </h4>
-            <div className="flex space-x-3">
-              <a 
-                href="https://www.facebook.com/theageschool/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
-                aria-label="Facebook"
-              >
-                <Facebook size={18} />
-              </a>
-              <a 
-                href="#" 
-                className="w-9 h-9 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 hover:bg-sky-500 hover:text-white transition-all duration-300 hover:-translate-y-0.5" 
-                aria-label="Twitter"
-              >
-                <Twitter size={18} />
-              </a>
-              <a 
-                href="https://www.instagram.com/theageschool?igsh=dmJ6M2Z5dTQxY3M1" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 hover:bg-pink-600 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
-                aria-label="Instagram"
-              >
-                <Instagram size={18} />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/the-age-school-92109a255" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 hover:bg-blue-700 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-            </div>
+            <h4 className="font-bold text-white mb-6 font-sans">Contact</h4>
+            <ul className="space-y-4 text-sm text-slate-400 font-sans">
+              <li className="flex items-start gap-3 group">
+                <div className="mt-1 text-indigo-400 group-hover:text-white transition-colors">
+                  <MapPin size={18} />
+                </div>
+                <span>Basavakalyan, Bidar,<br />Karnataka, 585327</span>
+              </li>
+              <li>
+                <a href="tel:+911234567890" className="flex items-center gap-3 group hover:text-white transition-colors">
+                  <div className="text-indigo-400 group-hover:text-white transition-colors">
+                     <Phone size={18} />
+                  </div>
+                  (+91) 12345 67890
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@theageschool.edu" className="flex items-center gap-3 group hover:text-white transition-colors">
+                  <div className="text-indigo-400 group-hover:text-white transition-colors">
+                    <Mail size={18} />
+                  </div>
+                  info@theageschool.edu
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-indigo-900 pt-6 text-center text-indigo-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} The Age School. All Rights Reserved.</p>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 font-sans">
+          <p>&copy; {currentYear} The Age School. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
+          </div>
         </div>
+
       </div>
     </footer>
   );
 };
+
+// Helper: Social Icon adapted for Dark Mode
+const SocialIcon = ({ href, icon, colorClass }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className={`p-2 rounded-full text-slate-400 transition-all duration-300 ${colorClass}`}
+  >
+    {icon}
+  </a>
+);
 
 export default Footer;

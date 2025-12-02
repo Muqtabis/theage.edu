@@ -1,34 +1,32 @@
 import React from 'react';
 
 const PageHeader = ({ title, description }) => (
-    <section className="relative py-24 md:py-32 bg-indigo-950 overflow-hidden">
+    <section className="relative py-20 md:py-28 bg-indigo-50/50 border-b border-indigo-100 overflow-hidden">
+        
         {/* ==========================================
-            BACKGROUND EFFECTS (Updated to Violet/Purple)
+            BACKGROUND (Minimal)
         ========================================== */}
-        <div className="absolute inset-0 z-0">
-            {/* Violet Glow (Top Left) - Replaces Teal */}
-            <div className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-violet-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-pulse"></div>
-            
-            {/* Purple Glow (Bottom Right) */}
-            <div className="absolute bottom-[-20%] right-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-overlay filter blur-3xl opacity-30"></div>
-            
-            {/* Texture Pattern */}
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        {/* Optional: Very subtle background pattern (dots) for texture without noise */}
+        <div className="absolute inset-0 opacity-[0.4]" 
+             style={{ backgroundImage: 'radial-gradient(#6366f1 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}>
         </div>
 
         {/* ==========================================
             CONTENT
         ========================================== */}
         <div className="container relative z-10 mx-auto px-6 text-center">
-            {/* Decorative Accent Line - Updated Gradient */}
-            <div className="w-20 h-1.5 bg-gradient-to-r from-violet-400 to-purple-500 mx-auto mb-8 rounded-full animate-fade-in-up"></div>
+            
+            {/* Minimal Accent Line */}
+            <div className="w-16 h-1 bg-indigo-600 mx-auto mb-6 rounded-full opacity-80"></div>
 
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-sm animate-fade-in-up delay-100">
+            {/* Title - Serif Font to match Header/Footer */}
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-6 tracking-tight">
                 {title}
             </h1>
             
+            {/* Description - Sans Serif for readability */}
             {description && (
-                <p className="text-lg md:text-xl text-indigo-100 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up delay-200">
+                <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-sans leading-relaxed">
                     {description}
                 </p>
             )}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Loader2, ArrowLeft, Image as ImageIcon, Maximize2, Share2 } from 'lucide-react'; 
+import ImageModal from '../components/ImageModal'; // ✅ NEW: Import the modal
 
 const ALBUM_API_URL = '/api/albums'; 
 
@@ -10,6 +11,9 @@ const AlbumPage = () => {
     const [album, setAlbum] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    // ✅ NEW: State for the zoomed image
+    const [selectedImage, setSelectedImage] = useState(null); 
 
     useEffect(() => {
         if (!albumId) {
@@ -40,6 +44,15 @@ const AlbumPage = () => {
         fetchAlbumDetails();
     }, [albumId]);
 
+    // ✅ NEW: Handlers for opening/closing modal
+    const handleImageClick = (imgSrc) => {
+        setSelectedImage(imgSrc);
+    };
+
+    const closeModal = () => {
+        setSelectedImage(null);
+    };
+
     if (isLoading) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-indigo-950 text-white">
@@ -59,7 +72,6 @@ const AlbumPage = () => {
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">Album Not Found</h2>
                     <p className="text-slate-500 mb-8">{error || "We couldn't locate the photos you are looking for."}</p>
                     
-                    {/* ✅ FIXED LINK: Points to Student Life now */}
                     <Link to="/student-life" className="inline-flex items-center px-6 py-3 bg-indigo-900 text-white rounded-full hover:bg-indigo-800 transition-all font-bold">
                         <ArrowLeft size={18} className="mr-2" />
                         Back to Campus Life
@@ -73,7 +85,6 @@ const AlbumPage = () => {
 
     return (
         <div className="font-sans bg-slate-50 min-h-screen">
-            {/* Animation Styles */}
             <style>{`
                 @keyframes fadeInUp {
                     from { opacity: 0; transform: translateY(20px); }
@@ -85,11 +96,8 @@ const AlbumPage = () => {
                 .delay-100 { animation-delay: 0.1s; }
             `}</style>
 
-            {/* ==========================================
-                1. IMMERSIVE HERO SECTION (Deep Purple Theme)
-            ========================================== */}
+            {/* HERO SECTION */}
             <section className="relative bg-indigo-950 text-white pt-32 pb-20 overflow-hidden">
-                {/* Background Effects */}
                 <div className="absolute top-0 left-0 w-full h-full z-0">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20 translate-x-1/2 -translate-y-1/2"></div>
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20 -translate-x-1/2 translate-y-1/2"></div>
@@ -97,7 +105,6 @@ const AlbumPage = () => {
                 </div>
 
                 <div className="container relative z-10 mx-auto px-6">
-                    {/* ✅ FIXED LINK: Breadcrumb / Back */}
                     <Link 
                         to="/student-life" 
                         className="inline-flex items-center text-indigo-200 hover:text-white hover:-translate-x-1 transition-all duration-300 mb-8 group"
@@ -133,9 +140,7 @@ const AlbumPage = () => {
                 </div>
             </section>
 
-            {/* ==========================================
-                2. PHOTO GRID
-            ========================================== */}
+            {/* PHOTO GRID */}
             <section className="relative z-20 -mt-10 pb-24">
                 <div className="container mx-auto px-6">
                     <div className="bg-white p-6 md:p-8 rounded-3xl shadow-2xl border border-gray-100 min-h-[400px]">
@@ -147,8 +152,8 @@ const AlbumPage = () => {
                                         key={image._id || index} 
                                         className="group relative aspect-[4/3] bg-gray-100 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
                                         style={{ animationDelay: `${index * 50}ms` }} 
+                                        onClick={() => handleImageClick(image.src)} // ✅ NEW: Add Click Handler
                                     >
-                                        {/* Image */}
                                         <img 
                                             src={image.src} 
                                             alt={image.alt || 'Gallery Photo'} 
@@ -156,7 +161,6 @@ const AlbumPage = () => {
                                             loading="lazy"
                                         />
                                         
-                                        {/* Gradient Overlay on Hover */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                                             <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                                 <p className="text-white font-medium text-sm truncate">
@@ -169,7 +173,6 @@ const AlbumPage = () => {
                                             </div>
                                         </div>
 
-                                        {/* Corner Icon */}
                                         <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white hover:text-indigo-900">
                                             <Maximize2 size={14} />
                                         </div>
@@ -188,6 +191,11 @@ const AlbumPage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* ✅ NEW: Render the Modal */}
+            {selectedImage && (
+                <ImageModal image={selectedImage} onClose={closeModal} />
+            )}
         </div>
     );
 };

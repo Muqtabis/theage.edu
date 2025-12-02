@@ -5,7 +5,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 
 // Import ALL your pages
-import LandingPage from './pages/LandingPage'; 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import AcademicsPage from './pages/AcademicsPage';
@@ -30,8 +29,6 @@ export default function App() {
   return (
     <Routes>
 
-      {/* 1️⃣ Landing page WITHOUT Layout */}
-      <Route path="/" element={<LandingPage />} />
 
       {/* 2️⃣ Login page WITHOUT Layout */}
       <Route path="/login" element={<LoginPage />} />
