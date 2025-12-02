@@ -28,7 +28,9 @@ const ProtectedRoute = ({ children }) => {
 export default function App() {
   return (
     <Routes>
-
+      {/* 1️⃣ ROOT REDIRECT (Fixes the White Screen) */}
+      {/* When user visits '/', send them to '/home' */}
+      <Route path="/" element={<Navigate to="/home" replace />} />
 
       {/* 2️⃣ Login page WITHOUT Layout */}
       <Route path="/login" element={<LoginPage />} />
@@ -44,7 +46,7 @@ export default function App() {
         <Route path="/gallery/:albumId" element={<AlbumPage />} />
         <Route path="/contact" element={<ContactPage />} />
 
-        {/* Protected portal inside layout OR outside — your choice */}
+        {/* Protected portal inside layout */}
         <Route 
           path="/portal" 
           element={
@@ -56,7 +58,8 @@ export default function App() {
       </Route>
 
       {/* 4️⃣ Catch-all fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      {/* If path is unknown, send to '/home' (NOT '/') to avoid loops */}
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
 }
