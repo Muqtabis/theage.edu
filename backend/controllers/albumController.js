@@ -25,11 +25,11 @@ const getAlbumById = async (req, res) => {
 const createAlbum = async (req, res) => {
     const { title, description } = req.body;
 
-    // 1. Handle Cover Image Upload
-    // If a file named 'coverImage' is uploaded, use its Cloudinary URL
     let coverUrl;
     if (req.file && req.file.path) {
         coverUrl = req.file.path;
+    } else if (req.body.coverImage) {
+        coverUrl = req.body.coverImage;
     }
 
     if (!title || !description) {
@@ -40,7 +40,6 @@ const createAlbum = async (req, res) => {
         const album = await Album.create({
             title,
             description,
-            // Use uploaded URL, or the default placeholder
             coverImage: coverUrl || 'https://placehold.co/600x400/b9e5fd/0c457e?text=No+Cover',
             timestamp: Date.now(),
         });
@@ -62,17 +61,13 @@ const deleteAlbum = async (req, res) => {
     }
 };
 
-// @desc    Upload photo to album (The specific Drag & Drop handler)
+// @desc    Upload photo to album
 const uploadPhoto = async (req, res) => {
-    // req.file contains the Cloudinary info now
     const file = req.file; 
-    const { albumId } = req.body; 
+    const { albumId, alt } = req.body; 
 
     if (!file) return res.status(400).json({ message: 'No image file uploaded.' });
-    
-    if (!albumId) {
-        return res.status(400).json({ message: 'Album ID is required.' });
-    }
+    if (!albumId) return res.status(400).json({ message: 'Album ID is required.' });
 
     try {
         const album = await Album.findById(albumId);
@@ -80,14 +75,31 @@ const uploadPhoto = async (req, res) => {
             return res.status(404).json({ message: 'Album not found.' });
         }
 
-        // 1. Get Cloudinary URL directly
         const publicUrl = file.path; 
+        album.images.push({ src: publicUrl, alt: alt || file.originalname });
         
-        // 2. Push to album array
-        album.images.push({ src: publicUrl, alt: file.originalname });
-        await album.save();
+        // If album has default cover image or no cover image, use this first photo!
+        if (!album.coverImage || album.coverImage.includes('placehold.co')) {
+            album.coverImage = publicUrl;
+        }
 
+        await album.save();
         res.status(200).json({ message: 'Photo saved.', url: publicUrl });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Delete photo from album
+const deletePhoto = async (req, res) => {
+    const { albumId, photoId } = req.params;
+    try {
+        const album = await Album.findById(albumId);
+        if (!album) return res.status(404).json({ message: 'Album not found' });
+
+        album.images = album.images.filter(img => img._id.toString() !== photoId);
+        await album.save();
+        res.status(200).json({ message: 'Photo removed', album });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -98,5 +110,6 @@ module.exports = {
     getAlbumById, 
     createAlbum, 
     deleteAlbum, 
-    uploadPhoto 
+    uploadPhoto,
+    deletePhoto,
 };

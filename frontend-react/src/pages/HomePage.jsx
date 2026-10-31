@@ -6,101 +6,100 @@ import {
     Loader2, 
     ChevronLeft, 
     ChevronRight, 
-    Camera, 
     Image as ImageIcon, 
     ArrowRight, 
     Clock,
     BookOpen,
     Globe,
     Heart,
-    Zap,
     MapPin,
     GraduationCap,
     Shapes,
-    BrainCircuit
+    BrainCircuit,
+    ArrowUpRight, 
+    PlayCircle,   
+    Star,
+    CheckCircle2,
+    Award,
+    Compass
 } from 'lucide-react';
 import heroBg from '../assets/theageheader.jpg';
+import { useSiteContent } from '../context/ContentContext';
 
-// ==========================================
-// 1. CONFIGURATION & LOGIC (UNCHANGED)
-// ==========================================
 const API_BASE_URL = '/api';
 
-const useTopContent = () => {
-    const [data, setData] = useState({
-        latestNews: null,
-        nearestEvent: null,
-        isLoading: true
-    });
+const HomePage = () => {
+    const { content } = useSiteContent();
+    const home = content?.home || {};
+    const general = content?.general || {};
 
+    const [latestNews, setLatestNews] = useState(null);
+    const [nearestEvent, setNearestEvent] = useState(null);
+    const [slideshowPhotos, setSlideshowPhotos] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isGalleryLoading, setIsGalleryLoading] = useState(true);
+
+    // Fetch News & Events
     useEffect(() => {
-        const fetchRealData = async () => {
+        const fetchNewsAndEvents = async () => {
             try {
                 const [newsRes, eventsRes] = await Promise.all([
                     fetch(`${API_BASE_URL}/news`),
                     fetch(`${API_BASE_URL}/events`)
                 ]);
 
-                const newsData = await newsRes.json();
-                const eventsData = await eventsRes.json();
-
-                let mostRecentNews = null;
-                if (Array.isArray(newsData) && newsData.length > 0) {
-                    const sortedNews = newsData
-                        .filter(item => item.status !== 'draft') 
-                        .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt));
-                    mostRecentNews = sortedNews[0];
+                if (newsRes.ok) {
+                    const newsData = await newsRes.json();
+                    if (Array.isArray(newsData) && newsData.length > 0) {
+                        const sortedNews = [...newsData].sort(
+                            (a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt)
+                        );
+                        setLatestNews(sortedNews[0]);
+                    }
                 }
 
-                let upcomingEvent = null;
-                if (Array.isArray(eventsData) && eventsData.length > 0) {
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
-                    const sortedEvents = eventsData
-                        .filter(event => new Date(event.eventDate) >= today)
-                        .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
-                    upcomingEvent = sortedEvents[0];
+                if (eventsRes.ok) {
+                    const eventsData = await eventsRes.json();
+                    if (Array.isArray(eventsData) && eventsData.length > 0) {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const futureEvents = eventsData
+                            .filter(ev => new Date(ev.eventDate) >= today)
+                            .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+                        setNearestEvent(futureEvents[0] || eventsData[0]);
+                    }
                 }
-
-                setData({
-                    latestNews: mostRecentNews,
-                    nearestEvent: upcomingEvent,
-                    isLoading: false
-                });
-
-            } catch (error) {
-                console.error("Error fetching top content:", error);
-                setData({ latestNews: null, nearestEvent: null, isLoading: false });
+            } catch (err) {
+                console.error("Error fetching homepage dynamic feeds:", err);
             }
         };
-
-        fetchRealData();
+        fetchNewsAndEvents();
     }, []);
 
-    return data;
-};
-
-// ==========================================
-// 2. MAIN COMPONENT
-// ==========================================
-const HomePage = () => {
-    const { latestNews, nearestEvent, isLoading } = useTopContent(); 
-    const [albums, setAlbums] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isGalleryLoading, setIsGalleryLoading] = useState(true);
-
+    // Fetch albums for gallery slideshow
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/albums`);
-                if (!response.ok) throw new Error("Network response was not ok");
-                const data = await response.json();
-                if (Array.isArray(data)) {
-                    setAlbums(data);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        const photos = [];
+                        data.forEach(album => {
+                            if (album.coverImage && !album.coverImage.includes('placehold.co')) {
+                                photos.push({ src: album.coverImage, title: album.title, id: album._id });
+                            }
+                            if (Array.isArray(album.images)) {
+                                album.images.forEach(img => {
+                                    photos.push({ src: img.src, title: album.title, id: album._id });
+                                });
+                            }
+                        });
+                        setSlideshowPhotos(photos.slice(0, 8));
+                    }
                 }
             } catch (err) {
                 console.error("Error fetching albums:", err);
-                setAlbums([]); 
             } finally {
                 setIsGalleryLoading(false);
             }
@@ -108,355 +107,488 @@ const HomePage = () => {
         fetchAlbums();
     }, []);
 
+    // Auto slideshow
     useEffect(() => {
-        if (albums.length < 3) return; 
-        const timer = setInterval(() => {
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = prevIndex + 2;
-                return nextIndex >= albums.length ? 0 : nextIndex;
-            });
-        }, 6000); 
-        return () => clearInterval(timer);
-    }, [albums.length]);
+        if (slideshowPhotos.length < 2) return;
+        const interval = setInterval(() => {
+            setCurrentIndex(prev => (prev + 1) % slideshowPhotos.length);
+        }, 4500);
+        return () => clearInterval(interval);
+    }, [slideshowPhotos.length]);
 
-    const prevSlide = () => {
-        setCurrentIndex((prev) => {
-            const next = prev - 2;
-            return next < 0 ? Math.max(0, albums.length - 2) : next;
-        });
-    };
+    const nextSlide = () => setCurrentIndex(prev => (prev + 1) % Math.max(1, slideshowPhotos.length));
+    const prevSlide = () => setCurrentIndex(prev => (prev - 1 + slideshowPhotos.length) % Math.max(1, slideshowPhotos.length));
 
-    const nextSlide = () => {
-        setCurrentIndex((prev) => {
-            const next = prev + 2;
-            return next >= albums.length ? 0 : next;
-        });
-    };
-
-    const getAlbumAtIndex = (index) => {
-        if (albums.length === 0) return null;
-        const safeIndex = index % albums.length;
-        return albums[safeIndex];
-    };
+    const heroImageSource = home.heroImageUrl || heroBg;
 
     return (
-        <div className="font-sans text-slate-600 bg-white selection:bg-indigo-50 selection:text-indigo-600">
+        <div className="font-sans text-slate-800 bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900">
             
-            {/* CSS Animation Styles */}
-            <style>{`
-                @keyframes fadeUp {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-up {
-                    animation: fadeUp 0.8s ease-out forwards;
-                }
-                .delay-100 { animation-delay: 0.1s; }
-                .delay-200 { animation-delay: 0.2s; }
-                .delay-300 { animation-delay: 0.3s; }
-            `}</style>
-
             {/* ==========================================
-                1. HERO SECTION
+                1. HERO SECTION (High-Class Cinematic)
             ========================================== */}
-            <section className="relative w-full h-[90vh] flex flex-col justify-center pb-12 overflow-hidden bg-slate-900">
+            <section className="relative w-full min-h-[92vh] flex items-center pt-24 pb-16 overflow-hidden bg-slate-950">
+                {/* Background image & gradient overlay */}
                 <div className="absolute inset-0 z-0">
                     <img 
-                        src={heroBg} 
+                        src={heroImageSource} 
                         alt="The Age School Campus" 
-                        className="w-full h-full object-cover object-center opacity-90 animate-[pulse_10s_ease-in-out_infinite]" 
+                        className="w-full h-full object-cover object-center brightness-90 filter"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 </div>
 
-                <div className="relative z-10 container mx-auto px-6 text-center animate-fade-up">
-                    <div className="max-w-4xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8">
-                            <Sparkles size={14} className="text-yellow-300 fill-yellow-300" />
-                            <span className="text-xs font-bold text-white tracking-widest uppercase">Admissions Open 2025</span>
+                {/* Decorative glow */}
+                <div className="absolute -top-32 -left-32 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+                    <div className="max-w-3xl">
+                        
+                        {/* Dynamic Admissions Pill */}
+                        <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-6 shadow-lg">
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400" />
+                            </span>
+                            <span className="text-xs font-bold text-amber-300 tracking-wider uppercase">
+                                {home.heroBadge || general.admissionsBadge || 'Admissions Open 2025-26'}
+                            </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.1] tracking-tight delay-100 animate-fade-up">
-                            The future <br />
-                            <span className="font-light text-indigo-200">begins here.</span>
+                        {/* Hero Headline */}
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-[1.05] tracking-tight">
+                            {home.heroTitleLine1 || 'Future Ready.'} <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-indigo-200">
+                                {home.heroTitleHighlight || 'Values Driven.'}
+                            </span>
                         </h1>
 
-                        <p className="text-lg md:text-xl text-slate-200 font-light max-w-2xl mx-auto mb-10 leading-relaxed delay-200 animate-fade-up">
-                            From Kindergarten to Class 10, we nurture curiosity and empower the next generation of leaders.
+                        <p className="text-lg md:text-xl text-slate-200 font-normal max-w-2xl mb-10 leading-relaxed drop-shadow-sm">
+                            {home.heroSubtitle || 'A premier K-10 institution nurturing curiosity, character, and leadership in the heart of Karnataka.'}
                         </p>
 
-                        <div className="flex flex-col sm:flex-row justify-center gap-4 delay-300 animate-fade-up">
-                            <Link to="/admissions" className="px-8 py-4 bg-white text-slate-900 rounded-full text-sm font-bold hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
-                                Apply Now <ArrowRight size={16} />
+                        {/* CTA Buttons */}
+                        <div className="flex flex-wrap items-center gap-4">
+                            <Link 
+                                to="/admissions" 
+                                className="px-8 py-4 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-bold rounded-full text-sm shadow-xl shadow-amber-400/20 hover:shadow-amber-400/30 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2"
+                            >
+                                <span>{home.ctaApplyText || 'Apply Now'}</span>
+                                <ArrowUpRight size={18} />
                             </Link>
-                            <Link to="/academics" className="px-8 py-4 bg-transparent border border-white/30 text-white rounded-full text-sm font-bold hover:bg-white/10 backdrop-blur-sm transition-colors text-center">
-                                View Curriculum
+                            
+                            <Link 
+                                to="/about" 
+                                className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-semibold rounded-full text-sm transition-all flex items-center gap-2"
+                            >
+                                <Compass size={18} className="text-indigo-300" />
+                                <span>{home.ctaTourText || 'Explore Campus'}</span>
                             </Link>
                         </div>
+
+                        {/* Stats Banner under Hero */}
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-12 mt-12 border-t border-white/15">
+                            <div>
+                                <span className="block text-3xl md:text-4xl font-serif font-bold text-white mb-0.5">
+                                    {home.statsStudents || '500+'}
+                                </span>
+                                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Students</span>
+                            </div>
+                            <div>
+                                <span className="block text-3xl md:text-4xl font-serif font-bold text-amber-300 mb-0.5">
+                                    {home.statsPassRate || '100%'}
+                                </span>
+                                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Board Results</span>
+                            </div>
+                            <div>
+                                <span className="block text-3xl md:text-4xl font-serif font-bold text-white mb-0.5">
+                                    {home.statsFaculty || '35+'}
+                                </span>
+                                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Expert Faculty</span>
+                            </div>
+                            <div>
+                                <span className="block text-3xl md:text-4xl font-serif font-bold text-white mb-0.5">
+                                    {home.statsYears || '12+'}
+                                </span>
+                                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">Years Legacy</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
 
             {/* ==========================================
-                2. ACADEMIC PILLARS
+                2. QUICK SHORTCUT TILES
             ========================================== */}
-            <section className="py-24 px-6 container mx-auto">
-                <div className="mb-16 text-center animate-fade-up">
-                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4">Why choose us?</h2>
-                    <div className="h-1 w-20 bg-indigo-600 rounded-full mx-auto"></div>
+            <div className="relative z-20 -mt-8 container mx-auto px-6 max-w-7xl">
+                <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 p-4 md:p-6 grid grid-cols-2 lg:grid-cols-4 gap-4 border border-slate-100">
+                    {[
+                        { icon: BookOpen, label: "Academic Pathways", sub: "Curriculum & standards", link: "/academics", color: "text-indigo-600", bg: "bg-indigo-50" },
+                        { icon: Award, label: "Admissions & Fees", sub: "Apply for 2025-26", link: "/admissions", color: "text-amber-600", bg: "bg-amber-50" },
+                        { icon: ImageIcon, label: "Photo Gallery", sub: "Campus life memories", link: "/student-life", color: "text-violet-600", bg: "bg-violet-50" },
+                        { icon: MapPin, label: "Campus Visit", sub: "Contact & location", link: "/contact", color: "text-emerald-600", bg: "bg-emerald-50" },
+                    ].map((item, idx) => (
+                        <Link 
+                            key={idx} 
+                            to={item.link} 
+                            className="flex items-center gap-4 p-3.5 rounded-xl hover:bg-slate-50 transition-all group"
+                        >
+                            <div className={`p-3.5 rounded-xl ${item.bg} ${item.color} group-hover:scale-110 transition-transform shadow-xs`}>
+                                <item.icon size={22} strokeWidth={2} />
+                            </div>
+                            <div className="min-w-0">
+                                <h4 className="font-bold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors truncate">
+                                    {item.label}
+                                </h4>
+                                <p className="text-xs text-slate-400 truncate">{item.sub}</p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+
+            {/* ==========================================
+                3. BENTO GRID - WHY CHOOSE US
+            ========================================== */}
+            <section className="py-24 px-6 container mx-auto max-w-7xl">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
+                    <div className="max-w-2xl">
+                        <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-2">Our Distinction</span>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-slate-900 tracking-tight">
+                            Education Reimagined.
+                        </h2>
+                        <p className="text-slate-600 text-base md:text-lg mt-3">
+                            We don't just teach the syllabus. We ignite curiosity, inspire character, and empower lifelong leaders.
+                        </p>
+                    </div>
+                    <Link 
+                        to="/about" 
+                        className="inline-flex items-center gap-2 font-semibold text-slate-900 hover:text-indigo-600 border-b-2 border-slate-900 hover:border-indigo-600 pb-1 transition-all text-sm"
+                    >
+                        Learn About Our Vision <ArrowRight size={16} />
+                    </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {/* Card 1 */}
-                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-100/50 transition-all duration-300 bg-white text-left">
-                        <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:scale-110 transition-transform">
-                            <BookOpen size={28} strokeWidth={1.5} />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Bento 1: Innovation Lab */}
+                    <div className="md:col-span-2 bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden group shadow-xl">
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/30 rounded-full blur-3xl group-hover:bg-indigo-600/40 transition-colors" />
+                        <div className="relative z-10 max-w-lg">
+                            <div className="w-13 h-13 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-amber-300">
+                                <BrainCircuit size={28} />
+                            </div>
+                            <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider block mb-2">STEM & Digital Excellence</span>
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-3">
+                                {home.bento1Title || 'Innovation Lab'}
+                            </h3>
+                            <p className="text-slate-300 leading-relaxed text-sm md:text-base">
+                                {home.bento1Desc || 'State-of-the-art facilities for Robotics, Coding, and STEM learning. We prepare students for the future with real-world hands-on projects.'}
+                            </p>
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Expert Faculty</h3>
-                        <p className="text-sm text-slate-500 font-light leading-relaxed">Dedicated educators with years of experience mentoring students up to Class 10.</p>
                     </div>
 
-                    {/* Card 2 */}
-                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-violet-100 hover:shadow-xl hover:shadow-violet-100/50 transition-all duration-300 bg-white text-left">
-                        <div className="w-14 h-14 bg-violet-50 rounded-2xl flex items-center justify-center mb-6 text-violet-600 group-hover:scale-110 transition-transform">
-                            <Globe size={28} strokeWidth={1.5} />
+                    {/* Bento 2: Holistic Growth */}
+                    <div className="bg-gradient-to-br from-amber-400 to-amber-500 rounded-3xl p-8 md:p-10 text-slate-950 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div className="w-12 h-12 bg-slate-950/10 rounded-2xl flex items-center justify-center mb-6">
+                                <Star size={24} className="text-slate-950" fill="currentColor" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-800 uppercase tracking-wider block mb-1">Beyond Academics</span>
+                            <h3 className="text-2xl font-serif font-bold mb-2">
+                                {home.bento2Title || 'Holistic Growth'}
+                            </h3>
+                            <p className="text-slate-800 font-medium text-sm">
+                                {home.bento2Desc || 'Sports, Arts, and Academics in perfect balance.'}
+                            </p>
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Modern Curriculum</h3>
-                        <p className="text-sm text-slate-500 font-light leading-relaxed">A balanced blend of academics, technology, and life skills.</p>
+                        <div className="mt-8 space-y-2.5">
+                            {(home.bento2Tags || ['Yoga & Meditation', 'Visual Arts', 'Competitive Sports', 'Public Speaking']).map((tag, i) => (
+                                <div key={i} className="bg-white/40 backdrop-blur-xs px-4 py-2.5 rounded-xl text-slate-900 font-semibold text-xs flex items-center gap-2">
+                                    <CheckCircle2 size={14} className="text-slate-950" />
+                                    <span>{tag}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Card 3 */}
-                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-pink-100 hover:shadow-xl hover:shadow-pink-100/50 transition-all duration-300 bg-white text-left">
-                        <div className="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 text-pink-600 group-hover:scale-110 transition-transform">
-                            <Heart size={28} strokeWidth={1.5} />
+                    {/* Bento 3: Global Perspective */}
+                    <div className="bg-white border border-slate-200/80 rounded-3xl p-8 hover:shadow-xl hover:border-indigo-200 transition-all">
+                        <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-6">
+                            <Globe size={26} />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Student Care</h3>
-                        <p className="text-sm text-slate-500 font-light leading-relaxed">A safe, inclusive environment focused on mental and physical well-being.</p>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">
+                            {home.bento3Title || 'Global Perspective'}
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed">
+                            {home.bento3Desc || 'Curriculum designed for the modern world, combining local heritage with global awareness.'}
+                        </p>
                     </div>
 
-                    {/* Card 4 */}
-                    <div className="group p-8 rounded-3xl border border-slate-100 hover:border-amber-100 hover:shadow-xl hover:shadow-amber-100/50 transition-all duration-300 bg-white text-left">
-                        <div className="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 text-amber-600 group-hover:scale-110 transition-transform">
-                            <Zap size={28} strokeWidth={1.5} />
+                    {/* Bento 4: Student Care */}
+                    <div className="bg-white border border-slate-200/80 rounded-3xl p-8 hover:shadow-xl hover:border-pink-200 transition-all">
+                        <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 mb-6">
+                            <Heart size={26} />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Innovation Lab</h3>
-                        <p className="text-sm text-slate-500 font-light leading-relaxed">Facilities for STEM and creative arts to spark imagination.</p>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">
+                            {home.bento4Title || 'Student Care'}
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed">
+                            {home.bento4Desc || 'Individual mentorship, mental health support & safe nurturing environment for every child.'}
+                        </p>
+                    </div>
+
+                    {/* Bento 5: Academic Rigor */}
+                    <div className="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 flex flex-col justify-between hover:shadow-xl transition-all">
+                        <div>
+                            <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6">
+                                <GraduationCap size={26} />
+                            </div>
+                            <h3 className="text-xl font-bold text-indigo-950 mb-2">
+                                Board Excellence
+                            </h3>
+                            <p className="text-indigo-800/80 text-sm leading-relaxed">
+                                Continuous evaluation, mock drills, and specialized coaching for board examination distinction.
+                            </p>
+                        </div>
+                        <Link to="/academics" className="mt-6 text-indigo-600 font-bold text-sm inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+                            View Syllabus <ArrowRight size={14} />
+                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* ==========================================
-                3. LEARNING JOURNEY (K-10 Structure)
+                4. ACADEMIC DIVISIONS (Level Cards)
             ========================================== */}
-            <section className="py-24 bg-slate-50 border-t border-slate-100">
-                <div className="container mx-auto px-6">
+            <section className="py-20 bg-white border-y border-slate-200/60">
+                <div className="container mx-auto px-6 max-w-7xl">
                     <div className="text-center max-w-2xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4">The Learning Journey</h2>
-                        <p className="text-slate-500 font-light text-lg">Tailored educational pathways from Kindergarten to Class 10.</p>
+                        <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-2">Learning Pathways</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                            Comprehensive K-10 Education
+                        </h2>
+                        <p className="text-slate-600 mt-3 text-base">
+                            Structured across distinct learning phases tailored to each developmental milestone.
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Stage 1: Kindergarten (Teal Theme) */}
-                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-teal-200 transition-all hover:shadow-lg hover:shadow-teal-100/50 text-left">
-                            <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 text-teal-600">
-                                <Shapes size={32} strokeWidth={1.5} />
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Kindergarten</h3>
-                            <p className="text-xs font-bold text-teal-600 uppercase tracking-widest mb-4">LKG - UKG</p>
-                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
-                                Focused on play-based learning, social development, and foundational literacy in a nurturing environment.
-                            </p>
-                            <Link to="/academics" className="text-teal-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                Discover Early Years <ArrowRight size={14} />
+                        {[
+                            { title: "Kindergarten", sub: "LKG - UKG", icon: Shapes, color: "text-emerald-600", bg: "bg-emerald-50", desc: "Play-based inquiry developing sensory, emotional, and social skills." },
+                            { title: "Primary School", sub: "Class 1 - 5", icon: BookOpen, color: "text-indigo-600", bg: "bg-indigo-50", desc: "Building core literacy, numeracy, science concepts, and independent thought." },
+                            { title: "Secondary School", sub: "Class 6 - 10", icon: GraduationCap, color: "text-violet-600", bg: "bg-violet-50", desc: "Rigorous curriculum, laboratory experiments, and exam coaching." }
+                        ].map((level, idx) => (
+                            <Link 
+                                key={idx} 
+                                to="/academics" 
+                                className="group p-8 rounded-3xl bg-slate-50 hover:bg-slate-900 hover:text-white transition-all duration-300 border border-slate-200/60 hover:border-slate-800 hover:shadow-xl hover:-translate-y-1"
+                            >
+                                <div className="flex justify-between items-start mb-8">
+                                    <div className={`p-4 rounded-2xl ${level.bg} ${level.color} group-hover:bg-white/10 group-hover:text-white transition-colors`}>
+                                        <level.icon size={30} />
+                                    </div>
+                                    <span className="px-3.5 py-1 rounded-full border border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600 group-hover:border-slate-700 group-hover:text-slate-300">
+                                        {level.sub}
+                                    </span>
+                                </div>
+                                <h3 className="text-2xl font-serif font-bold mb-3">{level.title}</h3>
+                                <p className="text-slate-600 group-hover:text-slate-400 text-sm leading-relaxed mb-6">
+                                    {level.desc}
+                                </p>
+                                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 group-hover:text-amber-300 transition-colors">
+                                    Learn More <ArrowRight size={14} />
+                                </span>
                             </Link>
-                        </div>
-
-                        {/* Stage 2: Primary (Indigo Theme) */}
-                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-indigo-200 transition-all hover:shadow-lg hover:shadow-indigo-100/50 relative transform md:-translate-y-4 text-left">
-                            <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600">
-                                <BrainCircuit size={32} strokeWidth={1.5} />
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Primary School</h3>
-                            <p className="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Class 1 - Class 5</p>
-                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
-                                Building strong fundamentals in Math, Science, and Languages while encouraging curiosity and critical thinking.
-                            </p>
-                            <Link to="/academics" className="text-indigo-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                Explore Primary <ArrowRight size={14} />
-                            </Link>
-                        </div>
-
-                        {/* Stage 3: Secondary (Violet Theme) */}
-                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-violet-200 transition-all hover:shadow-lg hover:shadow-violet-100/50 text-left">
-                            <div className="w-14 h-14 bg-violet-50 rounded-2xl flex items-center justify-center mb-6 text-violet-600">
-                                <GraduationCap size={32} strokeWidth={1.5} />
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Secondary School</h3>
-                            <p className="text-xs font-bold text-violet-600 uppercase tracking-widest mb-4">Class 6 - Class 10</p>
-                            <p className="text-slate-500 font-light text-sm leading-relaxed mb-6">
-                                Advanced concepts and rigorous academic preparation for Board examinations and future studies.
-                            </p>
-                            <Link to="/academics" className="text-violet-700 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                View Syllabus <ArrowRight size={14} />
-                            </Link>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* ==========================================
-                4. NEWS & EVENTS (Left Aligned Headers)
+                5. CAMPUS MOMENTS (Dynamic Gallery Slider)
             ========================================== */}
-            <section className="py-24 bg-white">
-                <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-                        <div className="text-left w-full">
-                            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-3">Campus Board</h2>
-                            <p className="text-slate-500 font-light">Latest announcements and upcoming events.</p>
+            <section className="py-24 px-6 container mx-auto max-w-7xl">
+                <div className="flex justify-between items-end mb-12">
+                    <div>
+                        <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-2">Campus Moments</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                            Life at The Age School
+                        </h2>
+                    </div>
+                    {slideshowPhotos.length > 1 && (
+                        <div className="flex gap-2">
+                            <button 
+                                onClick={prevSlide} 
+                                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-900 hover:text-white transition-colors shadow-xs"
+                                aria-label="Previous photo"
+                            >
+                                <ChevronLeft size={18}/>
+                            </button>
+                            <button 
+                                onClick={nextSlide} 
+                                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-900 hover:text-white transition-colors shadow-xs"
+                                aria-label="Next photo"
+                            >
+                                <ChevronRight size={18}/>
+                            </button>
                         </div>
-                        <Link to="/news" className="text-indigo-600 text-sm font-bold flex items-center hover:underline whitespace-nowrap">
-                            View Archive <ArrowRight size={16} className="ml-1" />
+                    )}
+                </div>
+
+                <div className="relative h-[420px] md:h-[480px] w-full rounded-3xl overflow-hidden shadow-xl bg-slate-900 border border-slate-200">
+                    {isGalleryLoading ? (
+                        <div className="w-full h-full flex items-center justify-center text-white/50">
+                            <Loader2 size={36} className="animate-spin" />
+                        </div>
+                    ) : slideshowPhotos.length > 0 ? (
+                        <div className="relative w-full h-full">
+                            <img 
+                                src={slideshowPhotos[currentIndex]?.src} 
+                                alt={slideshowPhotos[currentIndex]?.title || 'Campus Moment'} 
+                                className="w-full h-full object-cover transition-opacity duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <span className="text-xs uppercase tracking-wider text-amber-300 font-bold mb-1">Photo Feature</span>
+                                <h3 className="text-2xl md:text-3xl font-serif font-bold text-white">
+                                    {slideshowPhotos[currentIndex]?.title || 'Campus Activity'}
+                                </h3>
+                                <Link 
+                                    to="/student-life" 
+                                    className="mt-4 inline-flex items-center gap-2 text-sm text-indigo-200 hover:text-white transition-colors font-medium"
+                                >
+                                    Browse All Albums <ArrowRight size={16} />
+                                </Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 p-8 text-center">
+                            <ImageIcon size={44} className="mb-3 opacity-40" />
+                            <p className="font-medium text-slate-300">Albums & photos will be showcased here.</p>
+                            <Link to="/student-life" className="mt-3 text-indigo-400 text-sm font-semibold hover:underline">Visit Gallery Page</Link>
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* ==========================================
+                6. LATEST UPDATES & EVENTS (Dynamic)
+            ========================================== */}
+            <section className="py-24 bg-white border-t border-slate-200/70">
+                <div className="container mx-auto px-6 max-w-7xl">
+                    <div className="flex justify-between items-end mb-12">
+                        <div>
+                            <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-2">Bulletin Board</span>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                                Latest News & Events
+                            </h2>
+                        </div>
+                        <Link to="/news" className="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors inline-flex items-center gap-1.5">
+                            View All News <ArrowRight size={15} />
                         </Link>
                     </div>
-
-                    {isLoading ? (
-                        <div className="h-64 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
-                            <Loader2 className="animate-spin text-indigo-600" />
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            
-                            {/* LEFT: NEWS (2/3 Width) */}
-                            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between h-full text-left">
-                                <div>
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <span className="px-3 py-1 bg-white text-indigo-600 border border-indigo-100 text-[10px] font-bold uppercase tracking-wider rounded-full">News</span>
-                                        <span className="text-slate-400 text-xs flex items-center gap-1">
-                                            <Clock size={12} />
-                                            {latestNews ? (latestNews.date || new Date(latestNews.createdAt).toLocaleDateString()) : '-'}
-                                        </span>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Latest News Card */}
+                        <div className="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200/80 flex flex-col justify-between hover:shadow-lg transition-shadow">
+                            <div>
+                                <div className="h-56 bg-slate-200 rounded-2xl mb-6 overflow-hidden relative">
+                                    {latestNews?.imageUrl ? (
+                                        <img 
+                                            src={latestNews.imageUrl} 
+                                            alt={latestNews.title} 
+                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center bg-indigo-900/10 text-indigo-600">
+                                            <BookOpen size={40} />
+                                        </div>
+                                    )}
+                                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1 rounded-full text-[11px] font-bold text-indigo-700 uppercase tracking-wider shadow-xs">
+                                        News Update
                                     </div>
-                                    <h3 className="text-2xl md:text-3xl font-medium text-slate-900 mb-4 leading-tight">
-                                        {latestNews ? latestNews.title : 'No Recent News'}
-                                    </h3>
-                                    <p className="text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                                        {latestNews ? (latestNews.content || latestNews.description) : 'No updates available.'}
-                                    </p>
                                 </div>
-                                <Link to="/news" className="text-indigo-600 text-sm font-bold flex items-center gap-2 group">
-                                    Read Full Article <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                                </Link>
+
+                                <div className="flex items-center gap-2 text-slate-400 text-xs mb-3 font-medium">
+                                    <Clock size={14} />
+                                    <span>{latestNews?.date || 'Recent Update'}</span>
+                                </div>
+
+                                <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    {latestNews ? latestNews.title : 'School Reopening & Academic Calendar'}
+                                </h3>
+
+                                <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
+                                    {latestNews ? latestNews.content : 'Stay informed with our regular updates, curricular achievements, and notices for parents and students.'}
+                                </p>
                             </div>
 
-                            {/* RIGHT: EVENT (1/3 Width) */}
-                            <div className="lg:col-span-1 bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200 flex flex-col justify-between relative overflow-hidden text-left">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
-                                <div className="relative z-10">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <span className="text-xs font-bold uppercase tracking-widest text-indigo-200">Upcoming</span>
-                                        <Calendar size={18} className="text-indigo-200" />
-                                    </div>
-                                    {nearestEvent ? (
-                                        <div className="mb-6">
-                                            <div className="text-5xl font-medium mb-1">{new Date(nearestEvent.eventDate).getDate()}</div>
-                                            <div className="text-lg text-indigo-200 mb-6">{new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'long' })}</div>
-                                            <h4 className="text-xl font-medium leading-snug">{nearestEvent.title}</h4>
-                                            <div className="flex items-center mt-2 text-indigo-200 text-sm">
-                                                <MapPin size={14} className="mr-2" />
-                                                {nearestEvent.location || 'Main Campus'}
+                            <div className="pt-6 mt-6 border-t border-slate-200 flex justify-between items-center">
+                                <Link to="/news" className="text-sm font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center gap-1.5">
+                                    Read Full Story <ArrowRight size={15} />
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Upcoming Event Card */}
+                        <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col justify-between shadow-xl">
+                            <div className="relative z-10">
+                                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-8">
+                                    <Calendar size={13} />
+                                    <span>Upcoming Event</span>
+                                </div>
+
+                                {nearestEvent ? (
+                                    <div>
+                                        <div className="flex items-baseline gap-3 mb-4">
+                                            <span className="text-5xl md:text-6xl font-serif font-bold text-amber-300">
+                                                {new Date(nearestEvent.eventDate).getDate()}
+                                            </span>
+                                            <div>
+                                                <span className="text-xl font-bold block text-white">
+                                                    {new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'long' })}
+                                                </span>
+                                                <span className="text-xs text-slate-400">
+                                                    {new Date(nearestEvent.eventDate).getFullYear()}
+                                                </span>
                                             </div>
                                         </div>
-                                    ) : (
-                                        <div className="mb-6">
-                                            <h4 className="text-xl font-medium">No Events</h4>
-                                        </div>
-                                    )}
-                                </div>
-                                <Link to="/news" className="relative z-10 w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-center text-sm font-semibold hover:bg-white/20 transition-colors">
-                                    View Calendar
+
+                                        <h3 className="text-2xl md:text-3xl font-serif font-bold mb-3">
+                                            {nearestEvent.title}
+                                        </h3>
+                                        <p className="text-slate-300 text-sm flex items-center gap-2 mb-6">
+                                            <MapPin size={16} className="text-amber-400 shrink-0" />
+                                            <span>{nearestEvent.location || 'Main Auditorium'}</span>
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="py-10">
+                                        <h3 className="text-2xl font-serif font-bold mb-2">Annual Sports Meet & Exhibition</h3>
+                                        <p className="text-slate-400 text-sm">Dates will be announced shortly. Check our news section for upcoming notifications.</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Decorative background shapes */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl" />
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
+
+                            <div className="relative z-10 pt-8 border-t border-slate-800">
+                                <Link 
+                                    to="/contact" 
+                                    className="inline-flex items-center justify-center w-full py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-semibold text-sm transition-all"
+                                >
+                                    Get In Touch For Event Details
                                 </Link>
                             </div>
                         </div>
-                    )}
-                </div>
-            </section>
-
-            {/* ==========================================
-                5. GALLERY SLIDER (Fixed Alignment)
-            ========================================== */}
-            <section className="py-24 bg-white overflow-hidden">
-                <div className="container mx-auto px-6">
-                    {/* Fixed Alignment: Items Center */}
-                    <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
-                        <div className="text-left w-full">
-                            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-2">School Life</h2>
-                            <p className="text-slate-500 font-light">Moments captured.</p>
-                        </div>
-                        {albums.length > 2 && (
-                            <div className="flex gap-2 shrink-0">
-                                <button onClick={prevSlide} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors"><ChevronLeft size={20}/></button>
-                                <button onClick={nextSlide} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors"><ChevronRight size={20}/></button>
-                            </div>
-                        )}
                     </div>
-
-                    {isGalleryLoading ? (
-                        <div className="h-80 bg-slate-50 rounded-2xl animate-pulse"></div>
-                    ) : albums.length > 0 ? (
-                        <div className="flex flex-col md:flex-row gap-6">
-                            {/* Primary Image */}
-                            {getAlbumAtIndex(currentIndex) && (
-                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex)._id || getAlbumAtIndex(currentIndex).id}`} className="block w-full md:w-2/3 h-[450px] rounded-3xl overflow-hidden relative group cursor-pointer">
-                                    {getAlbumAtIndex(currentIndex).images?.length > 0 ? (
-                                        <img src={getAlbumAtIndex(currentIndex).images[0].src || getAlbumAtIndex(currentIndex).images[0]} alt="Album" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                    ) : (
-                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300"><ImageIcon size={48} /></div>
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 text-left">
-                                        <div>
-                                            <h3 className="text-white text-xl font-medium">{getAlbumAtIndex(currentIndex).title}</h3>
-                                            <p className="text-slate-300 text-sm">{getAlbumAtIndex(currentIndex).images?.length || 0} Photos</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            )}
-                            
-                            {/* Secondary Image */}
-                            {getAlbumAtIndex(currentIndex + 1) && (
-                                <Link to={`/gallery/${getAlbumAtIndex(currentIndex + 1)._id || getAlbumAtIndex(currentIndex + 1).id}`} className="hidden md:block w-1/3 h-[450px] rounded-3xl overflow-hidden relative group cursor-pointer">
-                                    {getAlbumAtIndex(currentIndex + 1).images?.length > 0 ? (
-                                        <img src={getAlbumAtIndex(currentIndex + 1).images[0].src || getAlbumAtIndex(currentIndex + 1).images[0]} alt="Album" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                    ) : (
-                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300"><ImageIcon size={48} /></div>
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 text-left">
-                                        <div>
-                                            <h3 className="text-white text-lg font-medium">{getAlbumAtIndex(currentIndex + 1).title}</h3>
-                                        </div>
-                                    </div>
-                                </Link>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="text-center py-20 bg-slate-50 rounded-3xl border border-dashed border-slate-200 text-slate-400">Gallery Empty</div>
-                    )}
                 </div>
             </section>
 
-            {/* ==========================================
-                6. FOOTER CTA (Centered)
-            ========================================== */}
-            <section className="bg-white py-24 px-6 text-center border-t border-slate-100">
-                <div className="max-w-xl mx-auto animate-fade-up">
-                    <h2 className="text-3xl font-medium text-slate-900 mb-4">Ready to shape the future?</h2>
-                    <p className="text-slate-500 font-light mb-8">
-                        Join a community dedicated to excellence. Admissions open for the upcoming academic year.
-                    </p>
-                    <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-indigo-600 transition-colors">
-                        Get Started <ArrowRight size={16} />
-                    </Link>
-                </div>
-            </section>
         </div>
     );
 };

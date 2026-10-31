@@ -2,31 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/jpeg" href="/src/assets/theagelogo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <title>The Age School | Future Ready. Values Driven.</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
- tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          'school-blue': { '50': '#f0f8ff', '100': '#e0f1fe', '200': '#b9e5fd', '600': '#027ee6', '700': '#0164c0', '800': '#08539c', '900': '#0c457e', '950': '#072a4f', },
-          'school-gold': { '500': '#9b2a75', '700': '#800040', '900': '#660033' , },
-          'school-magenta': { '500': '#9b2a75', '700': '#800040', '900': '#660033' }
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+              serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            },
+            colors: {
+              indigo: {
+                50: '#eef2ff',
+                100: '#e0e7ff',
+                200: '#c7d2fe',
+                300: '#a5b4fc',
+                400: '#818cf8',
+                500: '#6366f1',
+                600: '#4f46e5',
+                700: '#4338ca',
+                800: '#3730a3',
+                900: '#312e81',
+                950: '#1e1b4b',
+              }
+            }
+          }
         }
       }
-    }
-  }
-</script>
+    </script>
     <script 
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI0J6UCzlP0GriXZG4Qf8P3fQc6jIcJIk&callback=initMap" 
-  async 
-  defer>
-</script>
-  
- 
-    <title>Vite + React</title>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI0J6UCzlP0GriXZG4Qf8P3fQc6jIcJIk&callback=initMap" 
+      async 
+      defer>
+    </script>
   </head>
   <body>
     <div id="root"></div>

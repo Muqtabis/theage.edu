@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getEvents, createEvent } = require('../controllers/eventController');
-
-// Import Cloudinary config
-const {upload}= require('../config/storage');
+const { getEvents, createEvent, deleteEvent, updateEvent } = require('../controllers/eventController');
+const { upload } = require('../config/storage');
 
 router.route('/')
-    .get(getEvents) 
-    // Add middleware to handle file upload
+    .get(getEvents)
     .post(upload.single('image'), createEvent);
+
+router.route('/:id')
+    .delete(deleteEvent)
+    .put(upload.single('image'), updateEvent);
 
 module.exports = router;
