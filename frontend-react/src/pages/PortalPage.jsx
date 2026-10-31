@@ -22,7 +22,7 @@ import {
     Building2,
     BookOpen
 } from 'lucide-react';
-import { useSiteContent } from '../context/ContentContext';
+import { useSiteContent, defaultClasses } from '../context/ContentContext';
 
 // API Endpoints
 const NEWS_API_URL = '/api/news';
@@ -47,7 +47,12 @@ const PortalPage = () => {
         home: { ...(content?.home || {}) },
         about: { ...(content?.about || {}) },
         admissions: { ...(content?.admissions || {}) },
-        academics: { ...(content?.academics || {}) },
+        academics: { 
+            ...(content?.academics || {}),
+            classes: (content?.academics?.classes && content.academics.classes.length > 0)
+                ? content.academics.classes
+                : defaultClasses
+        },
         studentLife: { ...(content?.studentLife || {}) },
     });
 
@@ -59,7 +64,12 @@ const PortalPage = () => {
                 home: { ...(content.home || {}) },
                 about: { ...(content.about || {}) },
                 admissions: { ...(content.admissions || {}) },
-                academics: { ...(content.academics || {}) },
+                academics: { 
+                    ...(content.academics || {}),
+                    classes: (content.academics?.classes && content.academics.classes.length > 0)
+                        ? content.academics.classes
+                        : defaultClasses
+                },
                 studentLife: { ...(content.studentLife || {}) },
             });
         }
@@ -1099,24 +1109,112 @@ const PortalPage = () => {
                                 </div>
 
                                 <div className="pt-4 border-t">
-                                    <h3 className="text-lg font-serif font-bold text-slate-900 mb-4">Curriculum Pathways</h3>
-                                    <div className="space-y-4">
-                                        {(cmsData.academics.levels || []).map((lvl, idx) => (
-                                            <div key={idx} className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                                                <div className="font-bold text-slate-900">{lvl.title}</div>
-                                                <textarea 
-                                                    rows="2"
-                                                    value={lvl.desc || ''} 
-                                                    onChange={e => {
-                                                        const newLvls = [...(cmsData.academics.levels || [])];
-                                                        newLvls[idx].desc = e.target.value;
-                                                        setCmsData(prev => ({
-                                                            ...prev,
-                                                            academics: { ...prev.academics, levels: newLvls }
-                                                        }));
-                                                    }}
-                                                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white"
-                                                />
+                                    <div className="flex justify-between items-center mb-4">
+                                        <div>
+                                            <h3 className="text-lg font-serif font-bold text-slate-900">Class-by-Class Curriculum & Subjects Manager</h3>
+                                            <p className="text-xs text-slate-500">Edit curriculum overviews, subjects, timings, and ratios for all individual grades.</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Classes List Editor */}
+                                    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+                                        {((cmsData.academics.classes && cmsData.academics.classes.length > 0) ? cmsData.academics.classes : []).map((cls, idx) => (
+                                            <div key={cls.id || idx} className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                                                <div className="flex flex-wrap justify-between items-center gap-2 pb-2 border-b border-slate-200">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-xs font-bold px-2 py-0.5 bg-white border border-slate-200 rounded text-slate-700">
+                                                            {cls.wingName || cls.wing}
+                                                        </span>
+                                                        <span className="font-bold text-slate-900">{cls.name}</span>
+                                                    </div>
+                                                    <span className="text-xs text-slate-500">ID: {cls.id}</span>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                                                    <div>
+                                                        <label className="font-bold text-slate-600 block mb-1">Age Criteria</label>
+                                                        <input 
+                                                            type="text" 
+                                                            value={cls.age || ''} 
+                                                            onChange={e => {
+                                                                const newClasses = [...(cmsData.academics.classes || [])];
+                                                                newClasses[idx].age = e.target.value;
+                                                                setCmsData(prev => ({
+                                                                    ...prev,
+                                                                    academics: { ...prev.academics, classes: newClasses }
+                                                                }));
+                                                            }}
+                                                            className="w-full px-3 py-1.5 border rounded-lg bg-white"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="font-bold text-slate-600 block mb-1">Class Timings</label>
+                                                        <input 
+                                                            type="text" 
+                                                            value={cls.timings || ''} 
+                                                            onChange={e => {
+                                                                const newClasses = [...(cmsData.academics.classes || [])];
+                                                                newClasses[idx].timings = e.target.value;
+                                                                setCmsData(prev => ({
+                                                                    ...prev,
+                                                                    academics: { ...prev.academics, classes: newClasses }
+                                                                }));
+                                                            }}
+                                                            className="w-full px-3 py-1.5 border rounded-lg bg-white"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="font-bold text-slate-600 block mb-1">Student-Teacher Ratio</label>
+                                                        <input 
+                                                            type="text" 
+                                                            value={cls.ratio || ''} 
+                                                            onChange={e => {
+                                                                const newClasses = [...(cmsData.academics.classes || [])];
+                                                                newClasses[idx].ratio = e.target.value;
+                                                                setCmsData(prev => ({
+                                                                    ...prev,
+                                                                    academics: { ...prev.academics, classes: newClasses }
+                                                                }));
+                                                            }}
+                                                            className="w-full px-3 py-1.5 border rounded-lg bg-white"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <label className="text-xs font-bold text-slate-600 block mb-1">Pedagogical Overview</label>
+                                                    <textarea 
+                                                        rows="2"
+                                                        value={cls.overview || ''} 
+                                                        onChange={e => {
+                                                            const newClasses = [...(cmsData.academics.classes || [])];
+                                                            newClasses[idx].overview = e.target.value;
+                                                            setCmsData(prev => ({
+                                                                ...prev,
+                                                                academics: { ...prev.academics, classes: newClasses }
+                                                            }));
+                                                        }}
+                                                        className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <label className="text-xs font-bold text-slate-600 block mb-1">Prescribed Subjects (Comma-separated)</label>
+                                                    <input 
+                                                        type="text"
+                                                        value={Array.isArray(cls.subjects) ? cls.subjects.join(', ') : (cls.subjects || '')} 
+                                                        onChange={e => {
+                                                            const newClasses = [...(cmsData.academics.classes || [])];
+                                                            newClasses[idx].subjects = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+                                                            setCmsData(prev => ({
+                                                                ...prev,
+                                                                academics: { ...prev.academics, classes: newClasses }
+                                                            }));
+                                                        }}
+                                                        className="w-full px-3 py-1.5 border rounded-lg text-xs bg-white"
+                                                        placeholder="English, Mathematics, Science, Kannada, Hindi..."
+                                                    />
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

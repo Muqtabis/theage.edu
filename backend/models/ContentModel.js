@@ -212,24 +212,55 @@ const ContentSchema = new mongoose.Schema(
         ],
         default: [
           {
-            id: 'lower',
-            title: 'Lower School (Grades K-5)',
-            desc: 'Focus on foundational literacy, numeracy, and social-emotional skills through hands-on learning and personalized attention.',
-            focus: ['Foundational Skills', 'Creative Arts', 'Digital Literacy'],
+            id: 'pre-primary',
+            title: 'Pre-Primary Wing (ECCE - Nursery to UKG)',
+            desc: 'Early childhood foundation emphasizing sensory-motor discovery, phonics, number sense, and play-based socialization.',
+            focus: ['Phonics & Pre-Math', 'Sensory Play', 'Social Communication'],
           },
           {
             id: 'primary',
-            title: 'Primary School (Grades 6-8)',
-            desc: 'Transitional phase emphasizing critical thinking, problem-solving, and subject specialization.',
-            focus: ['Critical Thinking', 'Integrated STEM', 'Leadership Programs'],
+            title: 'Primary School Wing (Classes I - V)',
+            desc: 'Foundational literacy, three-language familiarity, arithmetic, environmental sciences, and moral education.',
+            focus: ['Foundational Literacy', 'Mental Math', 'EVS & Digital Skills'],
           },
           {
-            id: 'high',
-            title: 'High School (Grades 9-10)',
-            desc: 'College preparatory curriculum with advanced coursework, career counseling, and rigorous external examination readiness.',
-            focus: ['Exam Prep', 'Career Counseling', 'Advanced Research'],
+            id: 'middle',
+            title: 'Middle School Wing (Classes VI - VIII)',
+            desc: 'Transitional phase emphasizing specialized STEM laboratory sciences, modern history, and analytical problem-solving.',
+            focus: ['Composite Science Labs', 'Algebra & Geometry', 'Three-Language Policy'],
+          },
+          {
+            id: 'secondary',
+            title: 'Secondary School Wing (Classes IX - X)',
+            desc: 'Rigorous Karnataka SSLC Board curriculum preparing scholars for secondary board examinations with 100% distinction track record.',
+            focus: ['SSLC Board Prep', 'Physics, Chemistry & Biology Labs', 'Career Guidance'],
+          },
+          {
+            id: 'senior',
+            title: 'Senior Secondary / Pre-University (Classes XI - XII)',
+            desc: 'Pre-University preparation across Science, Commerce, and Arts streams with integrated competitive entrance guidance.',
+            focus: ['PCMB / PCMC Science', 'Commerce & Accountancy', 'Humanities & CLAT Prep'],
           },
         ]
+      },
+      classes: {
+        type: [
+          {
+            id: String,
+            wing: String,
+            wingName: String,
+            name: String,
+            age: String,
+            timings: String,
+            ratio: String,
+            overview: String,
+            subjects: [String],
+            milestones: [String],
+            assessment: String,
+            coCurricular: [String],
+          }
+        ],
+        default: []
       }
     },
     studentLife: {

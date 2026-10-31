@@ -2,6 +2,9 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ContentProvider } from './context/ContentContext';
 
+// Import ScrollToTop to guarantee pages always open at the top
+import ScrollToTop from './components/ScrollToTop';
+
 // Import Layout (Header/Footer wrapper)
 import Layout from './components/Layout';
 
@@ -29,6 +32,7 @@ const ProtectedRoute = ({ children }) => {
 export default function App() {
   return (
     <ContentProvider>
+      <ScrollToTop />
       <Routes>
         {/* Root redirect */}
         <Route path="/" element={<Navigate to="/home" replace />} />

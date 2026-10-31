@@ -116,6 +116,73 @@ const StudentLifePage = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* THE FOUR HOUSES SYSTEM */}
+                <div className="mt-20 pt-16 border-t border-slate-200">
+                    <div className="max-w-2xl mb-12">
+                        <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#8c7355] block mb-2">Comradeship & Leadership</span>
+                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c]">The Four Houses System</h2>
+                        <p className="text-xs sm:text-sm text-slate-600 mt-2">
+                            Every scholar is initiated into one of our four institutional houses, fostering healthy competition, leadership, and lifelong brotherhood.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { name: "Ashoka House", color: "border-amber-500 bg-amber-50/50", badge: "text-amber-800 bg-amber-100", motto: "Courage & Righteousness", desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." },
+                            { name: "Tagore House", color: "border-blue-500 bg-blue-50/50", badge: "text-blue-800 bg-blue-100", motto: "Creativity & Wisdom", desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." },
+                            { name: "Raman House", color: "border-emerald-500 bg-emerald-50/50", badge: "text-emerald-800 bg-emerald-100", motto: "Inquiry & Scientific Truth", desc: "Championing empirical logic, innovation, mathematics, and technological marvels." },
+                            { name: "Kalam House", color: "border-rose-500 bg-rose-50/50", badge: "text-rose-800 bg-rose-100", motto: "Vision & Dedication", desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." }
+                        ].map((h, hi) => (
+                            <div key={hi} className={`p-6 border-t-4 rounded-xs border-slate-200 bg-white shadow-2xs ${h.color}`}>
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs inline-block mb-2 ${h.badge}`}>
+                                    House Division
+                                </span>
+                                <h3 className="font-serif font-bold text-lg text-[#0b192c] mb-1">{h.name}</h3>
+                                <p className="text-xs italic text-[#8c7355] mb-3">"{h.motto}"</p>
+                                <p className="text-xs text-slate-600 leading-relaxed">{h.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* CAMPUS FACILITIES */}
+                <div className="mt-20 pt-16 border-t border-slate-200">
+                    <div className="max-w-2xl mb-12">
+                        <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#8c7355] block mb-2">Campus Environment</span>
+                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c]">Infrastructure & Scholar Safety</h2>
+                        <p className="text-xs sm:text-sm text-slate-600 mt-2">
+                            State-of-the-art facilities engineered to provide a healthy, safe, and academically stimulating habitat.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-xs text-slate-700">
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Smart Interactive Classrooms</h4>
+                            <p className="text-slate-600 leading-relaxed">Equipped with interactive smart displays, audio-visual technology, and ergonomic seating.</p>
+                        </div>
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Composite Science & STEM Lab</h4>
+                            <p className="text-slate-600 leading-relaxed">Dedicated Physics, Chemistry, Biology, and Robotics experimentation apparatus.</p>
+                        </div>
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Central Knowledge Library</h4>
+                            <p className="text-slate-600 leading-relaxed">Over 5,000 curated books, periodicals, daily national newspapers, and digital research bays.</p>
+                        </div>
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">GPS-Monitored Bus Fleet</h4>
+                            <p className="text-slate-600 leading-relaxed">Safe transport covering Basavakalyan and neighboring taluk routes with speed governors and female attendants.</p>
+                        </div>
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Athletic Fields & Courts</h4>
+                            <p className="text-slate-600 leading-relaxed">Expansive play area for cricket, football, volleyball, badminton, kho-kho, and track events.</p>
+                        </div>
+                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
+                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Health Care & RO Purified Water</h4>
+                            <p className="text-slate-600 leading-relaxed">On-campus primary infirmary, periodic pediatric health checkups, and multi-stage commercial RO water.</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* COLLECTIONS DIRECTORY */}

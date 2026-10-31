@@ -129,7 +129,7 @@ const HomePage = () => {
                         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#0b192c]/80 border border-[#c5a880]/40 rounded-sm mb-6">
                             <span className="w-1.5 h-1.5 bg-[#c5a880] rounded-full" />
                             <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#f5eedc]">
-                                {home.heroBadge || general.admissionsBadge || 'Admissions Open for Academic Year 2025–26'}
+                                {home.heroBadge || general.admissionsBadge || 'Admissions Open for Academic Year 2026–27'}
                             </span>
                         </div>
 
@@ -142,7 +142,7 @@ const HomePage = () => {
                         </h1>
 
                         <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal mb-10 max-w-xl">
-                            {home.heroSubtitle || 'A distinguished K-10 institution cultivating scholarship, moral conviction, and leadership in Basavakalyan.'}
+                            {home.heroSubtitle || 'A distinguished K-12 institution in Basavakalyan cultivating academic supremacy, ethical conviction, and civic leadership.'}
                         </p>
 
                         {/* Action Buttons */}
@@ -156,16 +156,38 @@ const HomePage = () => {
                             </Link>
                             
                             <Link 
-                                to="/about" 
+                                to="/academics" 
                                 className="px-7 py-3.5 bg-transparent hover:bg-white/10 text-white text-xs font-bold uppercase tracking-[0.16em] rounded-sm border border-slate-300/40 transition-all flex items-center gap-2"
                             >
-                                <span>{home.ctaTourText || 'Institutional Vision'}</span>
+                                <span>Explore All 17 Classes</span>
                             </Link>
                         </div>
 
                     </div>
                 </div>
             </section>
+
+            {/* OFFICIAL URGENT NOTICE TICKER */}
+            <div className="bg-[#07111e] text-white border-b border-[#c5a880]/30 py-3 px-4 sm:px-8">
+                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 overflow-hidden">
+                        <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-[#c5a880] text-[#07111e] rounded-xs flex items-center gap-1.5 shadow-2xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
+                            LATEST NOTICE
+                        </span>
+                        <p className="text-xs text-slate-200 font-medium truncate">
+                            {general.noticeMarquee || 'ADMISSIONS OPEN FOR SESSION 2026-2027: Pre-Nursery to Grade XII (Science & Commerce) • Schedule Campus Tour • SSLC Board Preparatory Clinics Commencing Soon'}
+                        </p>
+                    </div>
+                    <Link 
+                        to="/news" 
+                        className="shrink-0 text-xs font-bold text-[#c5a880] hover:underline flex items-center gap-1"
+                    >
+                        <span>Official Circulars</span>
+                        <ArrowRight size={12} />
+                    </Link>
+                </div>
+            </div>
 
             {/* ==========================================
                 2. INSTITUTIONAL METRICS (Minimalist Divider)
@@ -308,62 +330,111 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                4. ACADEMIC DIVISIONS (Editorial Overview)
+                4. ACADEMIC WINGS & CLASS STRUCTURE (Expanded Directory)
             ========================================== */}
-            <section className="py-20 bg-white border-y border-slate-200/90">
+            <section className="py-24 bg-white border-y border-slate-200">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
                         <div>
-                            <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">
-                                Structured Learning
+                            <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#8c7355] block mb-2">
+                                Institutional Continuum
                             </span>
-                            <h2 className="text-3xl font-serif font-bold text-[#0b192c]">
-                                Three Stages of Academic Growth
+                            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#0b192c]">
+                                Progressive Class Structures & Wings
                             </h2>
+                            <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-2xl leading-relaxed">
+                                Every single class—from early childhood playgroups to high school board examinations and pre-university science/commerce streams—is guided by specialized faculty and syllabus benchmarks.
+                            </p>
                         </div>
                         <Link 
                             to="/academics" 
-                            className="text-xs font-bold uppercase tracking-wider text-[#0b192c] hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                            className="text-xs font-bold uppercase tracking-wider text-[#0b192c] hover:text-[#8c7355] transition-colors flex items-center gap-1.5 self-start md:self-auto bg-[#fdfbf7] px-4 py-2 border border-slate-200 rounded-xs"
                         >
-                            <span>View Full Curriculum Directory</span>
-                            <ArrowRight size={14} />
+                            <span>Open Detailed Class Directory</span>
+                            <ArrowRight size={14} className="text-[#8c7355]" />
                         </Link>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
                             { 
-                                stage: "Primary Foundation", 
-                                grades: "Kindergarten – Grade 2", 
-                                desc: "Cultivating language acquisition, sensory exploration, and joy in foundational numeracy through play and guided observation.",
-                                focus: ["Foundational Literacy", "Spatial Numeracy", "Social Adaptation"]
+                                wing: "Pre-Primary Wing (ECCE)", 
+                                age: "Ages 2.5 to 6 Years", 
+                                classes: ["Playgroup / Toddlers", "Nursery", "Lower KG (LKG)", "Upper KG (UKG)"],
+                                desc: "Montessori & play-based early foundation: phonics, sensory exploration, and joyful number sense in vibrant classrooms.",
+                                tag: "Early Childhood Care"
                             },
                             { 
-                                stage: "Middle Division", 
-                                grades: "Grade 3 – Grade 7", 
-                                desc: "Transition into structured disciplines. Science inquiry, linguistic depth in regional and English tongues, and cooperative sports.",
-                                focus: ["Integrated Sciences", "Mathematics Lab", "Bilingual Expression"]
+                                wing: "Primary School Wing", 
+                                age: "Classes I to V (Ages 6 to 11)", 
+                                classes: ["Class I", "Class II", "Class III", "Class IV", "Class V (Primary Capstone)"],
+                                desc: "Formal literacy, three-language formula (Kannada, English, Hindi), mental arithmetic, and environmental sciences.",
+                                tag: "Foundational Literacy"
                             },
                             { 
-                                stage: "Senior Secondary", 
-                                grades: "Grade 8 – Grade 10", 
-                                desc: "Rigorous board preparation, advanced physical laboratories, career guidance, and leadership roles in campus councils.",
-                                focus: ["SSLC Board Excellence", "Career Counseling", "Scientific Method"]
+                                wing: "Middle School Wing", 
+                                age: "Classes VI to VIII (Ages 11 to 14)", 
+                                classes: ["Class VI", "Class VII", "Class VIII (Middle Capstone)"],
+                                desc: "Subject-specialist mentoring: Physics, Chemistry & Biology laboratory experiments, linear algebra, and world history.",
+                                tag: "STEM & Departmental Science"
+                            },
+                            { 
+                                wing: "Secondary School Wing (SSLC)", 
+                                age: "Classes IX & X (Ages 14 to 16)", 
+                                classes: ["Class IX (Foundation)", "Class X (KSEAB State Board Exam)"],
+                                desc: "Rigorous secondary board syllabus completion, 3 Pre-Board model series, remedial doubt clinics, and 100% pass record.",
+                                tag: "Board Examination Center"
+                            },
+                            { 
+                                wing: "Senior Secondary / PUC Science", 
+                                age: "Classes XI & XII (Ages 16 to 18)", 
+                                classes: ["Class XI (PCMB/PCMC)", "Class XII (State PUC Board)"],
+                                desc: "Physics, Chemistry, Math, Biology / Computer Science with integrated entrance training for KCET, NEET, and JEE.",
+                                tag: "Pre-University Science"
+                            },
+                            { 
+                                wing: "Senior Secondary / PUC Commerce & Arts", 
+                                age: "Classes XI & XII (Ages 16 to 18)", 
+                                classes: ["Class XI (Commerce/Arts)", "Class XII (Commerce/Arts)"],
+                                desc: "Accountancy, Business Studies, Economics, History, and Political Science with CA Foundation and CLAT mentoring.",
+                                tag: "Pre-University Commerce & Arts"
                             }
                         ].map((div, i) => (
-                            <div key={i} className="bg-[#fdfbf7] p-8 border border-slate-200 rounded-sm flex flex-col justify-between">
+                            <div key={i} className="bg-[#fdfbf7] p-7 border border-slate-200 rounded-xs flex flex-col justify-between hover:border-[#0b192c] transition-all group shadow-2xs">
                                 <div>
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c5a880] block mb-1">{div.grades}</span>
-                                    <h3 className="text-xl font-serif font-bold text-[#0b192c] mb-3">{div.stage}</h3>
-                                    <p className="text-xs text-slate-600 leading-relaxed mb-6">{div.desc}</p>
+                                    <div className="flex items-center justify-between mb-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                                        <span className="text-[#8c7355]">{div.tag}</span>
+                                        <span className="bg-white px-2 py-0.5 border border-slate-200 rounded-xs">{div.age}</span>
+                                    </div>
+                                    <h3 className="text-lg font-serif font-bold text-[#0b192c] mb-2 group-hover:text-[#1e3e62] transition-colors">
+                                        {div.wing}
+                                    </h3>
+                                    <p className="text-xs text-slate-600 leading-relaxed mb-5">
+                                        {div.desc}
+                                    </p>
                                 </div>
-                                <div className="space-y-1.5 pt-4 border-t border-slate-200/80">
-                                    {div.focus.map((f, fi) => (
-                                        <div key={fi} className="text-[11px] text-slate-600 font-medium flex items-center gap-2">
-                                            <span className="w-1 h-1 rounded-full bg-[#c5a880]" />
-                                            <span>{f}</span>
-                                        </div>
-                                    ))}
+                                
+                                <div className="pt-4 border-t border-slate-200">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                                        Covered Classes:
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5 mb-4">
+                                        {div.classes.map((cName, ci) => (
+                                            <span 
+                                                key={ci} 
+                                                className="text-[11px] font-semibold text-slate-700 bg-white px-2.5 py-1 rounded-xs border border-slate-200"
+                                            >
+                                                {cName}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <Link 
+                                        to="/academics" 
+                                        className="text-xs font-bold text-[#0b192c] hover:text-[#8c7355] inline-flex items-center gap-1.5 transition-colors"
+                                    >
+                                        <span>Inspect Syllabus & Timings</span>
+                                        <ArrowRight size={12} className="text-[#8c7355]" />
+                                    </Link>
                                 </div>
                             </div>
                         ))}

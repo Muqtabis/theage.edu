@@ -83,7 +83,7 @@ const AdmissionsPage = () => {
                         <p className="text-xs text-slate-500 mt-2">Transparent institutional rates without hidden surcharges.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {fees.map((f, i) => (
                             <div 
                                 key={i} 
@@ -97,7 +97,7 @@ const AdmissionsPage = () => {
                                     <span className={`text-[10px] font-bold uppercase tracking-[0.2em] block mb-1 ${f.highlight ? 'text-[#c5a880]' : 'text-slate-500'}`}>
                                         {f.range}
                                     </span>
-                                    <h3 className="text-2xl font-serif font-bold mb-4">{f.grade}</h3>
+                                    <h3 className="text-xl font-serif font-bold mb-4">{f.grade}</h3>
 
                                     <div className={`pb-6 mb-6 border-b ${f.highlight ? 'border-slate-800' : 'border-slate-200'}`}>
                                         <span className="text-4xl font-serif font-bold block">
@@ -140,6 +140,75 @@ const AdmissionsPage = () => {
                                 </Link>
                             </div>
                         ))}
+                    </div>
+
+                    {/* AGE ELIGIBILITY & DOCUMENTATION REQUIREMENTS */}
+                    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="p-7 border border-slate-200 bg-[#fdfbf7] rounded-xs">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#8c7355] block mb-1">
+                                Statutory Compliance
+                            </span>
+                            <h4 className="font-serif font-bold text-lg text-[#0b192c] mb-3">
+                                Standard Age Eligibility (As of June 1st)
+                            </h4>
+                            <div className="space-y-2 text-xs text-slate-700 divide-y divide-slate-200/60">
+                                <div className="flex justify-between py-1.5">
+                                    <span className="font-semibold">Nursery:</span>
+                                    <span>3 Years completed</span>
+                                </div>
+                                <div className="flex justify-between py-1.5">
+                                    <span className="font-semibold">Lower Kindergarten (LKG):</span>
+                                    <span>4 Years completed</span>
+                                </div>
+                                <div className="flex justify-between py-1.5">
+                                    <span className="font-semibold">Upper Kindergarten (UKG):</span>
+                                    <span>5 Years completed</span>
+                                </div>
+                                <div className="flex justify-between py-1.5">
+                                    <span className="font-semibold">Class I (Grade 1):</span>
+                                    <span>6 Years completed</span>
+                                </div>
+                                <div className="flex justify-between py-1.5">
+                                    <span className="font-semibold">Classes II to X:</span>
+                                    <span>Commensurate age with valid Transfer Certificate (TC)</span>
+                                </div>
+                                <div className="flex justify-between pt-1.5">
+                                    <span className="font-semibold">Classes XI & XII (PUC):</span>
+                                    <span>Successful completion of SSLC / Class 10 Board</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="p-7 border border-slate-200 bg-[#fdfbf7] rounded-xs">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#8c7355] block mb-1">
+                                Verification Checklist
+                            </span>
+                            <h4 className="font-serif font-bold text-lg text-[#0b192c] mb-3">
+                                Required Documents for Admission
+                            </h4>
+                            <ul className="space-y-2 text-xs text-slate-700">
+                                <li className="flex items-start gap-2">
+                                    <Check size={14} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                    <span>Official Birth Certificate issued by Municipal Corporation or Gram Panchayat.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check size={14} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                    <span>Original Transfer Certificate (TC) counter-signed by BEO/DDPI (for Class 2 onwards).</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check size={14} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                    <span>Cumulative Record / Progress Report card of previous academic year.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check size={14} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                    <span>4 Passport-sized colored photographs of scholar and 2 photographs of parents.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check size={14} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                    <span>Photocopy of Aadhaar Card of scholar and parents / legal guardians.</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Financial Assistance Note */}
