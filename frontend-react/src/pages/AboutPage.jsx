@@ -42,15 +42,20 @@ const AboutPage = () => {
                 1. INSTITUTIONAL ABOUT HERO
             ========================================== */}
             <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 relative overflow-hidden">
+                {/* Ambient glowing mesh orbs */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#c5a880]/10 rounded-full blur-3xl pointer-events-none animate-float" />
+
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         
                         <div className="lg:col-span-7">
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c5a880] block mb-3">
+                            <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#c5a880] inline-flex items-center gap-2 mb-3 bg-[#c5a880]/10 px-3.5 py-1 rounded-full border border-[#c5a880]/25">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-ping" />
                                 {about.heroBadge || 'Chartered 2012 • Basavakalyan'}
                             </span>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-                                {about.heroTitle || 'Education for a Changing World.'}
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
+                                <span className="text-gradient-gold">{about.heroTitle || 'Education for a Changing World.'}</span>
                             </h1>
                             <p className="text-slate-300 text-base leading-relaxed max-w-xl mb-8">
                                 {about.heroSubtitle || "At The Age School, we don't merely instruct against a syllabus. We cultivate moral discernment, intellectual daring, and the leadership capacity needed to navigate tomorrow."}
@@ -78,11 +83,11 @@ const AboutPage = () => {
                         </div>
 
                         <div className="lg:col-span-5">
-                            <div className="border-4 border-slate-800 shadow-2xl relative">
+                            <div className="border-4 border-slate-800 shadow-2xl relative rounded-sm overflow-hidden group hover-lift">
                                 <img 
                                     src={about.heroImageUrl || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
                                     alt="School Campus Grounds" 
-                                    className="w-full h-[400px] object-cover" 
+                                    className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                                 />
                                 <div className="p-4 bg-[#07111e] border-t border-slate-800 text-[11px] text-slate-400 font-serif italic text-center">
                                     The Age School Campus, Basavakalyan, Karnataka
@@ -110,14 +115,15 @@ const AboutPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
                     
                     {/* President Card */}
-                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between">
+                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between hover-lift relative overflow-hidden group rounded-sm">
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div>
                             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                                 <div className="w-16 h-16 rounded-sm overflow-hidden border border-slate-300 shrink-0">
                                     <img 
                                         src={about.presidentImageUrl || "https://images.unsplash.com/photo-1544531327-c820ad9d46dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"} 
                                         alt="" 
-                                        className="w-full h-full object-cover" 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                                     />
                                 </div>
                                 <div>
@@ -145,14 +151,15 @@ const AboutPage = () => {
                     </div>
 
                     {/* Vice President Card */}
-                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between">
+                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between hover-lift relative overflow-hidden group rounded-sm">
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c5a880] to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div>
                             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                                 <div className="w-16 h-16 rounded-sm overflow-hidden border border-slate-300 shrink-0">
                                     <img 
                                         src={about.vpImageUrl || "https://images.unsplash.com/photo-1574023605634-6d9ff7b5a840?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"} 
                                         alt="" 
-                                        className="w-full h-full object-cover" 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                                     />
                                 </div>
                                 <div>
@@ -199,9 +206,10 @@ const AboutPage = () => {
                             { title: "Modern Inquiry", desc: "Integrating laboratory research, digital fluency, and applied mathematics for the 21st century." },
                             { title: "Inclusive Fellowship", desc: "A supportive environment where every background is embraced, supported, and challenged to achieve personal excellence." },
                         ].map((p, i) => (
-                            <div key={i} className="p-6 border border-slate-200 bg-[#fdfbf7]">
+                            <div key={i} className="p-6 border border-slate-200 bg-[#fdfbf7] hover-lift relative overflow-hidden group rounded-sm">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200 group-hover:bg-[#c5a880] transition-colors" />
                                 <span className="text-xs font-bold text-[#c5a880] block mb-2 font-mono">0{i+1}.</span>
-                                <h3 className="text-base font-serif font-bold text-[#0b192c] mb-2">{p.title}</h3>
+                                <h3 className="text-base font-serif font-bold text-[#0b192c] mb-2 group-hover:text-blue-900 transition-colors">{p.title}</h3>
                                 <p className="text-xs text-slate-600 leading-relaxed">{p.desc}</p>
                             </div>
                         ))}
@@ -222,8 +230,9 @@ const AboutPage = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                         {teachers.map(t => (
-                            <div key={t._id} className="bg-white p-6 border border-slate-200 rounded-sm">
-                                <h4 className="font-serif font-bold text-slate-900 text-sm mb-0.5">{t.name}</h4>
+                            <div key={t._id} className="bg-white p-6 border border-slate-200 rounded-sm hover-lift relative overflow-hidden group">
+                                <div className="absolute top-0 left-0 right-0 h-1 bg-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <h4 className="font-serif font-bold text-slate-900 text-sm mb-0.5 group-hover:text-blue-900 transition-colors">{t.name}</h4>
                                 <p className="text-xs font-bold text-[#c5a880] mb-2 uppercase tracking-wide">{t.subject}</p>
                                 {t.qualification && <p className="text-[11px] text-slate-500 mb-2">{t.qualification}</p>}
                                 <p className="text-[11px] text-slate-400 font-mono">{t.email}</p>
@@ -236,16 +245,17 @@ const AboutPage = () => {
             {/* ==========================================
                 5. CHRONOLOGICAL MILESTONES
             ========================================== */}
-            <section className="py-24 bg-[#0b192c] text-white">
-                <div className="max-w-5xl mx-auto px-6 sm:px-8">
+            <section className="py-24 bg-[#0b192c] text-white relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="max-w-5xl mx-auto px-6 sm:px-8 relative z-10">
                     <div className="text-center max-w-xl mx-auto mb-16">
                         <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">Historical Record</span>
                         <h2 className="text-3xl font-serif font-bold text-white">Foundations & Milestones</h2>
                     </div>
 
-                    <div className="space-y-8">
+                    <div className="space-y-6">
                         {timeline.map((item, idx) => (
-                            <div key={idx} className="p-6 md:p-8 bg-[#07111e] border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div key={idx} className="p-6 md:p-8 bg-[#07111e] border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6 hover-lift rounded-sm hover:border-[#c5a880]/40 transition-colors">
                                 <div className="text-2xl font-serif font-bold text-[#c5a880] md:w-32 shrink-0">
                                     {item.year}
                                 </div>

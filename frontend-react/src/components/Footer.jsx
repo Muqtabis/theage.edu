@@ -103,7 +103,7 @@ const Footer = () => {
               Accreditation
             </h4>
             
-            <div className="bg-[#0b192c] p-4 border border-slate-800">
+            <div className="bg-[#0b192c] p-4 border border-slate-800 rounded-sm hover:border-[#c5a880]/40 transition-colors">
               <span className="text-[10px] text-[#c5a880] uppercase tracking-wider font-bold block mb-1">
                 Official Recognition
               </span>
@@ -132,10 +132,10 @@ const Footer = () => {
             {/* Discreet Admin Login */}
             <Link 
               to="/login" 
-              className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5 text-slate-500 hover:text-slate-300"
+              className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5 text-slate-500 hover:text-slate-200 group"
               title="Authorized Personnel Access"
             >
-              <Shield size={12} />
+              <Shield size={12} className="group-hover:text-[#c5a880] transition-colors" />
               <span>Staff Login</span>
             </Link>
           </div>
@@ -151,7 +151,7 @@ const SocialLink = ({ href, icon }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer" 
-    className="w-8 h-8 rounded-xs bg-[#0b192c] border border-slate-800 text-slate-400 flex items-center justify-center transition-colors hover:text-white hover:border-[#c5a880]"
+    className="w-9 h-9 rounded-sm bg-[#0b192c] border border-slate-800 text-slate-400 flex items-center justify-center transition-all duration-300 hover:text-white hover:border-[#c5a880] hover:bg-[#152336] hover:scale-110 hover:-translate-y-0.5 hover:shadow-md"
   >
     {icon}
   </a>

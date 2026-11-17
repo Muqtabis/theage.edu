@@ -98,15 +98,21 @@ const AcademicsPage = () => {
         <div className="font-sans text-slate-800 bg-[#fdfbf7] w-full overflow-x-hidden selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
             
             {/* HERO SECTION */}
-            <section className="bg-[#0b192c] text-white py-20 md:py-28 border-b border-[#c5a880]/30 relative">
+            <section className="bg-[#0b192c] text-white py-20 md:py-28 border-b border-[#c5a880]/30 relative overflow-hidden">
+                {/* Glowing ambient background orbs */}
+                <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#c5a880]/15 rounded-full blur-3xl pointer-events-none animate-float" />
+
                 <div className="max-w-6xl mx-auto px-6 sm:px-8 text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xs bg-[#c5a880]/15 border border-[#c5a880]/40 text-[#c5a880] text-xs font-bold uppercase tracking-[0.2em] mb-5">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xs bg-[#c5a880]/15 border border-[#c5a880]/40 text-[#c5a880] text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-[0_0_15px_rgba(197,168,128,0.2)] animate-float">
                         <GraduationCap size={14} />
                         <span>{academics.heroBadge || 'Comprehensive Academic Framework'}</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-5 tracking-tight">
-                        {academics.heroTitle || 'Curriculum & Class-Wise Directory'}
+                        <span className="text-gradient-gold">
+                            {academics.heroTitle || 'Curriculum & Class-Wise Directory'}
+                        </span>
                     </h1>
                     
                     <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8">
@@ -116,19 +122,19 @@ const AcademicsPage = () => {
                     <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold">
                         <a 
                             href="#class-directory" 
-                            className="px-5 py-2.5 bg-[#c5a880] text-[#0b192c] font-bold rounded-xs hover:bg-[#d8bf9a] transition-colors shadow-xs"
+                            className="shimmer-btn px-5 py-2.5 bg-gradient-to-r from-[#c5a880] to-[#e2c7a5] text-[#0b192c] font-bold rounded-xs hover:from-[#d8ba92] hover:to-[#f3dcba] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                         >
                             Explore Class Structure
                         </a>
                         <a 
                             href="#daily-routine" 
-                            className="px-5 py-2.5 bg-white/10 text-white border border-white/20 rounded-xs hover:bg-white/20 transition-colors"
+                            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-white/50 rounded-xs transition-all hover:-translate-y-0.5"
                         >
                             School Daily Schedule
                         </a>
                         <a 
                             href="#board-gazette" 
-                            className="px-5 py-2.5 bg-white/10 text-white border border-white/20 rounded-xs hover:bg-white/20 transition-colors"
+                            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-white/50 rounded-xs transition-all hover:-translate-y-0.5"
                         >
                             Official Board Gazette
                         </a>
@@ -137,23 +143,23 @@ const AcademicsPage = () => {
             </section>
 
             {/* INSTITUTIONAL PILLARS STRIP */}
-            <section className="bg-white border-b border-slate-200 py-6 px-6 sm:px-8">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div className="border-r border-slate-100 last:border-r-0">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block">17</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Distinct Grades</span>
+            <section className="bg-white border-b border-slate-200 py-6 px-6 sm:px-8 shadow-xs">
+                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
+                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">17</span>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Distinct Grades</span>
                     </div>
-                    <div className="border-r border-slate-100 last:border-r-0">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block">100%</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">SSLC Board Pass Record</span>
+                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-700 block mb-1">100%</span>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">SSLC Board Pass Record</span>
                     </div>
-                    <div className="border-r border-slate-100 last:border-r-0">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block">3</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Language Formula</span>
+                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">3</span>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Language Formula</span>
                     </div>
-                    <div>
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block">1:20</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Average Student-Mentor Ratio</span>
+                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">1:20</span>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Average Student-Mentor Ratio</span>
                     </div>
                 </div>
             </section>
@@ -219,14 +225,14 @@ const AcademicsPage = () => {
                                 <button
                                     key={w.id}
                                     onClick={() => setActiveWing(w.id)}
-                                    className={`px-3.5 py-1.5 rounded-xs text-xs font-bold transition-all flex items-center gap-1.5 ${
+                                    className={`px-4 py-2 rounded-xs text-xs font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                                         active
-                                            ? 'bg-[#0b192c] text-white shadow-2xs'
-                                            : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                                            ? 'bg-gradient-to-r from-[#0b192c] to-[#1e3e62] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5'
+                                            : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-400 hover:bg-slate-50 hover:-translate-y-0.5 shadow-2xs'
                                     }`}
                                 >
                                     <span>{w.label}</span>
-                                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-[#c5a880] text-[#0b192c]' : 'bg-slate-100 text-slate-500'}`}>
+                                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-sans ${active ? 'bg-[#c5a880] text-[#0b192c] font-bold' : 'bg-slate-100 text-slate-600'}`}>
                                         {w.count}
                                     </span>
                                 </button>
@@ -254,27 +260,29 @@ const AcademicsPage = () => {
                             return (
                                 <div 
                                     key={item.id} 
-                                    className={`border transition-all rounded-xs overflow-hidden ${
+                                    className={`hover-lift border transition-all duration-300 rounded-xs overflow-hidden ${
                                         isExpanded 
-                                            ? 'bg-white border-[#0b192c] shadow-sm' 
-                                            : 'bg-white border-slate-200 hover:border-slate-300'
+                                            ? 'bg-white border-[#0b192c] shadow-md ring-1 ring-[#0b192c]/20' 
+                                            : 'bg-white border-slate-200 hover:border-blue-400/60 shadow-xs hover:shadow-lg'
                                     }`}
                                 >
                                     {/* CARD HEADER (Always Visible & Clickable) */}
                                     <button 
                                         onClick={() => toggleClassExpand(item.id)}
-                                        className="w-full p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between text-left cursor-pointer gap-4 bg-white hover:bg-slate-50/50 transition-colors"
+                                        className="w-full p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between text-left cursor-pointer gap-4 bg-white hover:bg-slate-50/70 transition-colors group"
                                     >
                                         <div className="flex items-start sm:items-center gap-3.5">
-                                            <div className={`w-9 h-9 rounded-xs shrink-0 flex items-center justify-center font-serif font-bold text-sm ${
-                                                isExpanded ? 'bg-[#0b192c] text-[#c5a880]' : 'bg-slate-100 text-slate-700'
+                                            <div className={`w-10 h-10 rounded-xs shrink-0 flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
+                                                isExpanded 
+                                                    ? 'bg-gradient-to-br from-[#0b192c] to-[#1e3e62] text-[#c5a880] shadow-sm scale-105' 
+                                                    : 'bg-slate-100 text-slate-700 group-hover:bg-[#0b192c] group-hover:text-[#c5a880]'
                                             }`}>
                                                 {item.name.includes('Class') ? item.name.split(' ')[1] : item.name.charAt(0)}
                                             </div>
 
                                             <div>
                                                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs bg-slate-100 text-slate-600 border border-slate-200">
+                                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs bg-slate-100 text-slate-700 border border-slate-200">
                                                         {item.wingName || item.wing}
                                                     </span>
                                                     <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1">
@@ -282,7 +290,7 @@ const AcademicsPage = () => {
                                                         {item.age}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0b192c]">
+                                                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0b192c] group-hover:text-blue-900 transition-colors">
                                                     {item.name}
                                                 </h3>
                                             </div>
@@ -296,20 +304,20 @@ const AcademicsPage = () => {
                                                 </span>
                                             </div>
 
-                                            <div className={`flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-xs transition-colors ${
+                                            <div className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-xs transition-all duration-200 ${
                                                 isExpanded 
-                                                    ? 'bg-[#0b192c] text-white' 
-                                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                                    ? 'bg-gradient-to-r from-[#0b192c] to-[#1e3e62] text-white shadow-xs' 
+                                                    : 'bg-slate-100 text-slate-700 hover:bg-[#0b192c] hover:text-white'
                                             }`}>
                                                 <span>{isExpanded ? 'Hide Details' : 'View Full Details'}</span>
-                                                {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                                {isExpanded ? <ChevronUp size={14} className="animate-bounce" /> : <ChevronDown size={14} />}
                                             </div>
                                         </div>
                                     </button>
 
                                     {/* EXPANDED CONTENT DRAWER */}
                                     {isExpanded && (
-                                        <div className="px-5 sm:px-7 pb-7 pt-2 border-t border-slate-100 bg-[#fdfbf7]/50">
+                                        <div className="px-5 sm:px-7 pb-7 pt-2 border-t border-slate-100 bg-[#fdfbf7]/70">
                                             
                                             {/* Overview and Class Metrics */}
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-4">
@@ -322,7 +330,7 @@ const AcademicsPage = () => {
                                                     </p>
                                                 </div>
 
-                                                <div className="bg-white p-4 border border-slate-200 rounded-xs space-y-2.5 text-xs">
+                                                <div className="bg-white p-4 border border-slate-200 rounded-xs space-y-2.5 text-xs shadow-2xs">
                                                     <div>
                                                         <span className="text-slate-400 block text-[10px] uppercase font-bold tracking-wider">Class Timings</span>
                                                         <span className="font-semibold text-slate-800">{item.timings}</span>
@@ -338,7 +346,7 @@ const AcademicsPage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* SUBJECTS TAUGHT */}
+                                            {/* SUBJECTS TAUGHT WITH HOVER GLOW */}
                                             {Array.isArray(item.subjects) && item.subjects.length > 0 && (
                                                 <div className="pt-3 pb-4">
                                                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#0b192c] block mb-2 flex items-center gap-1.5">
@@ -349,7 +357,7 @@ const AcademicsPage = () => {
                                                         {item.subjects.map((subj, si) => (
                                                             <span 
                                                                 key={si} 
-                                                                className="text-xs font-medium px-3 py-1 bg-white text-[#0b192c] rounded-xs border border-slate-200 shadow-2xs"
+                                                                className="text-xs font-medium px-3 py-1 bg-white text-[#0b192c] rounded-xs border border-slate-200 shadow-2xs hover:bg-[#0b192c] hover:text-[#c5a880] hover:border-[#0b192c] hover:scale-105 hover:shadow-sm transition-all duration-200 cursor-default"
                                                             >
                                                                 {subj}
                                                             </span>
@@ -362,15 +370,15 @@ const AcademicsPage = () => {
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-3 pb-4">
                                                 {/* Milestones */}
                                                 {Array.isArray(item.milestones) && item.milestones.length > 0 && (
-                                                    <div className="bg-white p-4 border border-slate-200 rounded-xs">
+                                                    <div className="bg-white p-5 border border-slate-200 rounded-xs shadow-2xs">
                                                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#0b192c] block mb-2.5 flex items-center gap-1.5">
                                                             <Sparkles size={13} className="text-[#8c7355]" />
                                                             Key Learning Milestones
                                                         </span>
-                                                        <ul className="space-y-1.5 text-xs text-slate-600">
+                                                        <ul className="space-y-2 text-xs text-slate-600">
                                                             {item.milestones.map((m, mi) => (
-                                                                <li key={mi} className="flex items-start gap-2">
-                                                                    <Check size={13} className="text-[#8c7355] mt-0.5 shrink-0" />
+                                                                <li key={mi} className="flex items-start gap-2 group/item">
+                                                                    <Check size={13} className="text-emerald-600 mt-0.5 shrink-0 group-hover/item:scale-125 transition-transform" />
                                                                     <span>{m}</span>
                                                                 </li>
                                                             ))}
@@ -379,7 +387,7 @@ const AcademicsPage = () => {
                                                 )}
 
                                                 {/* Assessment Scheme */}
-                                                <div className="bg-white p-4 border border-slate-200 rounded-xs flex flex-col justify-between">
+                                                <div className="bg-white p-5 border border-slate-200 rounded-xs shadow-2xs flex flex-col justify-between">
                                                     <div>
                                                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#0b192c] block mb-2 flex items-center gap-1.5">
                                                             <Award size={13} className="text-[#8c7355]" />
@@ -393,12 +401,15 @@ const AcademicsPage = () => {
                                                     {/* Co-curricular tags */}
                                                     {Array.isArray(item.coCurricular) && item.coCurricular.length > 0 && (
                                                         <div className="pt-2 border-t border-slate-100">
-                                                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                                                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
                                                                 Co-Curricular & Labs:
                                                             </span>
                                                             <div className="flex flex-wrap gap-1.5">
                                                                 {item.coCurricular.map((co, ci) => (
-                                                                    <span key={ci} className="text-[11px] font-semibold text-slate-600 bg-slate-50 px-2 py-0.5 rounded-xs border border-slate-200">
+                                                                    <span 
+                                                                        key={ci} 
+                                                                        className="text-[11px] font-semibold text-slate-600 bg-slate-50 hover:bg-blue-50 hover:text-blue-700 px-2.5 py-0.5 rounded-xs border border-slate-200 transition-colors"
+                                                                    >
                                                                         {co}
                                                                     </span>
                                                                 ))}
@@ -416,7 +427,7 @@ const AcademicsPage = () => {
                                                 <div className="flex items-center gap-3">
                                                     <Link
                                                         to="/admissions"
-                                                        className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 bg-[#0b192c] text-white hover:bg-[#1e3e62] rounded-xs transition-colors shadow-2xs"
+                                                        className="shimmer-btn inline-flex items-center gap-1.5 text-xs font-bold px-4.5 py-2.5 bg-gradient-to-r from-[#0b192c] to-[#1e3e62] hover:from-[#1e3e62] hover:to-blue-700 text-white rounded-xs transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
                                                     >
                                                         <span>Apply for {item.name.split('(')[0].trim()}</span>
                                                         <ArrowRight size={13} className="text-[#c5a880]" />

@@ -51,13 +51,18 @@ const NewsPage = () => {
         <div className="font-sans text-slate-800 bg-[#fbfbfb] min-h-screen w-full selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
             
             {/* HERO */}
-            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 text-center">
-                <div className="max-w-4xl mx-auto px-6">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c5a880] block mb-3">
+            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 text-center relative overflow-hidden">
+                {/* Ambient glowing mesh orbs */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#c5a880]/10 rounded-full blur-3xl pointer-events-none animate-float" />
+
+                <div className="max-w-4xl mx-auto px-6 relative z-10">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#c5a880] inline-flex items-center gap-2 mb-3 bg-[#c5a880]/10 px-3.5 py-1 rounded-full border border-[#c5a880]/25">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-ping" />
                         Official Gazette
                     </span>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6">
-                        Dispatches & Calendar
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tight">
+                        <span className="text-gradient-gold">Dispatches & Calendar</span>
                     </h1>
                     <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
                         Authorized communications, administrative circulars, and scheduled campus convocations.
@@ -68,7 +73,7 @@ const NewsPage = () => {
             <section className="py-20 max-w-7xl mx-auto px-6 sm:px-8">
                 {/* UPCOMING CALENDAR STRIP */}
                 {events.length > 0 && (
-                    <div className="mb-16 bg-white p-8 border border-slate-200">
+                    <div className="mb-16 bg-white p-8 border border-slate-200 rounded-sm shadow-xs">
                         <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
                             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0b192c]">
                                 Scheduled Convocations & Events
@@ -78,17 +83,18 @@ const NewsPage = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {events.slice(0, 3).map((ev) => (
-                                <div key={ev._id} className="p-5 border border-slate-200 bg-[#fdfbf7] flex items-start gap-4">
-                                    <div className="bg-[#0b192c] text-white p-3 text-center shrink-0 min-w-14">
-                                        <span className="block text-xl font-serif font-bold leading-none">
+                                <div key={ev._id} className="p-5 border border-slate-200 bg-[#fdfbf7] flex items-start gap-4 hover-lift rounded-sm relative overflow-hidden group">
+                                    <div className="absolute top-0 left-0 w-1 h-full bg-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <div className="bg-[#0b192c] text-white p-3 text-center shrink-0 min-w-14 rounded-xs shadow-xs">
+                                        <span className="block text-xl font-serif font-bold leading-none text-[#c5a880]">
                                             {new Date(ev.eventDate).getDate()}
                                         </span>
-                                        <span className="text-[10px] uppercase font-bold text-[#c5a880] block mt-1">
+                                        <span className="text-[10px] uppercase font-bold text-slate-300 block mt-1">
                                             {new Date(ev.eventDate).toLocaleString('default', { month: 'short' })}
                                         </span>
                                     </div>
                                     <div className="min-w-0">
-                                        <h4 className="font-serif font-bold text-slate-900 text-sm mb-1 truncate">{ev.title}</h4>
+                                        <h4 className="font-serif font-bold text-slate-900 text-sm mb-1 truncate group-hover:text-blue-900 transition-colors">{ev.title}</h4>
                                         <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
                                             <MapPin size={12} className="text-[#c5a880] shrink-0" />
                                             <span className="truncate">{ev.location || 'School Campus'}</span>
@@ -119,23 +125,23 @@ const NewsPage = () => {
                         {newsItems.map((item, index) => (
                             <article 
                                 key={item._id || index} 
-                                className="bg-white border border-slate-200 flex flex-col justify-between"
+                                className="bg-white border border-slate-200 flex flex-col justify-between hover-lift overflow-hidden rounded-sm group"
                             >
                                 <div>
-                                    <div className="h-52 bg-slate-100 overflow-hidden border-b border-slate-200">
+                                    <div className="h-52 bg-slate-100 overflow-hidden border-b border-slate-200 relative">
                                         <img 
                                             src={item.imageUrl || "https://placehold.co/600x400"} 
                                             alt={item.title} 
-                                            className="w-full h-full object-cover" 
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                                         />
                                     </div>
 
                                     <div className="p-6">
-                                        <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-2">
+                                        <div className="text-[10px] font-mono text-[#c5a880] uppercase tracking-wider mb-2 font-bold">
                                             {item.date || 'Recent Notification'}
                                         </div>
 
-                                        <h3 className="font-serif font-bold text-lg text-[#0b192c] mb-3 leading-snug">
+                                        <h3 className="font-serif font-bold text-lg text-[#0b192c] mb-3 leading-snug group-hover:text-blue-900 transition-colors">
                                             {item.title}
                                         </h3>
                                         
@@ -148,7 +154,7 @@ const NewsPage = () => {
                                 <div className="p-6 pt-0">
                                     <button 
                                         onClick={() => setSelectedArticle(item)}
-                                        className="text-xs font-bold uppercase tracking-wider text-[#0b192c] hover:text-[#c5a880] inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                                        className="text-xs font-bold uppercase tracking-wider text-[#0b192c] hover:text-[#c5a880] inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all cursor-pointer"
                                     >
                                         <span>Read Complete Dispatch</span>
                                         <ArrowRight size={12} />

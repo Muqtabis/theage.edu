@@ -75,13 +75,18 @@ const StudentLifePage = () => {
         <div className="font-sans text-slate-800 bg-[#fbfbfb] w-full overflow-x-hidden selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
             
             {/* HERO */}
-            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 text-center">
-                <div className="max-w-4xl mx-auto px-6">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c5a880] block mb-3">
+            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 text-center relative overflow-hidden">
+                {/* Ambient glowing mesh orbs */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#c5a880]/10 rounded-full blur-3xl pointer-events-none animate-float" />
+
+                <div className="max-w-4xl mx-auto px-6 relative z-10">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#c5a880] inline-flex items-center gap-2 mb-3 bg-[#c5a880]/10 px-3.5 py-1 rounded-full border border-[#c5a880]/25">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-ping" />
                         {studentLife.heroBadge || 'Beyond Academics'}
                     </span>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6">
-                        {studentLife.heroTitle || 'Life at The Age School'}
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tight">
+                        <span className="text-gradient-gold">{studentLife.heroTitle || 'Life at The Age School'}</span>
                     </h1>
                     <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
                         {studentLife.heroSubtitle || 'A community where character is forged through sport, artistic discipline, fellowship, and civic duty.'}
@@ -94,20 +99,28 @@ const StudentLifePage = () => {
                 <div className="max-w-2xl mb-14">
                     <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">Activities</span>
                     <h2 className="text-3xl font-serif font-bold text-[#0b192c]">The Co-Curricular Program</h2>
+                    <p className="text-xs text-slate-500 mt-2">Cultivating mind, body, and artistic expression through structured daily disciplines.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {activities.map((act, i) => (
-                        <div key={i} className="bg-white p-8 border border-slate-200/90 rounded-sm flex flex-col justify-between">
+                        <div 
+                            key={i} 
+                            className="bg-white p-8 border border-slate-200/90 rounded-sm flex flex-col justify-between hover-lift relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <div>
                                 <span className="text-[11px] font-mono font-bold text-[#c5a880] block mb-3">0{i+1}.</span>
-                                <h3 className="text-xl font-serif font-bold text-[#0b192c] mb-3">{act.title}</h3>
+                                <h3 className="text-xl font-serif font-bold text-[#0b192c] mb-3 group-hover:text-blue-900 transition-colors">{act.title}</h3>
                                 <p className="text-xs text-slate-600 leading-relaxed mb-6">{act.desc}</p>
                             </div>
                             {Array.isArray(act.tags) && (
                                 <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
                                     {act.tags.map((t, ti) => (
-                                        <span key={ti} className="text-[10px] font-semibold px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-700">
+                                        <span 
+                                            key={ti} 
+                                            className="text-[10px] font-semibold px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-700 hover:bg-[#0b192c] hover:text-[#c5a880] hover:border-[#0b192c] transition-colors"
+                                        >
                                             {t}
                                         </span>
                                     ))}
@@ -129,17 +142,49 @@ const StudentLifePage = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { name: "Ashoka House", color: "border-amber-500 bg-amber-50/50", badge: "text-amber-800 bg-amber-100", motto: "Courage & Righteousness", desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." },
-                            { name: "Tagore House", color: "border-blue-500 bg-blue-50/50", badge: "text-blue-800 bg-blue-100", motto: "Creativity & Wisdom", desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." },
-                            { name: "Raman House", color: "border-emerald-500 bg-emerald-50/50", badge: "text-emerald-800 bg-emerald-100", motto: "Inquiry & Scientific Truth", desc: "Championing empirical logic, innovation, mathematics, and technological marvels." },
-                            { name: "Kalam House", color: "border-rose-500 bg-rose-50/50", badge: "text-rose-800 bg-rose-100", motto: "Vision & Dedication", desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." }
+                            { 
+                                name: "Ashoka House", 
+                                borderAccent: "hover:border-amber-500 hover:shadow-amber-500/20", 
+                                barBg: "bg-amber-500",
+                                badge: "text-amber-800 bg-amber-100/80 border-amber-300", 
+                                motto: "Courage & Righteousness", 
+                                desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." 
+                            },
+                            { 
+                                name: "Tagore House", 
+                                borderAccent: "hover:border-blue-500 hover:shadow-blue-500/20", 
+                                barBg: "bg-blue-600",
+                                badge: "text-blue-800 bg-blue-100/80 border-blue-300", 
+                                motto: "Creativity & Wisdom", 
+                                desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." 
+                            },
+                            { 
+                                name: "Raman House", 
+                                borderAccent: "hover:border-emerald-500 hover:shadow-emerald-500/20", 
+                                barBg: "bg-emerald-600",
+                                badge: "text-emerald-800 bg-emerald-100/80 border-emerald-300", 
+                                motto: "Inquiry & Scientific Truth", 
+                                desc: "Championing empirical logic, innovation, mathematics, and technological marvels." 
+                            },
+                            { 
+                                name: "Kalam House", 
+                                borderAccent: "hover:border-rose-500 hover:shadow-rose-500/20", 
+                                barBg: "bg-rose-500",
+                                badge: "text-rose-800 bg-rose-100/80 border-rose-300", 
+                                motto: "Vision & Dedication", 
+                                desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." 
+                            }
                         ].map((h, hi) => (
-                            <div key={hi} className={`p-6 border-t-4 rounded-xs border-slate-200 bg-white shadow-2xs ${h.color}`}>
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs inline-block mb-2 ${h.badge}`}>
+                            <div 
+                                key={hi} 
+                                className={`p-6 border border-slate-200 bg-white rounded-sm hover-lift relative overflow-hidden transition-all duration-300 group shadow-xs ${h.borderAccent}`}
+                            >
+                                <div className={`absolute top-0 left-0 right-0 h-1.5 ${h.barBg}`} />
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-xs inline-block mb-3 border ${h.badge}`}>
                                     House Division
                                 </span>
-                                <h3 className="font-serif font-bold text-lg text-[#0b192c] mb-1">{h.name}</h3>
-                                <p className="text-xs italic text-[#8c7355] mb-3">"{h.motto}"</p>
+                                <h3 className="font-serif font-bold text-xl text-[#0b192c] mb-1 group-hover:text-slate-900">{h.name}</h3>
+                                <p className="text-xs italic text-[#8c7355] font-medium mb-3">"{h.motto}"</p>
                                 <p className="text-xs text-slate-600 leading-relaxed">{h.desc}</p>
                             </div>
                         ))}
@@ -157,30 +202,21 @@ const StudentLifePage = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-xs text-slate-700">
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Smart Interactive Classrooms</h4>
-                            <p className="text-slate-600 leading-relaxed">Equipped with interactive smart displays, audio-visual technology, and ergonomic seating.</p>
-                        </div>
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Composite Science & STEM Lab</h4>
-                            <p className="text-slate-600 leading-relaxed">Dedicated Physics, Chemistry, Biology, and Robotics experimentation apparatus.</p>
-                        </div>
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Central Knowledge Library</h4>
-                            <p className="text-slate-600 leading-relaxed">Over 5,000 curated books, periodicals, daily national newspapers, and digital research bays.</p>
-                        </div>
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">GPS-Monitored Bus Fleet</h4>
-                            <p className="text-slate-600 leading-relaxed">Safe transport covering Basavakalyan and neighboring taluk routes with speed governors and female attendants.</p>
-                        </div>
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Athletic Fields & Courts</h4>
-                            <p className="text-slate-600 leading-relaxed">Expansive play area for cricket, football, volleyball, badminton, kho-kho, and track events.</p>
-                        </div>
-                        <div className="p-5 border border-slate-200 bg-white rounded-xs">
-                            <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1">Health Care & RO Purified Water</h4>
-                            <p className="text-slate-600 leading-relaxed">On-campus primary infirmary, periodic pediatric health checkups, and multi-stage commercial RO water.</p>
-                        </div>
+                        {[
+                            { title: "Smart Interactive Classrooms", desc: "Equipped with interactive smart displays, audio-visual technology, and ergonomic seating.", icon: "01" },
+                            { title: "Composite Science & STEM Lab", desc: "Dedicated Physics, Chemistry, Biology, and Robotics experimentation apparatus.", icon: "02" },
+                            { title: "Central Knowledge Library", desc: "Over 5,000 curated books, periodicals, daily national newspapers, and digital research bays.", icon: "03" },
+                            { title: "GPS-Monitored Bus Fleet", desc: "Safe transport covering Basavakalyan and neighboring taluk routes with speed governors and female attendants.", icon: "04" },
+                            { title: "Athletic Fields & Courts", desc: "Expansive play area for cricket, football, volleyball, badminton, kho-kho, and track events.", icon: "05" },
+                            { title: "Health Care & RO Purified Water", desc: "On-campus primary infirmary, periodic pediatric health checkups, and multi-stage commercial RO water.", icon: "06" }
+                        ].map((fac, fi) => (
+                            <div key={fi} className="p-6 border border-slate-200 bg-white rounded-sm hover-lift relative overflow-hidden group">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200 group-hover:bg-[#c5a880] transition-colors" />
+                                <span className="text-[10px] font-mono font-bold text-[#c5a880] block mb-2">{fac.icon} / INFRASTRUCTURE</span>
+                                <h4 className="font-serif font-bold text-sm text-[#0b192c] mb-1.5 group-hover:text-blue-900 transition-colors">{fac.title}</h4>
+                                <p className="text-slate-600 leading-relaxed text-xs">{fac.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -206,28 +242,28 @@ const StudentLifePage = () => {
                                 <Link 
                                     key={album._id} 
                                     to={`/gallery/${album._id}`}
-                                    className="group border border-slate-200 bg-[#fdfbf7] flex flex-col justify-between hover:border-[#0b192c] transition-colors"
+                                    className="group border border-slate-200 bg-[#fdfbf7] flex flex-col justify-between hover-lift overflow-hidden rounded-sm transition-all"
                                 >
                                     <div className="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
                                         <img 
                                             src={album.coverImage || "https://placehold.co/600x400"} 
                                             alt={album.title} 
-                                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" 
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                                         />
-                                        <div className="absolute bottom-3 right-3 bg-[#0b192c] text-white px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                                        <div className="absolute bottom-3 right-3 glass-dark text-white px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-xs border border-white/20">
                                             {album.images?.length || 0} Photographs
                                         </div>
                                     </div>
                                     <div className="p-6">
-                                        <h4 className="font-serif font-bold text-base text-[#0b192c] mb-1 group-hover:text-[#1e3e62] transition-colors">
+                                        <h4 className="font-serif font-bold text-base text-[#0b192c] mb-1 group-hover:text-blue-900 transition-colors">
                                             {album.title}
                                         </h4>
                                         <p className="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed">
                                             {album.description}
                                         </p>
-                                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#c5a880] inline-flex items-center gap-1">
+                                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#c5a880] inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
                                             <span>Open Collection</span>
-                                            <ArrowRight size={11} />
+                                            <ArrowRight size={12} />
                                         </span>
                                     </div>
                                 </Link>

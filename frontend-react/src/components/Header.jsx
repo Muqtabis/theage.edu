@@ -61,10 +61,13 @@ const Header = () => {
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.08)] border-b border-slate-200'
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(11,25,44,0.1)] border-b border-slate-200/90'
           : 'bg-white border-b border-slate-200'
       }`}
     >
+      {/* ACCENT SPECTRUM LINE */}
+      <div className="h-[2.5px] w-full bg-gradient-to-r from-blue-600 via-[#c5a880] to-emerald-500" />
+
       {/* TOP UTILITY BAR (Official Institutional Details) */}
       <div className="bg-[#0b192c] text-white text-[11px] py-1.5 px-4 sm:px-8 border-b border-[#c5a880]/30 hidden md:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -83,25 +86,26 @@ const Header = () => {
           <div className="flex items-center gap-5 text-slate-300">
             <a 
               href={`tel:${general.phone || '+911234567890'}`} 
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors group"
             >
-              <Phone size={11} className="text-[#c5a880]" />
+              <Phone size={11} className="text-[#c5a880] group-hover:scale-110 transition-transform" />
               <span>{general.phone || '(+91) 12345 67890'}</span>
             </a>
             <span className="text-[#c5a880]/50">•</span>
             <a 
               href={`mailto:${general.email || 'info@theageschool.edu'}`} 
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors group"
             >
-              <Mail size={11} className="text-[#c5a880]" />
+              <Mail size={11} className="text-[#c5a880] group-hover:scale-110 transition-transform" />
               <span>{general.email || 'info@theageschool.edu'}</span>
             </a>
             <span className="text-[#c5a880]/50">•</span>
             <Link 
               to="/admissions" 
-              className="text-[#c5a880] font-semibold hover:underline"
+              className="inline-flex items-center gap-1.5 text-[#c5a880] font-semibold hover:text-white transition-colors group"
             >
-              Admissions Open 2026-27
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+              <span>Admissions Open 2026-27</span>
             </Link>
           </div>
         </div>
@@ -112,13 +116,16 @@ const Header = () => {
         
         {/* LOGO & INSTITUTIONAL TITLE */}
         <Link to="/home" className="flex items-center gap-3.5 group shrink-0">
-          <img
-            src={logo}
-            alt="The Age School Crest"
-            className="w-11 h-11 md:w-13 md:h-13 object-contain rounded-xs border border-slate-200 shadow-2xs group-hover:opacity-95 transition-opacity"
-          />
+          <div className="relative">
+            <img
+              src={logo}
+              alt="The Age School Crest"
+              className="w-11 h-11 md:w-13 md:h-13 object-contain rounded-xs border border-slate-200 shadow-2xs group-hover:border-[#c5a880] group-hover:scale-105 transition-all duration-300"
+            />
+            <div className="absolute inset-0 rounded-xs bg-[#c5a880]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </div>
           <div className="flex flex-col">
-            <span className="text-xl md:text-2xl font-serif font-bold text-[#0b192c] tracking-tight group-hover:text-[#1e3e62] transition-colors leading-tight">
+            <span className="text-xl md:text-2xl font-serif font-bold text-[#0b192c] tracking-tight group-hover:text-blue-900 transition-colors leading-tight">
               {general.schoolName || 'The Age School'}
             </span>
             <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8c7355]">
@@ -128,22 +135,22 @@ const Header = () => {
         </Link>
 
         {/* REFINED EDITORIAL NAVIGATION */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {navLinks.map((item) => {
             const active = isActive(item.to);
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`relative py-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
+                className={`relative px-3.5 py-2 rounded-xs text-[13px] font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
                   active
-                    ? 'text-[#0b192c] font-bold'
-                    : 'text-slate-600 hover:text-[#0b192c]'
+                    ? 'text-[#0b192c] font-bold bg-slate-100/90'
+                    : 'text-slate-600 hover:text-[#0b192c] hover:bg-slate-50'
                 }`}
               >
-                {item.label}
+                <span>{item.label}</span>
                 {active && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#c5a880]" />
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-[#c5a880] to-blue-600 rounded-full shadow-xs" />
                 )}
               </Link>
             );
@@ -154,7 +161,7 @@ const Header = () => {
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
             to="/admissions"
-            className="hidden sm:inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xs text-xs font-bold tracking-wider uppercase text-white bg-[#0b192c] hover:bg-[#1e3e62] border border-[#0b192c] transition-colors shadow-2xs"
+            className="shimmer-btn hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xs text-xs font-bold tracking-wider uppercase text-white bg-gradient-to-r from-[#0b192c] to-[#1e3e62] hover:from-[#1e3e62] hover:to-blue-700 border border-[#0b192c] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           >
             <span>Inquire & Apply</span>
             <ArrowRight size={13} className="text-[#c5a880]" />
