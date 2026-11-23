@@ -21,8 +21,11 @@ const Footer = () => {
   const general = content?.general || {};
 
   return (
-    <footer className="bg-[#07111e] text-slate-300 pt-16 pb-12 border-t border-[#c5a880]/30 font-sans">
-      <div className="container mx-auto px-6 sm:px-8 max-w-7xl">
+    <footer className="bg-gradient-to-b from-[#06111f] to-[#02070e] text-slate-300 pt-16 pb-12 border-t border-amber-500/20 font-sans relative overflow-hidden">
+      {/* Top spectrum accent */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-blue-600 via-amber-400 via-rose-500 to-emerald-500" />
+
+      <div className="container mx-auto px-6 sm:px-8 max-w-7xl relative z-10">
         
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -33,13 +36,13 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="The Age School Crest" 
-                className="h-11 w-11 object-contain rounded-xs border border-slate-700 bg-white" 
+                className="h-11 w-11 object-contain rounded-sm border border-amber-400/30 bg-white shadow-md group-hover:scale-105 transition-transform" 
               /> 
               <div className="flex flex-col">
-                <span className="text-xl font-serif font-bold text-white tracking-tight">
+                <span className="text-xl font-serif font-bold text-white tracking-tight group-hover:text-amber-200 transition-colors">
                   {general.schoolName || 'The Age School'}
                 </span>
-                <span className="text-[10px] text-[#c5a880] uppercase tracking-[0.2em] font-medium">
+                <span className="text-[10px] text-amber-400 uppercase tracking-[0.2em] font-semibold">
                   Basavakalyan • Karnataka
                 </span>
               </div>
@@ -63,12 +66,12 @@ const Footer = () => {
               Directory
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li><Link to="/home" className="hover:text-white transition-colors">Home Page</Link></li>
-              <li><Link to="/about" className="hover:text-white transition-colors">About Our Vision & Trustees</Link></li>
-              <li><Link to="/academics" className="hover:text-white transition-colors">Academic Pathways & Curriculum</Link></li>
-              <li><Link to="/admissions" className="hover:text-white transition-colors">Admissions & Tuition Schedule</Link></li>
-              <li><Link to="/student-life" className="hover:text-white transition-colors">Campus Life & Activities</Link></li>
-              <li><Link to="/news" className="hover:text-white transition-colors">Official Gazette & Events</Link></li>
+              <li><Link to="/home" className="hover:text-amber-300 transition-colors">Home Page</Link></li>
+              <li><Link to="/about" className="hover:text-amber-300 transition-colors">About Our Vision & Trustees</Link></li>
+              <li><Link to="/academics" className="hover:text-amber-300 transition-colors">Academic Pathways & Curriculum</Link></li>
+              <li><Link to="/admissions" className="hover:text-amber-300 transition-colors">Admissions & Tuition Schedule</Link></li>
+              <li><Link to="/student-life" className="hover:text-amber-300 transition-colors">Campus Life & Activities</Link></li>
+              <li><Link to="/news" className="hover:text-amber-300 transition-colors">Official Gazette & Events</Link></li>
             </ul>
           </div>
 
@@ -79,18 +82,18 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-xs text-slate-400">
               <li className="flex items-start gap-2.5">
-                <MapPin size={15} className="mt-0.5 text-[#c5a880] shrink-0" />
+                <MapPin size={15} className="mt-0.5 text-amber-400 shrink-0" />
                 <span>{general.address || 'Basavakalyan, Bidar Dist., Karnataka, India - 585327'}</span>
               </li>
               <li>
-                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-white transition-colors">
-                  <Phone size={15} className="text-[#c5a880] shrink-0" />
+                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-amber-300 transition-colors">
+                  <Phone size={15} className="text-amber-400 shrink-0" />
                   <span>{general.phone || '(+91) 12345 67890'}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-white transition-colors">
-                  <Mail size={15} className="text-[#c5a880] shrink-0" />
+                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-amber-300 transition-colors">
+                  <Mail size={15} className="text-amber-400 shrink-0" />
                   <span>{general.email || 'info@theageschool.edu'}</span>
                 </a>
               </li>
@@ -103,8 +106,8 @@ const Footer = () => {
               Accreditation
             </h4>
             
-            <div className="bg-[#0b192c] p-4 border border-slate-800 rounded-sm hover:border-[#c5a880]/40 transition-colors">
-              <span className="text-[10px] text-[#c5a880] uppercase tracking-wider font-bold block mb-1">
+            <div className="bg-[#0b1c36] p-4 border border-blue-400/20 rounded-sm hover:border-amber-400/50 transition-colors shadow-2xs">
+              <span className="text-[10px] text-amber-400 uppercase tracking-wider font-bold block mb-1">
                 Official Recognition
               </span>
               <p className="text-xs font-semibold text-white">
@@ -115,7 +118,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <p className="text-[11px] text-slate-500 leading-relaxed">
+            <p className="text-[11px] text-slate-400 leading-relaxed">
               Recognized under the Department of Public Instruction, Government of Karnataka.
             </p>
           </div>

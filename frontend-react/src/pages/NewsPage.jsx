@@ -48,23 +48,24 @@ const NewsPage = () => {
     }, []); 
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fbfbfb] min-h-screen w-full selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
+        <div className="font-sans text-slate-800 bg-[#fbfcfe] min-h-screen w-full selection:bg-amber-400/30 selection:text-slate-950">
             
             {/* HERO */}
-            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 text-center relative overflow-hidden">
+            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-24 md:py-32 border-b border-amber-500/25 text-center relative overflow-hidden">
                 {/* Ambient glowing mesh orbs */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#c5a880]/10 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
 
                 <div className="max-w-4xl mx-auto px-6 relative z-10">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#c5a880] inline-flex items-center gap-2 mb-3 bg-[#c5a880]/10 px-3.5 py-1 rounded-full border border-[#c5a880]/25">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-ping" />
+                    <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-300 inline-flex items-center gap-2 mb-3 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         Official Gazette
                     </span>
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tight">
                         <span className="text-gradient-gold">Dispatches & Calendar</span>
                     </h1>
-                    <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
+                    <p className="text-slate-200 text-base max-w-xl mx-auto leading-relaxed">
                         Authorized communications, administrative circulars, and scheduled campus convocations.
                     </p>
                 </div>

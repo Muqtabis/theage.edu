@@ -95,46 +95,47 @@ const AcademicsPage = () => {
     ];
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fdfbf7] w-full overflow-x-hidden selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
+        <div className="font-sans text-slate-800 bg-[#fbfcfe] w-full overflow-x-hidden selection:bg-amber-400/30 selection:text-slate-950">
             
             {/* HERO SECTION */}
-            <section className="bg-[#0b192c] text-white py-20 md:py-28 border-b border-[#c5a880]/30 relative overflow-hidden">
+            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-20 md:py-28 border-b border-amber-500/25 relative overflow-hidden">
                 {/* Glowing ambient background orbs */}
-                <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#c5a880]/15 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute top-0 right-1/4 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
 
                 <div className="max-w-6xl mx-auto px-6 sm:px-8 text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xs bg-[#c5a880]/15 border border-[#c5a880]/40 text-[#c5a880] text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-[0_0_15px_rgba(197,168,128,0.2)] animate-float">
-                        <GraduationCap size={14} />
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/50 text-amber-300 text-xs font-bold uppercase tracking-[0.22em] mb-5 shadow-[0_0_20px_rgba(245,158,11,0.25)] animate-float">
+                        <GraduationCap size={15} />
                         <span>{academics.heroBadge || 'Comprehensive Academic Framework'}</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-5 tracking-tight">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-5 tracking-tight">
                         <span className="text-gradient-gold">
                             {academics.heroTitle || 'Curriculum & Class-Wise Directory'}
                         </span>
                     </h1>
                     
-                    <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8">
+                    <p className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8">
                         {academics.heroSubtitle || "From foundational early childhood in Pre-Nursery to secondary board mastery and senior PUC streams, explore every grade's learning outcomes, daily timings, and subjects."}
                     </p>
 
-                    <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold">
+                    <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs font-semibold">
                         <a 
                             href="#class-directory" 
-                            className="shimmer-btn px-5 py-2.5 bg-gradient-to-r from-[#c5a880] to-[#e2c7a5] text-[#0b192c] font-bold rounded-xs hover:from-[#d8ba92] hover:to-[#f3dcba] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                            className="shimmer-btn btn-gold px-6 py-3 rounded-sm shadow-md"
                         >
                             Explore Class Structure
                         </a>
                         <a 
                             href="#daily-routine" 
-                            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-white/50 rounded-xs transition-all hover:-translate-y-0.5"
+                            className="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-amber-400/50 rounded-sm transition-all hover:-translate-y-0.5"
                         >
                             School Daily Schedule
                         </a>
                         <a 
                             href="#board-gazette" 
-                            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-white/50 rounded-xs transition-all hover:-translate-y-0.5"
+                            className="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/25 hover:border-amber-400/50 rounded-sm transition-all hover:-translate-y-0.5"
                         >
                             Official Board Gazette
                         </a>
@@ -145,21 +146,21 @@ const AcademicsPage = () => {
             {/* INSTITUTIONAL PILLARS STRIP */}
             <section className="bg-white border-b border-slate-200 py-6 px-6 sm:px-8 shadow-xs">
                 <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">17</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Distinct Grades</span>
+                    <div className="p-4 rounded-sm border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 transition-all duration-200 hover-lift">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-blue-600 block mb-1">17</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">Distinct Grades</span>
                     </div>
-                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-700 block mb-1">100%</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">SSLC Board Pass Record</span>
+                    <div className="p-4 rounded-sm border border-slate-100 hover:border-amber-200 hover:bg-amber-50/40 transition-all duration-200 hover-lift">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-amber-600 block mb-1">1:20</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">Student-Mentor Ratio</span>
                     </div>
-                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">3</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Language Formula</span>
+                    <div className="p-4 rounded-sm border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/40 transition-all duration-200 hover-lift">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-600 block mb-1">100%</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">Board Distinction Record</span>
                     </div>
-                    <div className="p-4 rounded-xs border border-transparent hover:border-blue-100 hover:bg-slate-50/80 transition-all duration-200">
-                        <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] block mb-1">1:20</span>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8c7355]">Average Student-Mentor Ratio</span>
+                    <div className="p-4 rounded-sm border border-slate-100 hover:border-purple-200 hover:bg-purple-50/40 transition-all duration-200 hover-lift">
+                        <span className="text-2xl sm:text-3xl font-serif font-bold text-purple-600 block mb-1">3-Lang</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">English, Kannada & Hindi</span>
                     </div>
                 </div>
             </section>
@@ -225,14 +226,14 @@ const AcademicsPage = () => {
                                 <button
                                     key={w.id}
                                     onClick={() => setActiveWing(w.id)}
-                                    className={`px-4 py-2 rounded-xs text-xs font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                                    className={`px-4 py-2 rounded-sm text-xs font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                                         active
-                                            ? 'bg-gradient-to-r from-[#0b192c] to-[#1e3e62] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5'
-                                            : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-400 hover:bg-slate-50 hover:-translate-y-0.5 shadow-2xs'
+                                            ? 'bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white shadow-md shadow-blue-700/25 -translate-y-0.5'
+                                            : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 hover:-translate-y-0.5 shadow-2xs'
                                     }`}
                                 >
                                     <span>{w.label}</span>
-                                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-sans ${active ? 'bg-[#c5a880] text-[#0b192c] font-bold' : 'bg-slate-100 text-slate-600'}`}>
+                                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-sans ${active ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-slate-100 text-slate-600'}`}>
                                         {w.count}
                                     </span>
                                 </button>
@@ -248,7 +249,7 @@ const AcademicsPage = () => {
                         <p className="text-sm font-semibold text-slate-600">No classes match your current filter.</p>
                         <button 
                             onClick={() => { setActiveWing('all'); setSearchQuery(''); }}
-                            className="mt-3 text-xs text-[#8c7355] font-bold hover:underline"
+                            className="mt-3 text-xs text-blue-600 font-bold hover:underline"
                         >
                             Reset filters to view all classes
                         </button>
@@ -257,40 +258,53 @@ const AcademicsPage = () => {
                     <div className="space-y-4">
                         {filteredClasses.map((item) => {
                             const isExpanded = !!expandedClasses[item.id];
+                            
+                            // Wing-specific color styling
+                            const wingStyles = {
+                                'pre-primary': { badge: 'bg-amber-100 text-amber-900 border-amber-300', bar: 'from-amber-400 to-orange-500' },
+                                'primary': { badge: 'bg-blue-100 text-blue-900 border-blue-300', bar: 'from-blue-500 to-indigo-600' },
+                                'middle': { badge: 'bg-emerald-100 text-emerald-900 border-emerald-300', bar: 'from-emerald-400 to-teal-600' },
+                                'secondary': { badge: 'bg-indigo-100 text-indigo-900 border-indigo-300', bar: 'from-indigo-500 to-purple-600' },
+                                'senior-secondary': { badge: 'bg-purple-100 text-purple-900 border-purple-300', bar: 'from-purple-500 to-pink-600' }
+                            }[item.wing] || { badge: 'bg-slate-100 text-slate-800 border-slate-200', bar: 'from-blue-600 to-indigo-600' };
+
                             return (
                                 <div 
                                     key={item.id} 
-                                    className={`hover-lift border transition-all duration-300 rounded-xs overflow-hidden ${
+                                    className={`hover-lift border transition-all duration-300 rounded-sm overflow-hidden relative ${
                                         isExpanded 
-                                            ? 'bg-white border-[#0b192c] shadow-md ring-1 ring-[#0b192c]/20' 
-                                            : 'bg-white border-slate-200 hover:border-blue-400/60 shadow-xs hover:shadow-lg'
+                                            ? 'bg-white border-blue-900 shadow-lg ring-1 ring-blue-900/20' 
+                                            : 'bg-white border-slate-200 hover:border-blue-400/80 shadow-xs hover:shadow-xl'
                                     }`}
                                 >
+                                    {/* Top colored accent line */}
+                                    <div className={`h-1.5 w-full bg-gradient-to-r ${wingStyles.bar} ${isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
                                     {/* CARD HEADER (Always Visible & Clickable) */}
                                     <button 
                                         onClick={() => toggleClassExpand(item.id)}
                                         className="w-full p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between text-left cursor-pointer gap-4 bg-white hover:bg-slate-50/70 transition-colors group"
                                     >
                                         <div className="flex items-start sm:items-center gap-3.5">
-                                            <div className={`w-10 h-10 rounded-xs shrink-0 flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
+                                            <div className={`w-11 h-11 rounded-sm shrink-0 flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
                                                 isExpanded 
-                                                    ? 'bg-gradient-to-br from-[#0b192c] to-[#1e3e62] text-[#c5a880] shadow-sm scale-105' 
-                                                    : 'bg-slate-100 text-slate-700 group-hover:bg-[#0b192c] group-hover:text-[#c5a880]'
+                                                    ? 'bg-gradient-to-br from-blue-900 to-indigo-900 text-amber-300 shadow-md scale-105' 
+                                                    : 'bg-slate-100 text-slate-700 group-hover:bg-blue-900 group-hover:text-amber-300'
                                             }`}>
                                                 {item.name.includes('Class') ? item.name.split(' ')[1] : item.name.charAt(0)}
                                             </div>
 
                                             <div>
                                                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs bg-slate-100 text-slate-700 border border-slate-200">
+                                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-2xs ${wingStyles.badge}`}>
                                                         {item.wingName || item.wing}
                                                     </span>
                                                     <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1">
-                                                        <Clock size={11} className="text-[#8c7355]" />
+                                                        <Clock size={12} className="text-amber-600" />
                                                         {item.age}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0b192c] group-hover:text-blue-900 transition-colors">
+                                                <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-900 group-hover:text-blue-900 transition-colors">
                                                     {item.name}
                                                 </h3>
                                             </div>
@@ -299,15 +313,15 @@ const AcademicsPage = () => {
                                         <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                                             <div className="flex items-center gap-3 text-xs text-slate-500">
                                                 <span className="hidden md:inline-flex items-center gap-1">
-                                                    <Users size={12} className="text-[#8c7355]" />
+                                                    <Users size={12} className="text-blue-600" />
                                                     Ratio: <strong className="text-slate-700">{item.ratio}</strong>
                                                 </span>
                                             </div>
 
-                                            <div className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-xs transition-all duration-200 ${
+                                            <div className={`flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-sm transition-all duration-200 ${
                                                 isExpanded 
-                                                    ? 'bg-gradient-to-r from-[#0b192c] to-[#1e3e62] text-white shadow-xs' 
-                                                    : 'bg-slate-100 text-slate-700 hover:bg-[#0b192c] hover:text-white'
+                                                    ? 'bg-gradient-to-r from-blue-900 to-indigo-900 text-white shadow-xs' 
+                                                    : 'bg-slate-100 text-slate-700 hover:bg-blue-900 hover:text-white'
                                             }`}>
                                                 <span>{isExpanded ? 'Hide Details' : 'View Full Details'}</span>
                                                 {isExpanded ? <ChevronUp size={14} className="animate-bounce" /> : <ChevronDown size={14} />}
@@ -427,10 +441,10 @@ const AcademicsPage = () => {
                                                 <div className="flex items-center gap-3">
                                                     <Link
                                                         to="/admissions"
-                                                        className="shimmer-btn inline-flex items-center gap-1.5 text-xs font-bold px-4.5 py-2.5 bg-gradient-to-r from-[#0b192c] to-[#1e3e62] hover:from-[#1e3e62] hover:to-blue-700 text-white rounded-xs transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                                                        className="shimmer-btn btn-gold inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-sm transition-all duration-300 shadow-md text-slate-950"
                                                     >
                                                         <span>Apply for {item.name.split('(')[0].trim()}</span>
-                                                        <ArrowRight size={13} className="text-[#c5a880]" />
+                                                        <ArrowRight size={13} className="text-slate-950" />
                                                     </Link>
                                                 </div>
                                             </div>

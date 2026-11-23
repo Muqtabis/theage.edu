@@ -36,48 +36,49 @@ const AboutPage = () => {
     ];
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fbfbfb] selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
+        <div className="font-sans text-slate-800 bg-[#fbfcfe] selection:bg-amber-400/30 selection:text-slate-950">
             
             {/* ==========================================
                 1. INSTITUTIONAL ABOUT HERO
             ========================================== */}
-            <section className="bg-[#0b192c] text-white py-24 md:py-32 border-b border-[#c5a880]/20 relative overflow-hidden">
+            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-24 md:py-32 border-b border-amber-500/25 relative overflow-hidden">
                 {/* Ambient glowing mesh orbs */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-[#c5a880]/10 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         
                         <div className="lg:col-span-7">
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#c5a880] inline-flex items-center gap-2 mb-3 bg-[#c5a880]/10 px-3.5 py-1 rounded-full border border-[#c5a880]/25">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-ping" />
+                            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-300 inline-flex items-center gap-2 mb-3 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                                 {about.heroBadge || 'Chartered 2012 • Basavakalyan'}
                             </span>
                             <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
                                 <span className="text-gradient-gold">{about.heroTitle || 'Education for a Changing World.'}</span>
                             </h1>
-                            <p className="text-slate-300 text-base leading-relaxed max-w-xl mb-8">
+                            <p className="text-slate-200 text-base leading-relaxed max-w-xl mb-8">
                                 {about.heroSubtitle || "At The Age School, we don't merely instruct against a syllabus. We cultivate moral discernment, intellectual daring, and the leadership capacity needed to navigate tomorrow."}
                             </p>
                             <div className="flex items-center gap-8 pt-6 border-t border-slate-800">
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-3xl font-serif font-bold text-blue-300 block">
                                         {home.statsStudents || '500+'}
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-wider text-[#c5a880]">Enrolled Scholars</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Enrolled Scholars</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-3xl font-serif font-bold text-amber-300 block">
                                         {home.statsPassRate || '100%'}
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-wider text-[#c5a880]">Board Distinction</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Board Distinction</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-3xl font-serif font-bold text-emerald-300 block">
                                         {home.statsFaculty || '35+'}
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-wider text-[#c5a880]">Academic Mentors</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Academic Mentors</span>
                                 </div>
                             </div>
                         </div>
