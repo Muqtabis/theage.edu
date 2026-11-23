@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import MobileQuickBar from "./MobileQuickBar";
 
 function Layout() {
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -27,15 +28,18 @@ function Layout() {
   }, [headerHeight]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-[#fcfcfd]">
       <Header />
 
-      {/* Applies ONLY the exact required offset */}
-      <main style={{ paddingTop: headerHeight }}>
+      {/* Main content with bottom clearance on mobile for floating bar */}
+      <main className="pb-16 md:pb-0" style={{ paddingTop: headerHeight }}>
         <Outlet />
       </main>
 
       <Footer />
+
+      {/* Sticky Mobile Parent Quick Contact Bar */}
+      <MobileQuickBar />
     </div>
   );
 }

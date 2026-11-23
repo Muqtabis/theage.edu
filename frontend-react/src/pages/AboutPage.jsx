@@ -41,55 +41,55 @@ const AboutPage = () => {
             {/* ==========================================
                 1. INSTITUTIONAL ABOUT HERO
             ========================================== */}
-            <section className="bg-[#0a192f] text-white py-24 md:py-32 border-b border-slate-800 relative overflow-hidden">
-                {/* Subtle ambient lighting */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
+            <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-white py-16 sm:py-24 md:py-32 border-b border-blue-800/40 relative overflow-hidden">
+                {/* Cheerful ambient background glows */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-blue-500/25 rounded-full blur-3xl pointer-events-none animate-float" />
 
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                         
                         <div className="lg:col-span-7">
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#f4ead4] inline-flex items-center gap-2 mb-3 bg-[#0c1b33]/90 px-4 py-1.5 rounded-full border border-[#c5a059]/40 shadow-xs">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                            <span className="text-xs font-black uppercase tracking-wider text-slate-950 inline-flex items-center gap-2 mb-4 bg-amber-400 px-4 py-1.5 rounded-full shadow-lg shadow-amber-400/20">
+                                <GraduationCap size={16} />
                                 {about.heroBadge || 'Chartered 2012 • Basavakalyan'}
                             </span>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
-                                <span className="text-gradient-gold">{about.heroTitle || 'Education for a Changing World.'}</span>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white mb-6 leading-tight tracking-tight">
+                                <span>{about.heroTitle || 'Education for a Changing World.'}</span>
                             </h1>
-                            <p className="text-slate-200 text-base leading-relaxed max-w-xl mb-8">
+                            <p className="text-blue-100 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
                                 {about.heroSubtitle || "At The Age School, we don't merely instruct against a syllabus. We cultivate moral discernment, intellectual daring, and the leadership capacity needed to navigate tomorrow."}
                             </p>
-                            <div className="flex items-center gap-8 pt-6 border-t border-slate-800">
+                            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-2xl sm:text-3xl font-black text-amber-300 block">
                                         {home.statsStudents || '500+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Enrolled Scholars</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Enrolled Scholars</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-2xl sm:text-3xl font-black text-emerald-300 block">
                                         {home.statsPassRate || '100%'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Board Distinction</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Board Distinction</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-white block">
+                                    <span className="text-2xl sm:text-3xl font-black text-amber-300 block">
                                         {home.statsFaculty || '35+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Academic Mentors</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Certified Mentors</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="lg:col-span-5">
-                            <div className="border-4 border-slate-800 shadow-2xl relative rounded-sm overflow-hidden group hover-lift">
+                            <div className="border-4 border-amber-400/80 shadow-2xl relative rounded-2xl overflow-hidden group hover-lift">
                                 <img 
                                     src={about.heroImageUrl || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
                                     alt="School Campus Grounds" 
-                                    className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                    className="w-full h-[320px] sm:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                                 />
-                                <div className="p-4 bg-[#07111e] border-t border-slate-800 text-[11px] text-slate-400 font-serif italic text-center">
+                                <div className="p-3 bg-blue-950 text-[11px] text-amber-300 font-bold text-center border-t border-blue-900">
                                     The Age School Campus, Basavakalyan, Karnataka
                                 </div>
                             </div>

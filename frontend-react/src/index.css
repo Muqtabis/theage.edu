@@ -1,7 +1,7 @@
 /* =========================================
    1. FONTS & BASE STYLES
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,17 +11,19 @@
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
-    color: #1e293b;
-    background-color: #fcfcfc;
+    color: #0f172a;
+    background-color: #f8fafc;
+    -webkit-tap-highlight-color: transparent;
   }
   
+  h1, h2, h3, .font-heading {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
   .font-serif {
     font-family: 'Playfair Display', Georgia, serif;
     letter-spacing: -0.015em;
-  }
-
-  .font-cormorant {
-    font-family: 'Cormorant Garamond', Georgia, serif;
   }
 }
 
@@ -34,24 +36,14 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
 }
 
-@keyframes shimmer-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* =========================================
-   3. REFINED INSTITUTIONAL PALETTE & UTILITIES
-   ========================================= */
 
 /* Shimmer Light Sweep on Interactive Buttons */
 .shimmer-btn {
@@ -68,7 +60,7 @@
   background: linear-gradient(
     60deg,
     rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.35) 50%,
     rgba(255, 255, 255, 0) 80%
   );
   transform: rotate(25deg);
@@ -79,78 +71,57 @@
   left: 140%;
 }
 
-/* Hover Lift with Layered Shadow */
+/* Tactile Hover Lift for Cards */
 .hover-lift {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 30px -8px rgba(12, 27, 51, 0.1), 0 6px 12px -4px rgba(12, 27, 51, 0.05);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12), 0 6px 12px -4px rgba(15, 23, 42, 0.06);
 }
 
-/* Glassmorphism Panels */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
+/* =========================================
+   3. COLORFUL EDUCATIONAL BUTTONS & BADGES
+   ========================================= */
 
-.glass-dark {
-  background: rgba(12, 27, 51, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(197, 160, 89, 0.2);
-}
-
-/* Restrained, Dignified Accents */
-.glow-gold {
-  box-shadow: 0 0 20px -2px rgba(197, 160, 89, 0.3);
-}
-.glow-navy {
-  box-shadow: 0 0 24px -2px rgba(12, 27, 51, 0.25);
-}
-
-/* Metallic Champagne Gold Gradient Text */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #ffffff 0%, #f4ead4 40%, #c5a059 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Subtle Oxford Navy Gradient Text */
-.text-gradient-navy {
-  background: linear-gradient(135deg, #0c1b33 0%, #17325e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Prestigious Institutional Buttons */
-.btn-gold {
-  background: linear-gradient(135deg, #c5a059 0%, #b58a3c 50%, #9e7529 100%);
-  color: #ffffff;
-  font-weight: 700;
-  box-shadow: 0 4px 14px 0 rgba(181, 138, 60, 0.35);
+/* Warm School Amber Button (Primary CTA) */
+.btn-amber {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0f172a;
+  font-weight: 800;
+  box-shadow: 0 6px 20px -4px rgba(245, 158, 11, 0.45);
   transition: all 0.25s ease;
 }
-.btn-gold:hover {
-  background: linear-gradient(135deg, #d4b06a 0%, #c5a059 50%, #b58a3c 100%);
-  box-shadow: 0 8px 20px 0 rgba(181, 138, 60, 0.45);
+.btn-amber:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 10px 24px -4px rgba(245, 158, 11, 0.6);
   transform: translateY(-2px);
 }
 
-.btn-navy {
-  background: #0c1b33;
+/* Royal School Blue Button */
+.btn-blue {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
-  border: 1px solid rgba(197, 160, 89, 0.4);
   font-weight: 700;
-  box-shadow: 0 4px 14px 0 rgba(12, 27, 51, 0.25);
+  box-shadow: 0 6px 20px -4px rgba(37, 99, 235, 0.4);
   transition: all 0.25s ease;
 }
-.btn-navy:hover {
-  background: #132a4e;
-  border-color: #c5a059;
-  box-shadow: 0 8px 20px 0 rgba(12, 27, 51, 0.35);
+.btn-blue:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.55);
+  transform: translateY(-2px);
+}
+
+/* Fresh Campus Emerald Button */
+.btn-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 6px 20px -4px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-emerald:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
   transform: translateY(-2px);
 }
 
@@ -163,20 +134,17 @@
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* Refined Institutional Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #f8fafc; 
+  background: #f1f5f9; 
 }
-
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
