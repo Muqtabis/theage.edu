@@ -72,17 +72,16 @@ const StudentLifePage = () => {
     const currentAlbum = albums[currentSlide] || null;
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fbfcfe] w-full overflow-x-hidden selection:bg-amber-400/30 selection:text-slate-950">
+        <div className="font-sans text-slate-800 bg-[#fbfcfe] w-full overflow-x-hidden selection:bg-[#c5a059]/30 selection:text-[#0a192f]">
             
             {/* HERO */}
-            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-24 md:py-32 border-b border-amber-500/25 text-center relative overflow-hidden">
-                {/* Ambient glowing mesh orbs */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
-                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+            <section className="bg-[#0a192f] text-white py-24 md:py-32 border-b border-slate-800 text-center relative overflow-hidden">
+                {/* Subtle ambient lighting */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="max-w-4xl mx-auto px-6 relative z-10">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-300 inline-flex items-center gap-2 mb-3 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#f4ead4] inline-flex items-center gap-2 mb-3 bg-[#0c1b33]/90 px-4 py-1.5 rounded-full border border-[#c5a059]/40 shadow-xs">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         {studentLife.heroBadge || 'Beyond Academics'}
                     </span>
@@ -98,8 +97,8 @@ const StudentLifePage = () => {
             {/* THREE PILLARS */}
             <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8">
                 <div className="max-w-2xl mb-14">
-                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 block mb-2">Activities</span>
-                    <h2 className="text-3xl font-serif font-bold text-[#06111f]">The Co-Curricular Program</h2>
+                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#8c7355] block mb-2">Activities</span>
+                    <h2 className="text-3xl font-serif font-bold text-[#0a192f]">The Co-Curricular Program</h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-2">Cultivating mind, body, and artistic expression through structured daily disciplines.</p>
                 </div>
 
@@ -109,41 +108,29 @@ const StudentLifePage = () => {
                             num: "01",
                             title: "Athletics & Physical Discipline",
                             desc: "Team sports, track events, and morning yoga instilling fitness, humility in victory, and resilience in defeat.",
-                            tags: ["Basketball", "Football", "Athletics", "Yoga"],
-                            color: "from-amber-400 to-orange-500",
-                            cardBg: "hover:border-amber-400/80",
-                            numColor: "text-amber-500",
-                            tagHover: "hover:bg-amber-500 hover:text-slate-950 hover:border-amber-500"
+                            tags: ["Basketball", "Football", "Athletics", "Yoga"]
                         },
                         {
                             num: "02",
                             title: "Fine Arts, Music & Theatre",
                             desc: "Creative self-expression through classical vocal traditions, dramatic performance, and painting studios.",
-                            tags: ["Drama", "Visual Arts", "Vocal Choir", "Handicrafts"],
-                            color: "from-rose-400 to-pink-500",
-                            cardBg: "hover:border-rose-400/80",
-                            numColor: "text-rose-500",
-                            tagHover: "hover:bg-rose-500 hover:text-white hover:border-rose-500"
+                            tags: ["Drama", "Visual Arts", "Vocal Choir", "Handicrafts"]
                         },
                         {
                             num: "03",
                             title: "Debating, Robotics & Societies",
                             desc: "Active student-led councils, scientific inquiry olympiads, and bilingual public speaking forums.",
-                            tags: ["Robotics Lab", "Debate Society", "Eco-Club", "Science Olympiad"],
-                            color: "from-blue-500 to-indigo-600",
-                            cardBg: "hover:border-blue-400/80",
-                            numColor: "text-blue-500",
-                            tagHover: "hover:bg-blue-600 hover:text-white hover:border-blue-600"
+                            tags: ["Robotics Lab", "Debate Society", "Eco-Club", "Science Olympiad"]
                         }
                     ].map((act, i) => (
                         <div 
                             key={i} 
-                            className={`bg-white p-8 border border-slate-200/90 ${act.cardBg} rounded-sm flex flex-col justify-between hover-lift relative overflow-hidden group shadow-xs hover:shadow-xl`}
+                            className="bg-white p-8 border border-slate-200/90 hover:border-[#c5a059]/60 rounded-sm flex flex-col justify-between hover-lift relative overflow-hidden group shadow-xs hover:shadow-lg transition-all duration-300"
                         >
-                            <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${act.color} opacity-90`} />
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0a192f] to-[#c5a059] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <div>
-                                <span className={`text-[12px] font-mono font-bold ${act.numColor} block mb-3`}>{act.num}.</span>
-                                <h3 className="text-xl font-serif font-bold text-[#06111f] mb-3 group-hover:text-blue-900 transition-colors">{act.title}</h3>
+                                <span className="text-[12px] font-mono font-bold text-[#c5a059] block mb-3">{act.num}.</span>
+                                <h3 className="text-xl font-serif font-bold text-[#0a192f] mb-3 group-hover:text-blue-950 transition-colors">{act.title}</h3>
                                 <p className="text-xs text-slate-600 leading-relaxed mb-6">{act.desc}</p>
                             </div>
                             {Array.isArray(act.tags) && (
@@ -151,7 +138,7 @@ const StudentLifePage = () => {
                                     {act.tags.map((t, ti) => (
                                         <span 
                                             key={ti} 
-                                            className={`text-[10px] font-semibold px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-700 transition-colors shadow-2xs rounded-xs ${act.tagHover}`}
+                                            className="text-[10px] font-medium px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-700 hover:bg-[#0a192f] hover:text-[#c5a059] hover:border-[#0a192f] transition-colors shadow-2xs rounded-xs cursor-default"
                                         >
                                             {t}
                                         </span>
@@ -235,17 +222,17 @@ const StudentLifePage = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-xs text-slate-700">
                         {[
-                            { title: "Smart Interactive Classrooms", desc: "Equipped with interactive smart displays, audio-visual technology, and ergonomic seating.", icon: "01", color: "text-blue-600", bar: "bg-blue-600" },
-                            { title: "Composite Science & STEM Lab", desc: "Dedicated Physics, Chemistry, Biology, and Robotics experimentation apparatus.", icon: "02", color: "text-emerald-600", bar: "bg-emerald-600" },
-                            { title: "Central Knowledge Library", desc: "Over 5,000 curated books, periodicals, daily national newspapers, and digital research bays.", icon: "03", color: "text-amber-600", bar: "bg-amber-500" },
-                            { title: "GPS-Monitored Bus Fleet", desc: "Safe transport covering Basavakalyan and neighboring taluk routes with speed governors and female attendants.", icon: "04", color: "text-indigo-600", bar: "bg-indigo-600" },
-                            { title: "Athletic Fields & Courts", desc: "Expansive play area for cricket, football, volleyball, badminton, kho-kho, and track events.", icon: "05", color: "text-orange-600", bar: "bg-orange-500" },
-                            { title: "Health Care & RO Purified Water", desc: "On-campus primary infirmary, periodic pediatric health checkups, and multi-stage commercial RO water.", icon: "06", color: "text-teal-600", bar: "bg-teal-600" }
+                            { title: "Smart Interactive Classrooms", desc: "Equipped with interactive smart displays, audio-visual technology, and ergonomic seating.", icon: "01" },
+                            { title: "Composite Science & STEM Lab", desc: "Dedicated Physics, Chemistry, Biology, and Robotics experimentation apparatus.", icon: "02" },
+                            { title: "Central Knowledge Library", desc: "Over 5,000 curated books, periodicals, daily national newspapers, and digital research bays.", icon: "03" },
+                            { title: "GPS-Monitored Bus Fleet", desc: "Safe transport covering Basavakalyan and neighboring taluk routes with speed governors and female attendants.", icon: "04" },
+                            { title: "Athletic Fields & Courts", desc: "Expansive play area for cricket, football, volleyball, badminton, kho-kho, and track events.", icon: "05" },
+                            { title: "Health Care & RO Purified Water", desc: "On-campus primary infirmary, periodic pediatric health checkups, and multi-stage commercial RO water.", icon: "06" }
                         ].map((fac, fi) => (
-                            <div key={fi} className="p-6 border border-slate-200 bg-white rounded-sm hover-lift relative overflow-hidden group shadow-xs">
-                                <div className={`absolute top-0 left-0 w-1.5 h-full ${fac.bar}`} />
-                                <span className={`text-[10px] font-mono font-bold ${fac.color} block mb-2`}>{fac.icon} / INFRASTRUCTURE</span>
-                                <h4 className="font-serif font-bold text-sm text-[#06111f] mb-1.5 group-hover:text-blue-900 transition-colors">{fac.title}</h4>
+                            <div key={fi} className="p-6 border border-slate-200 hover:border-[#c5a059]/60 bg-white rounded-sm hover-lift relative overflow-hidden group shadow-xs transition-all duration-300">
+                                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#0a192f] group-hover:bg-[#c5a059] transition-colors" />
+                                <span className="text-[10px] font-mono font-bold text-[#c5a059] block mb-2">{fac.icon} / INFRASTRUCTURE</span>
+                                <h4 className="font-serif font-bold text-sm text-[#0a192f] mb-1.5 group-hover:text-blue-950 transition-colors">{fac.title}</h4>
                                 <p className="text-slate-600 leading-relaxed text-xs">{fac.desc}</p>
                             </div>
                         ))}

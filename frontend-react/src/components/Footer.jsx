@@ -21,9 +21,9 @@ const Footer = () => {
   const general = content?.general || {};
 
   return (
-    <footer className="bg-gradient-to-b from-[#06111f] to-[#02070e] text-slate-300 pt-16 pb-12 border-t border-amber-500/20 font-sans relative overflow-hidden">
-      {/* Top spectrum accent */}
-      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-blue-600 via-amber-400 via-rose-500 to-emerald-500" />
+    <footer className="bg-gradient-to-b from-[#06111f] to-[#02070e] text-slate-300 pt-16 pb-12 border-t border-[#c5a059]/20 font-sans relative overflow-hidden">
+      {/* Top subtle antique gold accent */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c5a059] to-transparent" />
 
       <div className="container mx-auto px-6 sm:px-8 max-w-7xl relative z-10">
         
@@ -36,13 +36,13 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="The Age School Crest" 
-                className="h-11 w-11 object-contain rounded-sm border border-amber-400/30 bg-white shadow-md group-hover:scale-105 transition-transform" 
+                className="h-11 w-11 object-contain rounded-sm border border-[#c5a059]/30 bg-white shadow-md group-hover:scale-105 transition-transform" 
               /> 
               <div className="flex flex-col">
-                <span className="text-xl font-serif font-bold text-white tracking-tight group-hover:text-amber-200 transition-colors">
+                <span className="text-xl font-serif font-bold text-white tracking-tight group-hover:text-[#c5a059] transition-colors">
                   {general.schoolName || 'The Age School'}
                 </span>
-                <span className="text-[10px] text-amber-400 uppercase tracking-[0.2em] font-semibold">
+                <span className="text-[10px] text-[#c5a059] uppercase tracking-[0.2em] font-semibold">
                   Basavakalyan • Karnataka
                 </span>
               </div>
@@ -66,12 +66,12 @@ const Footer = () => {
               Directory
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li><Link to="/home" className="hover:text-amber-300 transition-colors">Home Page</Link></li>
-              <li><Link to="/about" className="hover:text-amber-300 transition-colors">About Our Vision & Trustees</Link></li>
-              <li><Link to="/academics" className="hover:text-amber-300 transition-colors">Academic Pathways & Curriculum</Link></li>
-              <li><Link to="/admissions" className="hover:text-amber-300 transition-colors">Admissions & Tuition Schedule</Link></li>
-              <li><Link to="/student-life" className="hover:text-amber-300 transition-colors">Campus Life & Activities</Link></li>
-              <li><Link to="/news" className="hover:text-amber-300 transition-colors">Official Gazette & Events</Link></li>
+              <li><Link to="/home" className="hover:text-[#c5a059] transition-colors">Home Page</Link></li>
+              <li><Link to="/about" className="hover:text-[#c5a059] transition-colors">About Our Vision & Trustees</Link></li>
+              <li><Link to="/academics" className="hover:text-[#c5a059] transition-colors">Academic Pathways & Curriculum</Link></li>
+              <li><Link to="/admissions" className="hover:text-[#c5a059] transition-colors">Admissions & Tuition Schedule</Link></li>
+              <li><Link to="/student-life" className="hover:text-[#c5a059] transition-colors">Campus Life & Activities</Link></li>
+              <li><Link to="/news" className="hover:text-[#c5a059] transition-colors">Official Gazette & Events</Link></li>
             </ul>
           </div>
 
@@ -82,18 +82,18 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-xs text-slate-400">
               <li className="flex items-start gap-2.5">
-                <MapPin size={15} className="mt-0.5 text-amber-400 shrink-0" />
+                <MapPin size={15} className="mt-0.5 text-[#c5a059] shrink-0" />
                 <span>{general.address || 'Basavakalyan, Bidar Dist., Karnataka, India - 585327'}</span>
               </li>
               <li>
-                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-amber-300 transition-colors">
-                  <Phone size={15} className="text-amber-400 shrink-0" />
+                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-[#c5a059] transition-colors">
+                  <Phone size={15} className="text-[#c5a059] shrink-0" />
                   <span>{general.phone || '(+91) 12345 67890'}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-amber-300 transition-colors">
-                  <Mail size={15} className="text-amber-400 shrink-0" />
+                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-[#c5a059] transition-colors">
+                  <Mail size={15} className="text-[#c5a059] shrink-0" />
                   <span>{general.email || 'info@theageschool.edu'}</span>
                 </a>
               </li>
@@ -106,8 +106,8 @@ const Footer = () => {
               Accreditation
             </h4>
             
-            <div className="bg-[#0b1c36] p-4 border border-blue-400/20 rounded-sm hover:border-amber-400/50 transition-colors shadow-2xs">
-              <span className="text-[10px] text-amber-400 uppercase tracking-wider font-bold block mb-1">
+            <div className="bg-[#0b192c] p-4 border border-slate-800 rounded-sm hover:border-[#c5a059]/40 transition-colors shadow-2xs">
+              <span className="text-[10px] text-[#c5a059] uppercase tracking-wider font-bold block mb-1">
                 Official Recognition
               </span>
               <p className="text-xs font-semibold text-white">
@@ -135,10 +135,10 @@ const Footer = () => {
             {/* Discreet Admin Login */}
             <Link 
               to="/login" 
-              className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5 text-slate-500 hover:text-slate-200 group"
+              className="hover:text-[#c5a059] transition-colors flex items-center gap-1.5 text-slate-500 hover:text-slate-200 group"
               title="Authorized Personnel Access"
             >
-              <Shield size={12} className="group-hover:text-[#c5a880] transition-colors" />
+              <Shield size={12} className="group-hover:text-[#c5a059] transition-colors" />
               <span>Staff Login</span>
             </Link>
           </div>
@@ -154,7 +154,7 @@ const SocialLink = ({ href, icon }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer" 
-    className="w-9 h-9 rounded-sm bg-[#0b192c] border border-slate-800 text-slate-400 flex items-center justify-center transition-all duration-300 hover:text-white hover:border-[#c5a880] hover:bg-[#152336] hover:scale-110 hover:-translate-y-0.5 hover:shadow-md"
+    className="w-9 h-9 rounded-sm bg-[#0b192c] border border-slate-800 text-slate-400 flex items-center justify-center transition-all duration-300 hover:text-white hover:border-[#c5a059] hover:bg-[#152336] hover:scale-110 hover:-translate-y-0.5 hover:shadow-md"
   >
     {icon}
   </a>

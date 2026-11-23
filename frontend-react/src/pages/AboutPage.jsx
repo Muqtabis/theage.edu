@@ -41,17 +41,16 @@ const AboutPage = () => {
             {/* ==========================================
                 1. INSTITUTIONAL ABOUT HERO
             ========================================== */}
-            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-24 md:py-32 border-b border-amber-500/25 relative overflow-hidden">
-                {/* Ambient glowing mesh orbs */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
-                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+            <section className="bg-[#0a192f] text-white py-24 md:py-32 border-b border-slate-800 relative overflow-hidden">
+                {/* Subtle ambient lighting */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         
                         <div className="lg:col-span-7">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-300 inline-flex items-center gap-2 mb-3 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                            <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#f4ead4] inline-flex items-center gap-2 mb-3 bg-[#0c1b33]/90 px-4 py-1.5 rounded-full border border-[#c5a059]/40 shadow-xs">
                                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                                 {about.heroBadge || 'Chartered 2012 • Basavakalyan'}
                             </span>
@@ -63,22 +62,22 @@ const AboutPage = () => {
                             </p>
                             <div className="flex items-center gap-8 pt-6 border-t border-slate-800">
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-blue-300 block">
+                                    <span className="text-3xl font-serif font-bold text-white block">
                                         {home.statsStudents || '500+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Enrolled Scholars</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Enrolled Scholars</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-amber-300 block">
+                                    <span className="text-3xl font-serif font-bold text-white block">
                                         {home.statsPassRate || '100%'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Board Distinction</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Board Distinction</span>
                                 </div>
                                 <div>
-                                    <span className="text-3xl font-serif font-bold text-emerald-300 block">
+                                    <span className="text-3xl font-serif font-bold text-white block">
                                         {home.statsFaculty || '35+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Academic Mentors</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a059]">Academic Mentors</span>
                                 </div>
                             </div>
                         </div>

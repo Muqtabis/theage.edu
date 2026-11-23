@@ -18,17 +18,16 @@ const ContactPage = () => {
     const [state, handleSubmit] = useForm("meorjaja"); 
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fbfcfe] min-h-screen selection:bg-amber-400/30 selection:text-slate-950">
+        <div className="font-sans text-slate-800 bg-[#fbfcfe] min-h-screen selection:bg-[#c5a059]/30 selection:text-[#0a192f]">
             
             {/* HERO */}
-            <section className="bg-gradient-to-b from-[#06111f] via-[#0b1d38] to-[#081830] text-white py-24 md:py-32 border-b border-amber-500/25 text-center relative overflow-hidden">
-                {/* Ambient glowing mesh orbs */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-float" />
-                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+            <section className="bg-[#0a192f] text-white py-24 md:py-32 border-b border-slate-800 text-center relative overflow-hidden">
+                {/* Subtle ambient lighting */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="max-w-4xl mx-auto px-6 relative z-10">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-amber-300 inline-flex items-center gap-2 mb-3 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#f4ead4] inline-flex items-center gap-2 mb-3 bg-[#0c1b33]/90 px-4 py-1.5 rounded-full border border-[#c5a059]/40 shadow-xs">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         Directory & Inquiries
                     </span>
@@ -47,7 +46,7 @@ const ContactPage = () => {
                     {/* FORM */}
                     <div className="lg:col-span-7">
                         <div className="bg-white p-8 md:p-10 border border-slate-200 rounded-sm hover-lift relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-[#c5a880] to-emerald-500 opacity-80" />
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0a192f] to-[#c5a059]" />
                             <h2 className="text-2xl font-serif font-bold text-[#0b192c] mb-2">Institutional Inquiry Form</h2>
                             <p className="text-slate-500 text-xs mb-8">Official correspondence is addressed directly by the administrative registrar.</p>
 
