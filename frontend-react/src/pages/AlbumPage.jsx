@@ -50,22 +50,22 @@ const AlbumPage = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#07111e] text-white">
-                <Loader2 className="animate-spin text-[#c5a880] mb-4" size={36} />
-                <p className="text-xs font-mono uppercase tracking-wider text-slate-400">Loading Photographic Records...</p>
+            <div className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-800">
+                <Loader2 className="animate-spin text-blue-600 mb-3" size={32} />
+                <p className="text-xs uppercase tracking-wider text-slate-500 font-medium">Loading Photographs...</p>
             </div>
         );
     }
 
     if (error || !album) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#fbfbfb] px-6">
-                <div className="bg-white p-10 border border-slate-200 text-center max-w-md">
-                    <h2 className="text-xl font-serif font-bold text-[#0b192c] mb-2">Collection Not Located</h2>
+            <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-6">
+                <div className="bg-white p-8 border border-slate-200 text-center max-w-md rounded-xl shadow-xs">
+                    <h2 className="text-lg font-bold text-slate-900 mb-2">Collection Not Found</h2>
                     <p className="text-slate-500 text-xs mb-6">{error || "We could not find the requested catalogued photos."}</p>
-                    <Link to="/student-life" className="inline-flex items-center px-5 py-2.5 bg-[#0b192c] text-white text-xs font-bold uppercase tracking-wider">
-                        <ArrowLeft size={14} className="mr-2" />
-                        Return to Archives
+                    <Link to="/student-life" className="btn-primary text-xs">
+                        <ArrowLeft size={14} />
+                        <span>Return to Archives</span>
                     </Link>
                 </div>
             </div>
@@ -75,49 +75,50 @@ const AlbumPage = () => {
     const images = album.images || [];
 
     return (
-        <div className="font-sans bg-[#fbfbfb] min-h-screen selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
+        <div className="font-sans bg-white min-h-screen selection:bg-blue-600 selection:text-white">
             {/* HERO */}
-            <section className="bg-[#0b192c] text-white pt-28 pb-20 border-b border-[#c5a880]/20">
-                <div className="max-w-7xl mx-auto px-6 sm:px-8">
+            <section className="bg-slate-50 border-b border-slate-200/80 pt-20 pb-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <Link 
                         to="/student-life" 
-                        className="inline-flex items-center text-slate-400 hover:text-white transition-colors mb-6 text-xs font-semibold"
+                        className="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-900 transition-colors mb-6 text-xs font-semibold"
                     >
-                        <ArrowLeft size={14} className="mr-2" />
+                        <ArrowLeft size={13} />
                         <span>Return to Collections Directory</span>
                     </Link>
 
                     <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-                        <div className="max-w-3xl">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c5a880] block mb-2">
+                        <div className="max-w-2xl">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-600 block mb-2">
                                 Campus Archive • {images.length} Photographs
                             </span>
-                            <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white mb-3">
+                            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2 tracking-tight">
                                 {album.title}
                             </h1>
-                            <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
+                            <p className="text-sm text-slate-600 leading-relaxed max-w-xl">
                                 {album.description}
                             </p>
                         </div>
                         
                         <button 
                             onClick={handleShare}
-                            className="px-4 py-2 border border-slate-700 hover:border-slate-500 text-xs font-semibold text-white transition-colors cursor-pointer"
+                            className="btn-secondary text-xs cursor-pointer"
                         >
-                            <span>{copied ? "Link Copied" : "Share Collection Link"}</span>
+                            <Share2 size={13} />
+                            <span>{copied ? "Link Copied" : "Share Collection"}</span>
                         </button>
                     </div>
                 </div>
             </section>
 
             {/* PHOTOGRAPH GRID */}
-            <section className="py-16 max-w-7xl mx-auto px-6 sm:px-8">
+            <section className="py-16 max-w-7xl mx-auto px-4 sm:px-8">
                 {images.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {images.map((image, index) => (
                             <div 
                                 key={image._id || index} 
-                                className="group relative aspect-[4/3] bg-slate-100 overflow-hidden cursor-pointer border border-slate-200"
+                                className="group relative aspect-4/3 bg-slate-100 overflow-hidden cursor-pointer rounded-xl border border-slate-200 card-minimal"
                                 onClick={() => setSelectedImage(image.src)}
                             >
                                 <img 
@@ -126,8 +127,8 @@ const AlbumPage = () => {
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102" 
                                     loading="lazy"
                                 />
-                                <div className="absolute inset-0 bg-[#07111e]/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                                    <span className="text-[10px] uppercase font-bold text-[#c5a880] tracking-wider">
+                                <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                                    <span className="text-[10px] uppercase font-semibold text-blue-400 tracking-wider">
                                         Click to Expand
                                     </span>
                                     <p className="text-white text-xs truncate">
@@ -138,7 +139,7 @@ const AlbumPage = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="py-20 text-center text-slate-400 text-xs border border-dashed border-slate-200">
+                    <div className="py-20 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-xl">
                         No photographic records added to this album yet.
                     </div>
                 )}

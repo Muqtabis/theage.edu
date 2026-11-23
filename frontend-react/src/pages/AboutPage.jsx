@@ -32,65 +32,61 @@ const AboutPage = () => {
     const timeline = Array.isArray(about.timeline) && about.timeline.length > 0 ? about.timeline : [
         { year: '2012', title: 'Foundation & Charter', desc: 'The Age School opened its doors with 50 students and a vision for progressive education in Karnataka.' },
         { year: '2016', title: 'Campus Expansion', desc: 'Added modern science laboratories, high-speed computer center, and expanded athletic grounds.' },
-        { year: '2024', title: 'Smart Learning & Global Standards', desc: 'Integrated interactive digital classrooms, STEM robotics curriculum, and international student exchange modules.' }
+        { year: '2024', title: 'Smart Learning & Global Standards', desc: 'Integrated interactive digital classrooms, STEM robotics curriculum, and enhanced academic modules.' }
     ];
 
     return (
-        <div className="font-sans text-slate-800 bg-[#fbfcfe] selection:bg-amber-400/30 selection:text-slate-950">
+        <div className="font-sans text-slate-800 bg-white selection:bg-blue-600 selection:text-white">
             
             {/* ==========================================
                 1. INSTITUTIONAL ABOUT HERO
             ========================================== */}
-            <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-white py-16 sm:py-24 md:py-32 border-b border-blue-800/40 relative overflow-hidden">
-                {/* Cheerful ambient background glows */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-blue-500/25 rounded-full blur-3xl pointer-events-none animate-float" />
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <section className="bg-slate-50 border-b border-slate-200/80 py-16 sm:py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                         
                         <div className="lg:col-span-7">
-                            <span className="text-xs font-black uppercase tracking-wider text-slate-950 inline-flex items-center gap-2 mb-4 bg-amber-400 px-4 py-1.5 rounded-full shadow-lg shadow-amber-400/20">
-                                <GraduationCap size={16} />
-                                {about.heroBadge || 'Chartered 2012 • Basavakalyan'}
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 inline-flex items-center gap-2 mb-4 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-2xs">
+                                <GraduationCap size={15} className="text-blue-600" />
+                                <span>{about.heroBadge || 'Chartered 2012 • Basavakalyan'}</span>
                             </span>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white mb-6 leading-tight tracking-tight">
-                                <span>{about.heroTitle || 'Education for a Changing World.'}</span>
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
+                                {about.heroTitle || 'Education for a Changing World.'}
                             </h1>
-                            <p className="text-blue-100 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
+                            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
                                 {about.heroSubtitle || "At The Age School, we don't merely instruct against a syllabus. We cultivate moral discernment, intellectual daring, and the leadership capacity needed to navigate tomorrow."}
                             </p>
-                            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
+                            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200">
                                 <div>
-                                    <span className="text-2xl sm:text-3xl font-black text-amber-300 block">
+                                    <span className="text-2xl sm:text-3xl font-bold text-slate-900 block">
                                         {home.statsStudents || '500+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Enrolled Scholars</span>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Enrolled Scholars</span>
                                 </div>
                                 <div>
-                                    <span className="text-2xl sm:text-3xl font-black text-emerald-300 block">
+                                    <span className="text-2xl sm:text-3xl font-bold text-slate-900 block">
                                         {home.statsPassRate || '100%'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Board Distinction</span>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Board Record</span>
                                 </div>
                                 <div>
-                                    <span className="text-2xl sm:text-3xl font-black text-amber-300 block">
+                                    <span className="text-2xl sm:text-3xl font-bold text-slate-900 block">
                                         {home.statsFaculty || '35+'}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Certified Mentors</span>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Certified Mentors</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="lg:col-span-5">
-                            <div className="border-4 border-amber-400/80 shadow-2xl relative rounded-2xl overflow-hidden group hover-lift">
+                            <div className="border border-slate-200 shadow-xl relative rounded-2xl overflow-hidden group aspect-4/3 bg-slate-100">
                                 <img 
                                     src={about.heroImageUrl || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
                                     alt="School Campus Grounds" 
-                                    className="w-full h-[320px] sm:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" 
                                 />
-                                <div className="p-3 bg-blue-950 text-[11px] text-amber-300 font-bold text-center border-t border-blue-900">
-                                    The Age School Campus, Basavakalyan, Karnataka
+                                <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-2.5 rounded-lg text-xs font-semibold text-slate-900 text-center border border-slate-200/80">
+                                    The Age School Campus, Basavakalyan
                                 </div>
                             </div>
                         </div>
@@ -102,41 +98,40 @@ const AboutPage = () => {
             {/* ==========================================
                 2. LEADERSHIP STATEMENTS
             ========================================== */}
-            <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8">
-                <div className="max-w-2xl mx-auto text-center mb-16">
-                    <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">
-                        Executive Governance
+            <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="max-w-2xl mx-auto text-center mb-14">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
+                        Institutional Governance
                     </span>
-                    <h2 className="text-3xl font-serif font-bold text-[#0b192c]">
-                        Statements from the Leadership
+                    <h2 className="text-3xl font-bold text-slate-900">
+                        Statements from Leadership
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     
                     {/* President Card */}
-                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between hover-lift relative overflow-hidden group rounded-sm">
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="card-minimal p-7 sm:p-8 flex flex-col justify-between group">
                         <div>
                             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                                <div className="w-16 h-16 rounded-sm overflow-hidden border border-slate-300 shrink-0">
+                                <div className="w-14 h-14 rounded-lg overflow-hidden border border-slate-200 shrink-0">
                                     <img 
                                         src={about.presidentImageUrl || "https://images.unsplash.com/photo-1544531327-c820ad9d46dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"} 
                                         alt="" 
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                        className="w-full h-full object-cover" 
                                     />
                                 </div>
                                 <div>
-                                    <h3 className="font-serif font-bold text-lg text-[#0b192c]">
+                                    <h3 className="font-bold text-base text-slate-900">
                                         {about.presidentName || 'Dr. Sarah Mitchell'}
                                     </h3>
-                                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#c5a880]">
+                                    <span className="text-xs text-blue-600 font-medium">
                                         {about.presidentRole || 'President & Trustee'}
                                     </span>
                                 </div>
                             </div>
 
-                            <p className="font-serif italic text-base text-[#0b192c] mb-4">
+                            <p className="italic text-sm text-slate-800 font-medium mb-3">
                                 {about.presidentQuote || '"Lighting the fire of curiosity."'}
                             </p>
                             
@@ -145,34 +140,33 @@ const AboutPage = () => {
                             </p>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-100 text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                        <div className="pt-5 mt-5 border-t border-slate-100 text-[10px] uppercase tracking-wider text-slate-400 font-semibold">
                             Office of the President
                         </div>
                     </div>
 
                     {/* Vice President Card */}
-                    <div className="bg-white p-8 md:p-10 border border-slate-200/90 shadow-2xs flex flex-col justify-between hover-lift relative overflow-hidden group rounded-sm">
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c5a880] to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="card-minimal p-7 sm:p-8 flex flex-col justify-between group">
                         <div>
                             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                                <div className="w-16 h-16 rounded-sm overflow-hidden border border-slate-300 shrink-0">
+                                <div className="w-14 h-14 rounded-lg overflow-hidden border border-slate-200 shrink-0">
                                     <img 
                                         src={about.vpImageUrl || "https://images.unsplash.com/photo-1574023605634-6d9ff7b5a840?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"} 
                                         alt="" 
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                        className="w-full h-full object-cover" 
                                     />
                                 </div>
                                 <div>
-                                    <h3 className="font-serif font-bold text-lg text-[#0b192c]">
+                                    <h3 className="font-bold text-base text-slate-900">
                                         {about.vpName || 'Mr. Alex Chen'}
                                     </h3>
-                                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#c5a880]">
+                                    <span className="text-xs text-blue-600 font-medium">
                                         {about.vpRole || 'Vice President & Head of Faculty'}
                                     </span>
                                 </div>
                             </div>
 
-                            <p className="font-serif italic text-base text-[#0b192c] mb-4">
+                            <p className="italic text-sm text-slate-800 font-medium mb-3">
                                 {about.vpQuote || '"Embracing tomorrow\'s challenges."'}
                             </p>
                             
@@ -181,7 +175,7 @@ const AboutPage = () => {
                             </p>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-100 text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                        <div className="pt-5 mt-5 border-t border-slate-100 text-[10px] uppercase tracking-wider text-slate-400 font-semibold">
                             Academic & Student Affairs
                         </div>
                     </div>
@@ -192,25 +186,26 @@ const AboutPage = () => {
             {/* ==========================================
                 3. CORE VALUES & PHILOSOPHY
             ========================================== */}
-            <section className="py-20 bg-white border-y border-slate-200">
-                <div className="max-w-7xl mx-auto px-6 sm:px-8">
-                    <div className="max-w-2xl mb-14">
-                        <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">Pillars</span>
-                        <h2 className="text-3xl font-serif font-bold text-[#0b192c]">The Four Core Commitments</h2>
+            <section className="py-20 bg-slate-50/70 border-y border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-8">
+                    <div className="max-w-2xl mb-12">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">Pillars</span>
+                        <h2 className="text-3xl font-bold text-slate-900">The Four Core Commitments</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
                             { title: "Intellectual Rigor", desc: "Setting ambitious expectations and fostering independent curiosity with dedicated faculty mentoring." },
                             { title: "Ethical Integrity", desc: "Instilling deep moral responsibility, community civic pride, and uncompromising honesty in every interaction." },
                             { title: "Modern Inquiry", desc: "Integrating laboratory research, digital fluency, and applied mathematics for the 21st century." },
                             { title: "Inclusive Fellowship", desc: "A supportive environment where every background is embraced, supported, and challenged to achieve personal excellence." },
                         ].map((p, i) => (
-                            <div key={i} className="p-6 border border-slate-200 bg-[#fdfbf7] hover-lift relative overflow-hidden group rounded-sm">
-                                <div className="absolute top-0 left-0 w-1 h-full bg-slate-200 group-hover:bg-[#c5a880] transition-colors" />
-                                <span className="text-xs font-bold text-[#c5a880] block mb-2 font-mono">0{i+1}.</span>
-                                <h3 className="text-base font-serif font-bold text-[#0b192c] mb-2 group-hover:text-blue-900 transition-colors">{p.title}</h3>
-                                <p className="text-xs text-slate-600 leading-relaxed">{p.desc}</p>
+                            <div key={i} className="card-minimal p-6 flex flex-col justify-between group">
+                                <div>
+                                    <span className="text-xs font-bold text-blue-600 block mb-2 font-mono">0{i+1}.</span>
+                                    <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{p.title}</h3>
+                                    <p className="text-xs text-slate-600 leading-relaxed">{p.desc}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -221,21 +216,22 @@ const AboutPage = () => {
                 4. FACULTY DIRECTORY
             ========================================== */}
             {teachers.length > 0 && (
-                <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8">
-                    <div className="max-w-2xl mb-14">
-                        <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">Teaching Fellowship</span>
-                        <h2 className="text-3xl font-serif font-bold text-[#0b192c]">Our Dedicated Faculty</h2>
-                        <p className="text-xs text-slate-500 mt-2">Certified educators guiding scholars across languages, physical sciences, mathematics, and arts.</p>
+                <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
+                    <div className="max-w-2xl mb-12">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">Faculty</span>
+                        <h2 className="text-3xl font-bold text-slate-900">Our Dedicated Educators</h2>
+                        <p className="text-xs text-slate-500 mt-2">Certified mentors guiding scholars across languages, sciences, mathematics, and arts.</p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                         {teachers.map(t => (
-                            <div key={t._id} className="bg-white p-6 border border-slate-200 rounded-sm hover-lift relative overflow-hidden group">
-                                <div className="absolute top-0 left-0 right-0 h-1 bg-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <h4 className="font-serif font-bold text-slate-900 text-sm mb-0.5 group-hover:text-blue-900 transition-colors">{t.name}</h4>
-                                <p className="text-xs font-bold text-[#c5a880] mb-2 uppercase tracking-wide">{t.subject}</p>
-                                {t.qualification && <p className="text-[11px] text-slate-500 mb-2">{t.qualification}</p>}
-                                <p className="text-[11px] text-slate-400 font-mono">{t.email}</p>
+                            <div key={t._id} className="card-minimal p-5 flex flex-col justify-between group">
+                                <div>
+                                    <h4 className="font-bold text-slate-900 text-sm mb-0.5 group-hover:text-blue-600 transition-colors">{t.name}</h4>
+                                    <p className="text-xs font-semibold text-blue-600 mb-2">{t.subject}</p>
+                                    {t.qualification && <p className="text-[11px] text-slate-500 mb-2">{t.qualification}</p>}
+                                </div>
+                                <p className="text-[11px] text-slate-400 font-mono pt-3 border-t border-slate-100">{t.email}</p>
                             </div>
                         ))}
                     </div>
@@ -245,23 +241,22 @@ const AboutPage = () => {
             {/* ==========================================
                 5. CHRONOLOGICAL MILESTONES
             ========================================== */}
-            <section className="py-24 bg-[#0b192c] text-white relative overflow-hidden">
-                <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-                <div className="max-w-5xl mx-auto px-6 sm:px-8 relative z-10">
-                    <div className="text-center max-w-xl mx-auto mb-16">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#c5a880] block mb-2">Historical Record</span>
-                        <h2 className="text-3xl font-serif font-bold text-white">Foundations & Milestones</h2>
+            <section className="py-20 bg-slate-950 text-white">
+                <div className="max-w-4xl mx-auto px-4 sm:px-8">
+                    <div className="text-center max-w-xl mx-auto mb-14">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 block mb-2">Historical Record</span>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white">Foundations & Milestones</h2>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {timeline.map((item, idx) => (
-                            <div key={idx} className="p-6 md:p-8 bg-[#07111e] border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6 hover-lift rounded-sm hover:border-[#c5a880]/40 transition-colors">
-                                <div className="text-2xl font-serif font-bold text-[#c5a880] md:w-32 shrink-0">
+                            <div key={idx} className="p-6 bg-slate-900 border border-slate-800 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-slate-700 transition-colors">
+                                <div className="text-2xl font-bold text-blue-400 md:w-28 shrink-0">
                                     {item.year}
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-serif font-bold text-white mb-1.5">{item.title}</h3>
-                                    <p className="text-xs text-slate-300 leading-relaxed">{item.desc}</p>
+                                    <h3 className="text-base font-bold text-white mb-1">{item.title}</h3>
+                                    <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
                                 </div>
                             </div>
                         ))}
