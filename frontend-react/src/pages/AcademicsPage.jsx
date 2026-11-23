@@ -35,6 +35,7 @@ const AcademicsPage = () => {
     // Filter and search states
     const [activeWing, setActiveWing] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
+    const [scheduleTab, setScheduleTab] = useState('weekdays'); // 'weekdays' | 'saturdays' | 'kindergarten'
     
     // Expanded classes state: default to expanding the first class
     const [expandedClasses, setExpandedClasses] = useState({
@@ -434,107 +435,144 @@ const AcademicsPage = () => {
 
             {/* DAILY BELL SCHEDULE & ROUTINE */}
             <section id="daily-routine" className="py-20 bg-slate-50/70 border-t border-b border-slate-200">
-                <div className="max-w-6xl mx-auto px-6 sm:px-8">
-                    <div className="text-center max-w-2xl mx-auto mb-14">
+                <div className="max-w-5xl mx-auto px-4 sm:px-8">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
                         <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
-                            Punctuality & Rhythm
+                            Punctuality & Routine
                         </span>
                         <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
                             Campus Bell Schedule
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-600 mt-2">
-                            A structured, harmonious academic timetable balancing mental rigor with recreation and nourishment.
+                            Select a schedule below to view periods, recesses, and specialized timings.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Regular Weekdays */}
-                        <div className="border border-slate-200 bg-white p-6 sm:p-8 rounded-xl shadow-xs">
-                            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
-                                <div>
-                                    <h3 className="font-bold text-base text-slate-900">Monday to Friday</h3>
-                                    <span className="text-xs text-slate-500">Full Academic Day (8 Periods)</span>
-                                </div>
-                                <Clock size={18} className="text-blue-600" />
-                            </div>
+                    {/* Interactive Schedule Tab Switcher */}
+                    <div className="flex justify-center mb-8">
+                        <div className="inline-flex p-1 bg-white border border-slate-200 rounded-lg shadow-2xs">
+                            <button
+                                onClick={() => setScheduleTab('weekdays')}
+                                className={`px-4 py-2 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                                    scheduleTab === 'weekdays'
+                                        ? 'bg-blue-600 text-white shadow-2xs'
+                                        : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                            >
+                                Monday – Friday (8 Periods)
+                            </button>
+                            <button
+                                onClick={() => setScheduleTab('saturdays')}
+                                className={`px-4 py-2 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                                    scheduleTab === 'saturdays'
+                                        ? 'bg-blue-600 text-white shadow-2xs'
+                                        : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                            >
+                                Saturday Half-Day & Clubs
+                            </button>
+                            <button
+                                onClick={() => setScheduleTab('kindergarten')}
+                                className={`px-4 py-2 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                                    scheduleTab === 'kindergarten'
+                                        ? 'bg-blue-600 text-white shadow-2xs'
+                                        : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                            >
+                                Pre-Primary Kindergarten
+                            </button>
+                        </div>
+                    </div>
 
-                            <div className="space-y-3 text-xs">
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                                    <span className="font-medium text-slate-700">08:30 AM – 08:45 AM</span>
+                    {/* Dynamic Schedule View */}
+                    <div className="card-minimal p-6 sm:p-8 bg-white max-w-3xl mx-auto">
+                        {scheduleTab === 'weekdays' && (
+                            <div className="space-y-3 text-xs animate-in fade-in duration-200">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                                    <div>
+                                        <h3 className="font-bold text-base text-slate-900">Monday to Friday Full-Day Schedule</h3>
+                                        <span className="text-xs text-slate-500">Classes I to XII • 8 Periods + Labs</span>
+                                    </div>
+                                    <Clock size={18} className="text-blue-600" />
+                                </div>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">08:30 AM – 08:45 AM</span>
                                     <span className="text-slate-900 font-semibold">Morning Assembly & Daily Prayer</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                                    <span className="font-medium text-slate-700">08:45 AM – 10:45 AM</span>
-                                    <span className="text-slate-600">Periods 1, 2 & 3 (Core Academics)</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">08:45 AM – 10:45 AM</span>
+                                    <span className="text-slate-800">Periods 1, 2 & 3 (Core Mathematics, Science & Languages)</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100 bg-slate-50 px-2 rounded-md">
-                                    <span className="font-medium text-slate-700">10:45 AM – 11:00 AM</span>
-                                    <span className="text-slate-900 font-semibold">Short Recess & Hydration</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100 bg-blue-50/50 px-2.5 rounded-md">
+                                    <span className="font-medium text-blue-700">10:45 AM – 11:00 AM</span>
+                                    <span className="text-blue-900 font-semibold">Short Recess & Nutrition</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                                    <span className="font-medium text-slate-700">11:00 AM – 01:00 PM</span>
-                                    <span className="text-slate-600">Periods 4, 5 & Laboratory Practical</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">11:00 AM – 01:00 PM</span>
+                                    <span className="text-slate-800">Periods 4, 5 & Composite Science Laboratory Practical</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100 bg-slate-50 px-2 rounded-md">
-                                    <span className="font-medium text-slate-700">01:00 PM – 01:45 PM</span>
-                                    <span className="text-slate-900 font-semibold">Lunch Break & Supervised Play</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100 bg-blue-50/50 px-2.5 rounded-md">
+                                    <span className="font-medium text-blue-700">01:00 PM – 01:45 PM</span>
+                                    <span className="text-blue-900 font-semibold">Lunch Recess & Supervised Recreation</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                                    <span className="font-medium text-slate-700">01:45 PM – 03:00 PM</span>
-                                    <span className="text-slate-600">Periods 6 & 7 (Languages & Social Sciences)</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">01:45 PM – 03:00 PM</span>
+                                    <span className="text-slate-800">Periods 6 & 7 (Social Sciences, Computers & Second Language)</span>
                                 </div>
-                                <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                                    <span className="font-medium text-slate-700">03:00 PM – 03:45 PM</span>
-                                    <span className="text-slate-600">Period 8 (Sports, Arts & Remedial Clinic)</span>
+                                <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">03:00 PM – 03:45 PM</span>
+                                    <span className="text-slate-800">Period 8 (Sports, Arts, Clubs & Remedial Doubt Clinics)</span>
                                 </div>
-                                <div className="flex justify-between items-center pt-1.5 font-semibold text-slate-900">
+                                <div className="flex justify-between items-center pt-2 font-semibold text-slate-900">
                                     <span>03:45 PM</span>
-                                    <span>National Anthem & Orderly Dispersal</span>
+                                    <span className="text-blue-600">National Anthem & Orderly Bus Dispersal</span>
                                 </div>
                             </div>
-                        </div>
+                        )}
 
-                        {/* Saturdays & Pre-Primary */}
-                        <div className="space-y-6">
-                            {/* Saturday Uniform Timing */}
-                            <div className="border border-slate-200 bg-white p-6 rounded-xl shadow-xs">
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+                        {scheduleTab === 'saturdays' && (
+                            <div className="space-y-3 text-xs animate-in fade-in duration-200">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                                     <div>
-                                        <h3 className="font-bold text-base text-slate-900">Saturday Schedule</h3>
-                                        <span className="text-[11px] text-slate-500">Board Mandated Half-Day</span>
+                                        <h3 className="font-bold text-base text-slate-900">Saturday Mandated Half-Day</h3>
+                                        <span className="text-xs text-slate-500">Remedial Clinics, House Tournaments & Clubs</span>
                                     </div>
                                     <Calendar size={18} className="text-blue-600" />
                                 </div>
-                                <div className="space-y-2.5 text-xs text-slate-600">
-                                    <div className="flex justify-between py-1 border-b border-slate-100">
-                                        <span className="font-medium text-slate-700">08:30 AM – 10:30 AM</span>
-                                        <span>Assembly & Remedial Teaching / Quizzes</span>
-                                    </div>
-                                    <div className="flex justify-between py-1 border-b border-slate-100">
-                                        <span className="font-medium text-slate-700">10:30 AM – 12:30 PM</span>
-                                        <span>House Competitions, Sports & Clubs</span>
-                                    </div>
-                                    <div className="flex justify-between pt-1 font-semibold text-slate-900">
-                                        <span>12:30 PM</span>
-                                        <span>Weekend Dispersal</span>
-                                    </div>
+                                <div className="flex justify-between items-center py-2.5 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">08:30 AM – 10:30 AM</span>
+                                    <span className="text-slate-900 font-semibold">Assembly, Quiz Contests & Board Remedial Coaching</span>
+                                </div>
+                                <div className="flex justify-between items-center py-2.5 border-b border-slate-100">
+                                    <span className="font-medium text-slate-600">10:30 AM – 12:30 PM</span>
+                                    <span className="text-slate-900 font-semibold">Inter-House Sports, Drama, Debate & Robotics Clubs</span>
+                                </div>
+                                <div className="flex justify-between items-center pt-2.5 font-semibold text-slate-900">
+                                    <span>12:30 PM</span>
+                                    <span className="text-blue-600">Weekend Home Dispersal</span>
                                 </div>
                             </div>
+                        )}
 
-                            {/* Pre-Primary Notice */}
-                            <div className="border border-slate-200 bg-white p-6 rounded-xl shadow-xs">
-                                <h3 className="font-bold text-sm text-slate-900 mb-1.5">
-                                    Pre-Primary Timings (Nursery to UKG)
-                                </h3>
-                                <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                                    To protect early childhood biological rhythms, Pre-Primary operates on a specialized schedule: 
-                                    <strong> 08:45 AM – 12:30 PM (Monday to Friday)</strong>. Saturdays are observed as a complete home holiday for kindergarten scholars.
+                        {scheduleTab === 'kindergarten' && (
+                            <div className="space-y-4 text-xs animate-in fade-in duration-200">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                                    <div>
+                                        <h3 className="font-bold text-base text-slate-900">Pre-Primary (Nursery, LKG, UKG)</h3>
+                                        <span className="text-xs text-slate-500">Child-Centric Early Dismissal Routine</span>
+                                    </div>
+                                    <Clock size={18} className="text-blue-600" />
+                                </div>
+                                <p className="text-slate-600 leading-relaxed">
+                                    To protect early childhood biological rhythms, kindergarten operates on a specialized schedule: 
+                                    <strong className="text-slate-900"> 08:45 AM – 12:30 PM (Monday to Friday)</strong>. Saturdays are observed as a complete home holiday.
                                 </p>
-                                <span className="text-[11px] text-blue-600 font-medium block">
-                                    Dedicated school van transport available for early dismissal.
-                                </span>
+                                <div className="p-3.5 bg-blue-50/60 border border-blue-200 rounded-lg text-blue-900">
+                                    <span className="font-semibold block mb-1">Dedicated Transport:</span>
+                                    School vans are routed specifically for 12:30 PM early dismissal with on-board female attendants.
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </section>

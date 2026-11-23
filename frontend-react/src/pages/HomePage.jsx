@@ -13,11 +13,14 @@ import {
     Compass,
     Award,
     MapPin,
-    Users,
-    ChevronDown
+    Users
 } from 'lucide-react';
 import heroBg from '../assets/theageheader.jpg';
 import { useSiteContent } from '../context/ContentContext';
+import GradeFinder from '../components/GradeFinder';
+import CampusFacilitySwitcher from '../components/CampusFacilitySwitcher';
+import TestimonialsSlider from '../components/TestimonialsSlider';
+import FaqAccordion from '../components/FaqAccordion';
 
 const API_BASE_URL = '/api';
 
@@ -219,7 +222,6 @@ const HomePage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                         
-                        {/* 1. Students */}
                         <div className="card-minimal p-6">
                             <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
                                 {home.statsStudents || '500+'}
@@ -232,7 +234,6 @@ const HomePage = () => {
                             </span>
                         </div>
 
-                        {/* 2. Board Record */}
                         <div className="card-minimal p-6">
                             <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
                                 {home.statsPassRate || '100%'}
@@ -245,7 +246,6 @@ const HomePage = () => {
                             </span>
                         </div>
 
-                        {/* 3. Faculty */}
                         <div className="card-minimal p-6">
                             <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
                                 {home.statsFaculty || '35+'}
@@ -258,7 +258,6 @@ const HomePage = () => {
                             </span>
                         </div>
 
-                        {/* 4. Years */}
                         <div className="card-minimal p-6">
                             <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
                                 {home.statsYears || '12+'}
@@ -276,7 +275,12 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                3. PRINCIPLES OF EXCELLENCE (4 Pillars)
+                3. INTERACTIVE GRADE & CURRICULUM FINDER
+            ========================================== */}
+            <GradeFinder />
+
+            {/* ==========================================
+                4. PRINCIPLES OF EXCELLENCE (4 Pillars)
             ========================================== */}
             <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="max-w-2xl mb-12 sm:mb-16">
@@ -346,7 +350,7 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                4. ACADEMIC WINGS & CLASS STRUCTURE
+                5. ACADEMIC WINGS & CLASS STRUCTURE
             ========================================== */}
             <section className="py-20 bg-slate-50/70 border-y border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -462,7 +466,12 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                5. CAMPUS MOMENTS (Clean Showcase)
+                6. INTERACTIVE CAMPUS FACILITIES SWITCHER
+            ========================================== */}
+            <CampusFacilitySwitcher />
+
+            {/* ==========================================
+                7. CAMPUS MOMENTS (Clean Showcase)
             ========================================== */}
             <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="flex justify-between items-end mb-8 sm:mb-12">
@@ -527,7 +536,17 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                6. DISPATCHES & CALENDAR (Clean Slate Split)
+                8. INTERACTIVE TESTIMONIALS SLIDER
+            ========================================== */}
+            <TestimonialsSlider />
+
+            {/* ==========================================
+                9. INTERACTIVE FAQ ACCORDION
+            ========================================== */}
+            <FaqAccordion />
+
+            {/* ==========================================
+                10. DISPATCHES & CALENDAR (Clean Slate Split)
             ========================================== */}
             <section className="py-20 bg-slate-50/70 border-t border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">

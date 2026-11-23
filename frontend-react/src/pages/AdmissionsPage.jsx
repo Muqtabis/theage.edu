@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
     Calendar, 
@@ -10,19 +10,42 @@ import {
     GraduationCap,
     Award,
     Sparkles,
-    ShieldCheck
+    ShieldCheck,
+    CheckSquare,
+    Square
 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
+
+const initialDocs = [
+    { id: 'birth', text: 'Official Birth Certificate issued by Municipal Corporation or Gram Panchayat.' },
+    { id: 'tc', text: 'Original Transfer Certificate (TC) counter-signed by BEO/DDPI (for Class 2 onwards).' },
+    { id: 'report', text: 'Cumulative Record / Progress Report card of previous academic year.' },
+    { id: 'photos', text: '4 Passport-sized colored photographs of scholar and 2 photographs of parents.' },
+    { id: 'aadhaar', text: 'Photocopy of Aadhaar Card of scholar and parents / legal guardians.' }
+];
 
 const AdmissionsPage = () => {
     const { content } = useSiteContent();
     const admissions = content?.admissions || {};
     const general = content?.general || {};
 
-    const fees = Array.isArray(admissions.fees) && admissions.fees.length > 0 ? admissions.fees : [
-        { grade: 'Primary School Wing', range: 'Classes I to V', annual: '15,000', materials: '₹ 3,500', highlight: false },
-        { grade: 'Middle School Wing', range: 'Classes VI to VIII', annual: '18,000', materials: '₹ 4,000', highlight: true },
-        { grade: 'Secondary School (SSLC)', range: 'Classes IX & X', annual: '25,000', materials: '₹ 5,000', highlight: false }
+    const [billingCycle, setBillingCycle] = useState('annual'); // 'annual' | 'quarterly'
+    const [checkedDocs, setCheckedDocs] = useState({ birth: true, aadhaar: true });
+
+    const toggleDoc = (id) => {
+        setCheckedDocs(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    };
+
+    const readyCount = Object.values(checkedDocs).filter(Boolean).length;
+    const progressPercent = Math.round((readyCount / initialDocs.length) * 100);
+
+    const baseFees = Array.isArray(admissions.fees) && admissions.fees.length > 0 ? admissions.fees : [
+        { grade: 'Primary School Wing', range: 'Classes I to V', annual: '15,000', numericAnnual: 15000, materials: '₹ 3,500', highlight: false },
+        { grade: 'Middle School Wing', range: 'Classes VI to VIII', annual: '18,000', numericAnnual: 18000, materials: '₹ 4,000', highlight: true },
+        { grade: 'Secondary School (SSLC)', range: 'Classes IX & X', annual: '25,000', numericAnnual: 25000, materials: '₹ 5,000', highlight: false }
     ];
 
     return (
@@ -99,91 +122,128 @@ const AdmissionsPage = () => {
                 </div>
             </section>
 
-            {/* TUITION & FEE SCHEDULE */}
+            {/* TUITION & FEE SCHEDULE WITH INTERACTIVE BILLING FREQUENCY TOGGLE */}
             <section className="py-16 sm:py-20 bg-slate-50/70 border-y border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="max-w-2xl mb-12 sm:mb-14">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
-                            Institutional Value
-                        </span>
-                        <h2 className="text-3xl font-bold text-slate-900">Fee Schedule (Session 2026–27)</h2>
-                        <p className="text-xs sm:text-sm text-slate-600 mt-2">Transparent institutional rates without hidden surcharges or capitation fees.</p>
+                    
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                        <div>
+                            <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
+                                Institutional Value
+                            </span>
+                            <h2 className="text-3xl font-bold text-slate-900">Fee Schedule (Session 2026–27)</h2>
+                            <p className="text-xs sm:text-sm text-slate-600 mt-2">Transparent institutional rates without hidden surcharges or capitation fees.</p>
+                        </div>
+
+                        {/* Interactive Billing Frequency Selector */}
+                        <div className="inline-flex p-1 bg-white border border-slate-200 rounded-lg shadow-2xs self-start md:self-auto">
+                            <button
+                                onClick={() => setBillingCycle('annual')}
+                                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                                    billingCycle === 'annual'
+                                        ? 'bg-blue-600 text-white shadow-2xs'
+                                        : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                            >
+                                Annual Plan (1x)
+                            </button>
+                            <button
+                                onClick={() => setBillingCycle('quarterly')}
+                                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                                    billingCycle === 'quarterly'
+                                        ? 'bg-blue-600 text-white shadow-2xs'
+                                        : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                            >
+                                Quarterly Installments (4x)
+                            </button>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-                        {fees.map((f, i) => (
-                            <div 
-                                key={i} 
-                                className={`card-minimal p-6 sm:p-8 flex flex-col justify-between relative ${
-                                    f.highlight 
-                                        ? 'border-blue-600 ring-1 ring-blue-600/30 shadow-md' 
-                                        : 'border-slate-200'
-                                }`}
-                            >
-                                {f.highlight && (
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-2xs">
-                                        Most Popular Tier
-                                    </div>
-                                )}
-                                <div>
-                                    <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 block mb-1">
-                                        {f.range}
-                                    </span>
-                                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">{f.grade}</h3>
+                        {baseFees.map((f, i) => {
+                            const rawAmount = f.numericAnnual || parseInt(String(f.annual).replace(/[^0-9]/g, '')) || 15000;
+                            const displayAmount = billingCycle === 'annual' 
+                                ? rawAmount.toLocaleString('en-IN')
+                                : Math.round(rawAmount / 4).toLocaleString('en-IN');
+                            const cycleLabel = billingCycle === 'annual' ? 'Per Academic Year' : 'Per Quarter (4 Installments)';
 
-                                    <div className="pb-6 mb-6 border-b border-slate-100">
-                                        <span className="text-3xl sm:text-4xl font-bold text-slate-900 block">
-                                            ₹ {f.annual}
-                                        </span>
-                                        <span className="text-xs text-slate-500 block mt-1">
-                                            Annual Academic Tuition
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-3 mb-8 text-xs text-slate-600">
-                                        <div className="flex items-center gap-2.5">
-                                            <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                                <Check size={11} strokeWidth={2.5} />
-                                            </span>
-                                            <span>Curricular Materials & Library: <strong>{f.materials}</strong></span>
-                                        </div>
-                                        <div className="flex items-center gap-2.5">
-                                            <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                                <Check size={11} strokeWidth={2.5} />
-                                            </span>
-                                            <span>Composite Science & STEM Lab Access</span>
-                                        </div>
-                                        <div className="flex items-center gap-2.5">
-                                            <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                                <Check size={11} strokeWidth={2.5} />
-                                            </span>
-                                            <span>Smart Interactive Digital Classroom</span>
-                                        </div>
-                                        <div className="flex items-center gap-2.5">
-                                            <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                                <Check size={11} strokeWidth={2.5} />
-                                            </span>
-                                            <span>Physical Education, Sports & Games</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <Link
-                                    to="/contact"
-                                    className={`w-full py-2.5 text-center text-xs font-semibold rounded-lg block transition-colors ${
+                            return (
+                                <div 
+                                    key={i} 
+                                    className={`card-minimal p-6 sm:p-8 flex flex-col justify-between relative ${
                                         f.highlight 
-                                            ? 'btn-primary justify-center' 
-                                            : 'btn-secondary justify-center'
+                                            ? 'border-blue-600 ring-1 ring-blue-600/30 shadow-md' 
+                                            : 'border-slate-200'
                                     }`}
                                 >
-                                    Inquire for Enrollment
-                                </Link>
-                            </div>
-                        ))}
+                                    {f.highlight && (
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-2xs">
+                                            Most Popular Tier
+                                        </div>
+                                    )}
+                                    <div>
+                                        <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 block mb-1">
+                                            {f.range}
+                                        </span>
+                                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">{f.grade}</h3>
+
+                                        <div className="pb-6 mb-6 border-b border-slate-100">
+                                            <span className="text-3xl sm:text-4xl font-bold text-slate-900 block transition-all">
+                                                ₹ {displayAmount}
+                                            </span>
+                                            <span className="text-xs text-slate-500 block mt-1">
+                                                {cycleLabel}
+                                            </span>
+                                        </div>
+
+                                        <div className="space-y-3 mb-8 text-xs text-slate-600">
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                                    <Check size={11} strokeWidth={2.5} />
+                                                </span>
+                                                <span>Curricular Materials & Library: <strong>{f.materials}</strong></span>
+                                            </div>
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                                    <Check size={11} strokeWidth={2.5} />
+                                                </span>
+                                                <span>Composite Science & STEM Lab Access</span>
+                                            </div>
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                                    <Check size={11} strokeWidth={2.5} />
+                                                </span>
+                                                <span>Smart Interactive Digital Classroom</span>
+                                            </div>
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                                    <Check size={11} strokeWidth={2.5} />
+                                                </span>
+                                                <span>Physical Education, Sports & Games</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <Link
+                                        to="/contact"
+                                        className={`w-full py-2.5 text-center text-xs font-semibold rounded-lg block transition-colors ${
+                                            f.highlight 
+                                                ? 'btn-primary justify-center' 
+                                                : 'btn-secondary justify-center'
+                                        }`}
+                                    >
+                                        Inquire for Enrollment
+                                    </Link>
+                                </div>
+                            );
+                        })}
                     </div>
 
-                    {/* AGE ELIGIBILITY & DOCUMENTATION REQUIREMENTS */}
+                    {/* AGE ELIGIBILITY & INTERACTIVE DOCUMENT CHECKLIST */}
                     <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        {/* Age Eligibility */}
                         <div className="card-minimal p-6 sm:p-8">
                             <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-600 block mb-1">
                                 Statutory Compliance
@@ -219,36 +279,63 @@ const AdmissionsPage = () => {
                             </div>
                         </div>
 
+                        {/* Interactive Document Readiness Tracker */}
                         <div className="card-minimal p-6 sm:p-8">
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-600 block mb-1">
-                                Verification Checklist
-                            </span>
-                            <h4 className="font-bold text-base sm:text-lg text-slate-900 mb-3">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-600 block">
+                                    Interactive Checklist
+                                </span>
+                                <span className="text-xs font-semibold text-slate-700">
+                                    {readyCount} of {initialDocs.length} Ready ({progressPercent}%)
+                                </span>
+                            </div>
+
+                            <h4 className="font-bold text-base sm:text-lg text-slate-900 mb-2">
                                 Required Documents for Admission
                             </h4>
-                            <ul className="space-y-2 text-xs text-slate-700">
-                                <li className="flex items-start gap-2">
-                                    <Check size={13} className="text-blue-600 shrink-0 mt-0.5" />
-                                    <span>Official Birth Certificate issued by Municipal Corporation or Gram Panchayat.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <Check size={13} className="text-blue-600 shrink-0 mt-0.5" />
-                                    <span>Original Transfer Certificate (TC) counter-signed by BEO/DDPI (for Class 2 onwards).</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <Check size={13} className="text-blue-600 shrink-0 mt-0.5" />
-                                    <span>Cumulative Record / Progress Report card of previous academic year.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <Check size={13} className="text-blue-600 shrink-0 mt-0.5" />
-                                    <span>4 Passport-sized colored photographs of scholar and 2 photographs of parents.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <Check size={13} className="text-blue-600 shrink-0 mt-0.5" />
-                                    <span>Photocopy of Aadhaar Card of scholar and parents / legal guardians.</span>
-                                </li>
-                            </ul>
+
+                            {/* Progress Bar */}
+                            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-4">
+                                <div 
+                                    className="bg-blue-600 h-full transition-all duration-300 rounded-full"
+                                    style={{ width: `${progressPercent}%` }}
+                                />
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 mb-3">
+                                Tap each document below to verify what you currently have ready:
+                            </p>
+
+                            <div className="space-y-2">
+                                {initialDocs.map((doc) => {
+                                    const isDone = !!checkedDocs[doc.id];
+                                    return (
+                                        <button
+                                            key={doc.id}
+                                            type="button"
+                                            onClick={() => toggleDoc(doc.id)}
+                                            className={`w-full text-left p-2.5 rounded-lg border text-xs flex items-start gap-2.5 transition-colors cursor-pointer ${
+                                                isDone
+                                                    ? 'bg-blue-50/60 border-blue-200 text-slate-900'
+                                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                                            }`}
+                                        >
+                                            <span className={`w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 border ${
+                                                isDone 
+                                                    ? 'bg-blue-600 border-blue-600 text-white' 
+                                                    : 'border-slate-300 bg-white'
+                                            }`}>
+                                                {isDone && <Check size={11} strokeWidth={3} />}
+                                            </span>
+                                            <span className={isDone ? 'font-medium' : 'font-normal'}>
+                                                {doc.text}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
                         </div>
+
                     </div>
 
                     {/* Financial Assistance Note */}
