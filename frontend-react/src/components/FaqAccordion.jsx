@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
+import { ChevronDown, HelpCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const faqItems = [
@@ -37,20 +37,20 @@ const FaqAccordion = () => {
     };
 
     return (
-        <section className="py-20 bg-white border-b border-slate-200/80">
+        <section className="py-20 sm:py-28 bg-white border-b border-[#e8e4dc]">
             <div className="max-w-4xl mx-auto px-4 sm:px-8">
                 
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2 flex items-center justify-center gap-1.5">
-                        <HelpCircle size={14} />
-                        Common Inquiries
+                    <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center justify-center gap-1.5">
+                        <HelpCircle size={14} className="text-[#c5a880]" />
+                        Admissions Guidance
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c] tracking-tight">
                         Frequently Asked Questions
                     </h2>
                     <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-lg mx-auto leading-relaxed">
-                        Find clear answers to key institutional policies, admission dates, transport safety, and academic methodology.
+                        Clear institutional answers regarding admissions criteria, safe bus transport, curriculum rigor, and campus daily rhythms.
                     </p>
                 </div>
 
@@ -63,8 +63,8 @@ const FaqAccordion = () => {
                                 key={idx}
                                 className={`border transition-all duration-200 rounded-xl overflow-hidden ${
                                     isOpen 
-                                        ? 'border-blue-600 bg-slate-50/50 shadow-xs' 
-                                        : 'border-slate-200 bg-white hover:border-slate-300'
+                                        ? 'border-[#c5a880] bg-[#faf8f5] shadow-xs' 
+                                        : 'border-[#e8e4dc] bg-white hover:border-[#c5a880]/60'
                                 }`}
                             >
                                 <button
@@ -72,18 +72,18 @@ const FaqAccordion = () => {
                                     className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                                     aria-expanded={isOpen}
                                 >
-                                    <span className="font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                    <span className="font-serif font-bold text-sm sm:text-base text-[#0b192c] leading-snug">
                                         {item.q}
                                     </span>
                                     <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                                        isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-600'
+                                        isOpen ? 'bg-[#c5a880] text-[#071322] rotate-180' : 'bg-slate-100 text-slate-600'
                                     }`}>
                                         <ChevronDown size={14} />
                                     </span>
                                 </button>
 
                                 {isOpen && (
-                                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 animate-in fade-in duration-200">
+                                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-[#e8e4dc]/70">
                                         {item.a}
                                     </div>
                                 )}
@@ -92,13 +92,13 @@ const FaqAccordion = () => {
                     })}
                 </div>
 
-                {/* Still Have Questions CTA */}
-                <div className="mt-12 p-6 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                {/* Direct Action */}
+                <div className="mt-12 p-6 sm:p-8 rounded-xl border border-[#c5a880]/40 bg-[#faf8f5] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-2xs">
                     <div>
-                        <h4 className="font-bold text-sm text-slate-900">Have a specific admission question?</h4>
-                        <p className="text-xs text-slate-500 mt-0.5">Our admissions counselor is available Monday through Saturday from 08:30 to 16:30 IST.</p>
+                        <h4 className="font-serif font-bold text-base text-[#0b192c]">Have a specific enrollment inquiry?</h4>
+                        <p className="text-xs text-slate-600 mt-1">Our admissions desk is available Monday through Saturday from 08:30 to 16:30 IST.</p>
                     </div>
-                    <Link to="/contact" className="btn-primary text-xs shrink-0">
+                    <Link to="/contact" className="btn-gold text-xs shrink-0">
                         <span>Contact Admissions Desk</span>
                         <ArrowRight size={13} />
                     </Link>

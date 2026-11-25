@@ -1,8 +1,8 @@
 /* =========================================
-   APPLE-STYLE MINIMALIST TECH-CAMPUS PALETTE
-   Monochrome Slate + Crisp White + Electric Blue Accent
+   THE AGE SCHOOL — PRESTIGIOUS ACADEMIC IDENTITY
+   Oxford Royal Navy (#0b192c) + Antique Burnished Gold (#c5a880) + Pure Alabaster (#faf8f5)
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,14 +12,14 @@
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     scroll-behavior: smooth;
-    color: #0f172a;
-    background-color: #ffffff;
+    color: #0b192c;
+    background-color: #faf8f5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4 {
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 
   .font-serif {
@@ -29,86 +29,154 @@
 }
 
 /* =========================================
-   CLEAN UTILITY & INTERACTIVE CLASSES
+   PRESTIGIOUS ACADEMIC BUTTONS & UTILITIES
    ========================================= */
 
-/* Primary Electric Blue CTA with Subtle Shimmer */
+/* Burnished Antique Gold CTA */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #c5a880 0%, #b89058 100%);
+  color: #071322;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px -2px rgba(197, 168, 128, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-gold:hover {
+  background: linear-gradient(135deg, #d4b890 0%, #c5a880 100%);
+  box-shadow: 0 8px 24px -4px rgba(197, 168, 128, 0.6);
+  transform: translateY(-2px);
+}
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Royal Oxford Navy Primary */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #2563eb;
+  background-color: #0b192c;
   color: #ffffff;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px 0 rgba(37, 99, 235, 0.25), 0 1px 2px -1px rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  box-shadow: 0 4px 12px -2px rgba(11, 25, 44, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 .btn-primary:hover {
-  background-color: #1d4ed8;
-  box-shadow: 0 6px 20px -2px rgba(37, 99, 235, 0.35);
-  transform: translateY(-1.5px);
+  background-color: #122744;
+  border-color: #c5a880;
+  box-shadow: 0 8px 20px -2px rgba(11, 25, 44, 0.5);
+  transform: translateY(-2px);
 }
 .btn-primary:active {
   transform: translateY(0);
 }
 
-/* Secondary Slate Outline Button */
+/* Frosted Glass Hero CTA */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.btn-glass:active {
+  transform: translateY(0);
+}
+
+/* Clean Outline Button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   background-color: #ffffff;
-  color: #0f172a;
+  color: #0b192c;
   border: 1px solid #e2e8f0;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.65rem 1.25rem;
   border-radius: 0.5rem;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
 }
 .btn-secondary:hover {
-  background-color: #f8fafc;
-  border-color: #94a3b8;
-  color: #0284c7;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px 0 rgba(15, 23, 42, 0.06);
-}
-.btn-secondary:active {
-  transform: translateY(0);
+  background-color: #faf8f5;
+  border-color: #c5a880;
+  color: #8c7355;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(11, 25, 44, 0.06);
 }
 
-/* Tactile Minimal Card with Smooth Hover Glow */
-.card-minimal {
+/* Academic Heritage Card */
+.academic-card {
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(197, 168, 128, 0.25);
   border-radius: 0.75rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px -2px rgba(11, 25, 44, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+.academic-card:hover {
+  border-color: #c5a880;
+  box-shadow: 0 16px 32px -8px rgba(11, 25, 44, 0.09), 0 4px 12px -2px rgba(197, 168, 128, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Legacy Card Minimal */
+.card-minimal {
+  background-color: #ffffff;
+  border: 1px solid #e8e4dc;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
 }
 .card-minimal:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.06), 0 8px 12px -6px rgba(15, 23, 42, 0.03);
+  border-color: #c5a880;
+  box-shadow: 0 12px 28px -6px rgba(11, 25, 44, 0.06);
   transform: translateY(-2px);
 }
 
-/* Interactive Spotlight Card (Hover Glow Accent) */
+/* Card Interactive (Hover Spotlight) */
 .card-interactive {
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
+  border: 1px solid rgba(197, 168, 128, 0.25);
+  border-radius: 0.875rem;
   position: relative;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-interactive:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 16px 36px -8px rgba(37, 99, 235, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  border-color: #c5a880;
+  box-shadow: 0 16px 36px -8px rgba(11, 25, 44, 0.1), 0 4px 16px -2px rgba(197, 168, 128, 0.2);
   transform: translateY(-3px);
 }
 
@@ -118,63 +186,10 @@
   border-radius: inherit;
 }
 .img-zoom-box img {
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .img-zoom-box:hover img {
-  transform: scale(1.04);
-}
-
-/* Custom Interactive Range Slider */
-.slider-custom {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  border-radius: 9999px;
-  background: #e2e8f0;
-  outline: none;
-  transition: background 0.2s;
-}
-.slider-custom::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #2563eb;
-  border: 3px solid #ffffff;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.slider-custom::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.55);
-}
-.slider-custom::-webkit-slider-thumb:active {
   transform: scale(1.05);
-}
-.slider-custom::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #2563eb;
-  border: 3px solid #ffffff;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-/* Mobile Horizontal Snap Container */
-.snap-scroll-x {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-.snap-scroll-x > * {
-  scroll-snap-align: start;
-  flex-shrink: 0;
 }
 
 /* Subtle Scrollbar */
@@ -183,14 +198,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f8fafc; 
+  background: #faf8f5; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d4cfc7;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #c5a880;
 }
 
 html, body {

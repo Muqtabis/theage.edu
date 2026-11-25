@@ -13,16 +13,18 @@ import {
     Compass,
     Award,
     MapPin,
-    Users
+    Users,
+    Sparkles
 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import InteractiveHeroSlider from '../components/InteractiveHeroSlider';
+import HeadmasterWelcome from '../components/HeadmasterWelcome';
 import AnimatedStatCounter from '../components/AnimatedStatCounter';
-import TuitionRangeSlider from '../components/TuitionRangeSlider';
 import GradeFinder from '../components/GradeFinder';
 import CampusFacilitySwitcher from '../components/CampusFacilitySwitcher';
 import TestimonialsSlider from '../components/TestimonialsSlider';
 import FaqAccordion from '../components/FaqAccordion';
+import QuickInquiryModal from '../components/QuickInquiryModal';
 
 const API_BASE_URL = '/api';
 
@@ -36,6 +38,7 @@ const HomePage = () => {
     const [slideshowPhotos, setSlideshowPhotos] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isGalleryLoading, setIsGalleryLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -107,31 +110,32 @@ const HomePage = () => {
     const prevSlide = () => setCurrentIndex(prev => (prev - 1 + slideshowPhotos.length) % Math.max(1, slideshowPhotos.length));
 
     return (
-        <div className="font-sans text-slate-800 bg-white selection:bg-blue-600 selection:text-white">
+        <div className="font-sans text-[#0b192c] bg-[#faf8f5] selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
             
             {/* ==========================================
-                1. INTERACTIVE MULTI-SLIDE HERO
+                1. FULL-WIDTH CINEMATIC HERO SLIDER
             ========================================== */}
             <InteractiveHeroSlider 
                 admissionsBadge={home.heroBadge || general.admissionsBadge} 
+                onOpenModal={() => setIsModalOpen(true)}
             />
 
             {/* ==========================================
-                OFFICIAL NOTICE TICKER (Sleek Slate Strip)
+                OFFICIAL NOTICE MARQUEE TICKER
             ========================================== */}
-            <div className="bg-slate-50 border-b border-slate-200 py-3 px-4 sm:px-8">
+            <div className="bg-[#0b192c] text-white py-3 px-4 sm:px-8 border-b border-[#c5a880]/30">
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
-                        <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 bg-slate-900 text-white rounded-full">
-                            Official Notice
+                        <span className="shrink-0 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 bg-[#c5a880] text-[#071322] rounded-full">
+                            OFFICIAL GAZETTE
                         </span>
-                        <p className="text-xs font-medium text-slate-700 truncate">
+                        <p className="text-xs font-medium text-slate-200 truncate">
                             {general.noticeMarquee || 'ADMISSIONS OPEN FOR SESSION 2026-2027: Pre-Nursery to Grade XII (Science & Commerce) • Schedule Campus Tour'}
                         </p>
                     </div>
                     <Link 
                         to="/news" 
-                        className="shrink-0 text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
+                        className="shrink-0 text-xs font-bold text-[#c5a880] hover:text-white flex items-center gap-1 group"
                     >
                         <span>Official Gazette</span>
                         <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
@@ -140,33 +144,29 @@ const HomePage = () => {
             </div>
 
             {/* ==========================================
-                2. ANIMATED STATS COUNTER WITH HOVER INSIGHTS
+                2. HEADMASTER WELCOME (THE ACADEMIC SOUL)
+            ========================================== */}
+            <HeadmasterWelcome />
+
+            {/* ==========================================
+                3. ANIMATED METRICS BANNER
             ========================================== */}
             <AnimatedStatCounter />
 
             {/* ==========================================
-                3. INTERACTIVE GRADE RANGE SLIDER
+                4. INSTITUTIONAL PHILOSOPHY & PILLARS
             ========================================== */}
-            <TuitionRangeSlider />
-
-            {/* ==========================================
-                4. INTERACTIVE GRADE & CURRICULUM FINDER
-            ========================================== */}
-            <GradeFinder />
-
-            {/* ==========================================
-                5. PRINCIPLES OF EXCELLENCE (4 Pillars with Hover Glow)
-            ========================================== */}
-            <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="max-w-2xl mb-12 sm:mb-16">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
-                        Institutional Philosophy
+            <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="max-w-2xl mb-14">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center gap-1.5">
+                        <Sparkles size={14} className="text-[#c5a880]" />
+                        Pillars of Excellence
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-                        A Framework Built on Academic Rigor & Ethical Bearing.
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#0b192c] tracking-tight">
+                        A Framework Built on Academic Supremacy & Moral Bearing.
                     </h2>
                     <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-3">
-                        We blend disciplined scholarship with progressive inquiry, ensuring students master foundational knowledge while developing independent critical thinking.
+                        We balance disciplined scholarship with creative inquiry, ensuring students master foundational concepts while developing independent critical judgment.
                     </p>
                 </div>
 
@@ -201,22 +201,22 @@ const HomePage = () => {
                         return (
                             <div 
                                 key={pi} 
-                                className="card-interactive p-6 sm:p-7 flex flex-col justify-between group cursor-default"
+                                className="academic-card p-6 sm:p-7 flex flex-col justify-between group cursor-default"
                             >
                                 <div>
-                                    <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
-                                        <Icon size={20} strokeWidth={2} />
+                                    <div className="w-11 h-11 rounded-lg bg-[#0b192c] text-[#c5a880] flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform">
+                                        <Icon size={22} strokeWidth={2} />
                                     </div>
-                                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">
+                                    <h3 className="text-lg font-serif font-bold text-[#0b192c] group-hover:text-[#8c7355] transition-colors mb-2.5">
                                         {pillar.title}
                                     </h3>
                                     <p className="text-xs text-slate-600 leading-relaxed">
                                         {pillar.desc}
                                     </p>
                                 </div>
-                                <div className="pt-6 mt-6 border-t border-slate-100 text-[11px] font-medium text-slate-500 flex items-center justify-between">
-                                    <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">{pillar.tag}</span>
-                                    <ArrowRight size={13} className="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                                <div className="pt-6 mt-6 border-t border-[#e8e4dc] text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                                    <span className="px-2.5 py-0.5 rounded-md bg-[#faf8f5] text-[#0b192c] border border-[#e8e4dc]">{pillar.tag}</span>
+                                    <ArrowRight size={13} className="text-[#c5a880] group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>
                         );
@@ -225,114 +225,70 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                6. ACADEMIC WINGS & CLASS STRUCTURE
+                5. INTERACTIVE ALL 17 CLASSES EXPLORER
             ========================================== */}
-            <section className="py-20 bg-slate-50/70 border-y border-slate-200/80">
+            <GradeFinder />
+
+            {/* ==========================================
+                6. INTERACTIVE CAMPUS FACILITIES SHOWCASE
+            ========================================== */}
+            <CampusFacilitySwitcher onOpenModal={() => setIsModalOpen(true)} />
+
+            {/* ==========================================
+                7. THE FOUR HOUSES SYSTEM
+            ========================================== */}
+            <section className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                        <div>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
-                                Academic Progression
-                            </span>
-                            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                                Progressive Class Structures & Wings
-                            </h2>
-                            <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-2xl leading-relaxed">
-                                Every single grade—from early childhood playgroup to SSLC board examinations and pre-university science & commerce—is structured with specialized pedagogy.
-                            </p>
-                        </div>
-                        <Link 
-                            to="/academics" 
-                            className="btn-primary self-start md:self-auto text-xs"
-                        >
-                            <span>Open Detailed Class Directory</span>
-                            <ArrowRight size={13} />
-                        </Link>
+                    <div className="max-w-2xl mb-12">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2">
+                            House Tradition
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c]">
+                            The Four Houses System
+                        </h2>
+                        <p className="text-xs sm:text-sm text-slate-600 mt-2">
+                            Every scholar is initiated into one of our four institutional houses, fostering healthy competition, leadership, and lifelong fellowship.
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
                             { 
-                                wing: "Pre-Primary Wing (ECCE)", 
-                                age: "Ages 2.5 to 6 Years", 
-                                classes: ["Playgroup", "Nursery", "Lower KG (LKG)", "Upper KG (UKG)"],
-                                desc: "Montessori & play-based early foundation: phonics, sensory exploration, and joyful number sense.",
-                                tag: "Early Childhood Care",
+                                name: "Ashoka House", 
+                                motto: "Courage & Righteousness", 
+                                color: "border-amber-400 bg-amber-50/40 text-amber-900",
+                                desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." 
                             },
                             { 
-                                wing: "Primary School Wing", 
-                                age: "Classes I to V (Ages 6 to 11)", 
-                                classes: ["Class I", "Class II", "Class III", "Class IV", "Class V"],
-                                desc: "Formal literacy, three-language formula (Kannada, English, Hindi), arithmetic, and environmental sciences.",
-                                tag: "Foundational Literacy",
+                                name: "Tagore House", 
+                                motto: "Creativity & Wisdom", 
+                                color: "border-blue-400 bg-blue-50/40 text-blue-900",
+                                desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." 
                             },
                             { 
-                                wing: "Middle School Wing", 
-                                age: "Classes VI to VIII (Ages 11 to 14)", 
-                                classes: ["Class VI", "Class VII", "Class VIII"],
-                                desc: "Subject-specialist mentoring: Physics, Chemistry & Biology laboratory experiments, linear algebra, and history.",
-                                tag: "STEM & Science",
+                                name: "Raman House", 
+                                motto: "Inquiry & Scientific Truth", 
+                                color: "border-emerald-400 bg-emerald-50/40 text-emerald-900",
+                                desc: "Championing empirical logic, innovation, mathematics, and technological marvels." 
                             },
                             { 
-                                wing: "Secondary School Wing (SSLC)", 
-                                age: "Classes IX & X (Ages 14 to 16)", 
-                                classes: ["Class IX (Foundation)", "Class X (Board Exam)"],
-                                desc: "Rigorous secondary board syllabus completion, 3 Pre-Board model series, and remedial clinics.",
-                                tag: "Board Exam Center",
-                            },
-                            { 
-                                wing: "Senior Secondary / PUC Science", 
-                                age: "Classes XI & XII (Ages 16 to 18)", 
-                                classes: ["Class XI (PCMB/PCMC)", "Class XII (State PUC Board)"],
-                                desc: "Physics, Chemistry, Math, Biology / Computer Science with integrated entrance prep for KCET, NEET, and JEE.",
-                                tag: "Pre-University Science",
-                            },
-                            { 
-                                wing: "Senior Secondary / PUC Commerce & Arts", 
-                                age: "Classes XI & XII (Ages 16 to 18)", 
-                                classes: ["Class XI (Commerce/Arts)", "Class XII (Commerce/Arts)"],
-                                desc: "Accountancy, Business Studies, Economics, History, and Political Science with CA Foundation mentorship.",
-                                tag: "Pre-University Commerce",
+                                name: "Kalam House", 
+                                motto: "Vision & Dedication", 
+                                color: "border-purple-400 bg-purple-50/40 text-purple-900",
+                                desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." 
                             }
-                        ].map((div, i) => (
+                        ].map((h, hi) => (
                             <div 
-                                key={i} 
-                                className="card-interactive p-6 sm:p-7 flex flex-col justify-between group"
+                                key={hi} 
+                                className="academic-card p-6 flex flex-col justify-between group"
                             >
                                 <div>
-                                    <div className="flex items-center justify-between mb-3 text-[10px] font-medium uppercase tracking-wider text-slate-500">
-                                        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">{div.tag}</span>
-                                        <span className="font-mono text-slate-400">{div.age}</span>
-                                    </div>
-                                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-                                        {div.wing}
-                                    </h3>
-                                    <p className="text-xs text-slate-600 leading-relaxed mb-5">
-                                        {div.desc}
-                                    </p>
-                                </div>
-                                
-                                <div className="pt-4 border-t border-slate-100">
-                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 block mb-2">
-                                        Classes:
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#0b192c] text-[#c5a880] inline-block mb-3">
+                                        House Division
                                     </span>
-                                    <div className="flex flex-wrap gap-1.5 mb-4">
-                                        {div.classes.map((cName, ci) => (
-                                            <span 
-                                                key={ci} 
-                                                className="text-[11px] font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-400 px-2.5 py-1 rounded-md border border-slate-200 transition-colors cursor-default"
-                                            >
-                                                {cName}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <Link 
-                                        to="/academics" 
-                                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1.5 transition-colors group-hover:gap-2"
-                                    >
-                                        <span>View Syllabus & Timings</span>
-                                        <ArrowRight size={13} />
-                                    </Link>
+                                    <h3 className="font-serif font-bold text-xl text-[#0b192c] mb-1 group-hover:text-[#8c7355] transition-colors">{h.name}</h3>
+                                    <p className="text-xs text-[#8c7355] font-semibold italic mb-3">"{h.motto}"</p>
+                                    <p className="text-xs text-slate-600 leading-relaxed">{h.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -341,34 +297,29 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                7. INTERACTIVE CAMPUS FACILITIES SWITCHER
+                8. CAMPUS MOMENTS (PHOTO SLIDER)
             ========================================== */}
-            <CampusFacilitySwitcher />
-
-            {/* ==========================================
-                8. CAMPUS MOMENTS (Showcase Carousel)
-            ========================================== */}
-            <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
+            <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="flex justify-between items-end mb-8 sm:mb-12">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2">
                             Campus Chronicle
                         </span>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Life & Learning in Pictures</h2>
+                        <h2 className="text-2xl sm:text-4xl font-serif font-black text-[#0b192c]">Life & Learning in Pictures</h2>
                     </div>
                     {slideshowPhotos.length > 1 && (
                         <div className="flex gap-2">
                             <button 
                                 onClick={prevSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                                aria-label="Previous image"
+                                className="w-9 h-9 border border-[#e8e4dc] bg-white rounded-lg flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                                aria-label="Previous photo"
                             >
                                 <ChevronLeft size={16} />
                             </button>
                             <button 
                                 onClick={nextSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                                aria-label="Next image"
+                                className="w-9 h-9 border border-[#e8e4dc] bg-white rounded-lg flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                                aria-label="Next photo"
                             >
                                 <ChevronRight size={16} />
                             </button>
@@ -376,10 +327,10 @@ const HomePage = () => {
                     )}
                 </div>
 
-                <div className="relative h-[320px] sm:h-[420px] md:h-[480px] w-full border border-slate-200 bg-slate-900 overflow-hidden rounded-2xl group img-zoom-box">
+                <div className="relative h-[340px] sm:h-[440px] md:h-[500px] w-full border-2 border-[#e8e4dc] bg-[#071322] overflow-hidden rounded-2xl group img-zoom-box shadow-lg">
                     {isGalleryLoading ? (
                         <div className="w-full h-full flex items-center justify-center text-slate-400">
-                            <Loader2 size={28} className="animate-spin text-blue-400" />
+                            <Loader2 size={32} className="animate-spin text-[#c5a880]" />
                         </div>
                     ) : slideshowPhotos.length > 0 ? (
                         <div className="relative w-full h-full overflow-hidden">
@@ -388,14 +339,14 @@ const HomePage = () => {
                                 alt={slideshowPhotos[currentIndex]?.title || 'Campus Moment'} 
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104" 
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-end p-6 sm:p-10">
-                                <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-400 mb-1">Campus Record</span>
-                                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/90 via-[#071322]/20 to-transparent flex flex-col justify-end p-6 sm:p-10">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a880] mb-1">Campus Record</span>
+                                <h3 className="text-xl sm:text-3xl font-serif font-bold text-white mb-2">
                                     {slideshowPhotos[currentIndex]?.title || 'Campus Life'}
                                 </h3>
                                 <Link 
                                     to="/student-life" 
-                                    className="text-xs font-medium text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1.5"
+                                    className="text-xs font-semibold text-[#c5a880] hover:text-white transition-colors inline-flex items-center gap-1.5"
                                 >
                                     <span>Browse All Collections</span>
                                     <ArrowRight size={13} />
@@ -411,48 +362,43 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                9. INTERACTIVE TESTIMONIALS SLIDER
+                9. TESTIMONIALS SLIDER
             ========================================== */}
             <TestimonialsSlider />
 
             {/* ==========================================
-                10. INTERACTIVE FAQ ACCORDION
+                10. DISPATCHES & CALENDAR
             ========================================== */}
-            <FaqAccordion />
-
-            {/* ==========================================
-                11. DISPATCHES & CALENDAR (Clean Slate Split)
-            ========================================== */}
-            <section className="py-20 bg-slate-50/70 border-t border-slate-200/80">
+            <section className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                         
                         {/* Notice & Bulletins Column */}
-                        <div className="lg:col-span-7 card-interactive p-6 sm:p-8 flex flex-col justify-between">
+                        <div className="lg:col-span-7 academic-card p-6 sm:p-8 flex flex-col justify-between">
                             <div>
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-2">
-                                        <Award size={14} className="text-blue-600" />
+                                <div className="flex items-center justify-between pb-3 border-b border-[#e8e4dc] mb-6">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0b192c] flex items-center gap-2">
+                                        <Award size={14} className="text-[#c5a880]" />
                                         Official School Bulletins
                                     </span>
-                                    <Link to="/news" className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+                                    <Link to="/news" className="text-xs font-bold text-[#8c7355] hover:text-[#0b192c]">
                                         View All
                                     </Link>
                                 </div>
 
                                 {latestNews ? (
                                     <div className="space-y-3">
-                                        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                                        <div className="flex items-center gap-1.5 text-xs text-[#8c7355] font-semibold">
                                             <Clock size={12} />
                                             <span>{latestNews.date || 'Recent Notification'}</span>
                                         </div>
-                                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0b192c] hover:text-[#8c7355] transition-colors">
                                             {latestNews.title}
                                         </h3>
                                         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
                                             {latestNews.content}
                                         </p>
-                                        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors pt-2">
+                                        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8c7355] hover:text-[#0b192c] transition-colors pt-2">
                                             <span>Read Full Dispatch</span>
                                             <ArrowRight size={13} />
                                         </Link>
@@ -462,41 +408,41 @@ const HomePage = () => {
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+                            <div className="pt-6 mt-6 border-t border-[#e8e4dc] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
                                 <span>Published under Directorate of Academics</span>
-                                <Link to="/news" className="font-medium text-slate-700 hover:text-blue-600">
+                                <Link to="/news" className="font-semibold text-slate-700 hover:text-[#0b192c]">
                                     Archives & Circulars →
                                 </Link>
                             </div>
                         </div>
 
                         {/* Calendar / Events Column */}
-                        <div className="lg:col-span-5 card-interactive p-6 sm:p-8 flex flex-col justify-between">
+                        <div className="lg:col-span-5 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white">
                             <div>
-                                <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-2">
-                                        <Calendar size={14} className="text-blue-600" />
-                                        Upcoming School Dates
+                                <div className="flex items-center justify-between mb-6 pb-3 border-b border-[#e8e4dc]">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0b192c] flex items-center gap-2">
+                                        <Calendar size={14} className="text-[#c5a880]" />
+                                        Upcoming Academic Dates
                                     </span>
                                 </div>
 
                                 {nearestEvent ? (
                                     <div className="space-y-4">
-                                        <div className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                                            <div className="w-14 h-14 rounded-lg bg-blue-600 text-white flex flex-col items-center justify-center shrink-0">
-                                                <span className="text-xl font-bold leading-none">
+                                        <div className="flex items-center gap-4 p-4 bg-[#faf8f5] border border-[#e8e4dc] rounded-xl">
+                                            <div className="w-14 h-14 rounded-lg bg-[#0b192c] text-[#c5a880] flex flex-col items-center justify-center shrink-0 border border-[#c5a880]/40">
+                                                <span className="text-xl font-serif font-bold leading-none">
                                                     {new Date(nearestEvent.eventDate).getDate()}
                                                 </span>
-                                                <span className="text-[10px] font-semibold uppercase tracking-tight mt-0.5">
+                                                <span className="text-[10px] font-bold uppercase tracking-tight mt-0.5">
                                                     {new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'short' })}
                                                 </span>
                                             </div>
                                             <div>
-                                                <span className="text-sm font-semibold text-slate-900 block leading-tight">
+                                                <span className="text-sm font-bold text-[#0b192c] block leading-tight">
                                                     {nearestEvent.title}
                                                 </span>
                                                 <span className="text-xs text-slate-500 flex items-center gap-1 mt-1">
-                                                    <MapPin size={11} className="text-blue-600 shrink-0" />
+                                                    <MapPin size={11} className="text-[#c5a880] shrink-0" />
                                                     {nearestEvent.location || 'Main Campus Auditorium'}
                                                 </span>
                                             </div>
@@ -504,13 +450,13 @@ const HomePage = () => {
                                     </div>
                                 ) : (
                                     <div className="py-6">
-                                        <h4 className="text-sm font-semibold text-slate-900 mb-1">Term Examination Dates</h4>
+                                        <h4 className="text-sm font-bold text-[#0b192c] mb-1">Term Examination Dates</h4>
                                         <p className="text-xs text-slate-500">Scheduled events and parent-teacher consultations will be announced here.</p>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-slate-100">
+                            <div className="pt-6 mt-6 border-t border-[#e8e4dc]">
                                 <Link 
                                     to="/contact" 
                                     className="btn-secondary w-full text-center text-xs justify-center"
@@ -523,6 +469,17 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* ==========================================
+                11. INTERACTIVE FAQ ACCORDION
+            ========================================== */}
+            <FaqAccordion />
+
+            {/* Quick Inquiry Modal */}
+            <QuickInquiryModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+            />
 
         </div>
     );

@@ -7,8 +7,8 @@ import {
     Check, 
     ArrowRight, 
     GraduationCap, 
-    Search,
-    Sparkles
+    Sparkles,
+    Award
 } from 'lucide-react';
 
 const gradeData = [
@@ -19,7 +19,7 @@ const gradeData = [
         age: '2.5 – 4 Years',
         timing: '08:45 AM – 12:30 PM',
         ratio: '1:12',
-        subjects: ['Sensory Exploration', 'Phonics & Rhymes', 'Motor Skills', 'Joyful Numbers', 'Story Circle'],
+        subjects: ['Sensory Exploration', 'Phonics & Rhymes', 'Motor Coordination', 'Joyful Numbers', 'Story Circle'],
         milestones: ['Social communication & self-expression', 'Fine motor pen grip & coordination', 'Bilingual listening comprehension'],
         annualFee: '₹ 12,000',
         stage: 'Early Years'
@@ -31,7 +31,7 @@ const gradeData = [
         age: '4 – 6 Years',
         timing: '08:45 AM – 12:30 PM',
         ratio: '1:15',
-        subjects: ['Early Reading', 'Number Sense (1-100)', 'Environmental Awareness', 'Art & Craft', 'Music'],
+        subjects: ['Early Reading', 'Number Sense (1-100)', 'Environmental Awareness', 'Art & Craft', 'Classical Music'],
         milestones: ['Independent sentence reading', 'Foundational addition & subtraction concepts', 'Confident classroom participation'],
         annualFee: '₹ 14,000',
         stage: 'Kindergarten'
@@ -91,35 +91,35 @@ const GradeFinder = () => {
     const selected = gradeData.find(g => g.id === selectedId) || gradeData[2];
 
     return (
-        <section className="py-20 bg-slate-50/70 border-b border-slate-200/80">
+        <section className="py-20 bg-[#faf8f5] border-b border-[#e8e4dc]">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2 flex items-center gap-1.5">
-                            <Sparkles size={14} />
-                            Interactive Admissions Tool
+                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center gap-1.5">
+                            <Sparkles size={14} className="text-[#c5a880]" />
+                            Interactive Academic Matrix
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-                            Find Your Child's Class & Curriculum
+                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c] tracking-tight">
+                            Explore Curriculum by Academic Wing
                         </h2>
                         <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-xl leading-relaxed">
-                            Select a stage below to instantly inspect eligible age criteria, daily timings, student-teacher ratio, and core learning outcomes.
+                            Select a stage below to inspect eligible age criteria, daily timings, student-teacher ratio, and core learning outcomes.
                         </p>
                     </div>
 
                     <Link 
-                        to="/admissions" 
+                        to="/academics" 
                         className="btn-secondary text-xs self-start md:self-auto"
                     >
-                        <span>Full Admissions Guide</span>
+                        <span>All 17 Classes Directory</span>
                         <ArrowRight size={13} />
                     </Link>
                 </div>
 
                 {/* Segmented Grade Selector Buttons */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
                     {gradeData.map((g) => {
                         const active = g.id === selectedId;
                         return (
@@ -128,8 +128,8 @@ const GradeFinder = () => {
                                 onClick={() => setSelectedId(g.id)}
                                 className={`px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                                     active
-                                        ? 'bg-blue-600 text-white shadow-xs'
-                                        : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                                        ? 'bg-[#0b192c] text-[#c5a880] border border-[#c5a880]/60 shadow-md font-bold'
+                                        : 'bg-white text-slate-700 border border-[#e8e4dc] hover:border-[#c5a880] hover:text-[#0b192c]'
                                 }`}
                             >
                                 <span>{g.name}</span>
@@ -139,13 +139,13 @@ const GradeFinder = () => {
                 </div>
 
                 {/* Interactive Dynamic Display Card */}
-                <div className="card-minimal p-6 sm:p-8 md:p-10 bg-white">
+                <div className="academic-card p-6 sm:p-8 md:p-10 bg-white">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         
                         {/* Left Details */}
                         <div className="lg:col-span-7 space-y-6">
                             <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
+                                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#0b192c] text-[#c5a880]">
                                     {selected.wing}
                                 </span>
                                 <span className="text-xs text-slate-500 font-medium">
@@ -154,25 +154,25 @@ const GradeFinder = () => {
                             </div>
 
                             <div>
-                                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+                                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#0b192c] mb-2">
                                     {selected.name}
                                 </h3>
                                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                                    Structured academic learning tailored specifically for developmental stage {selected.age}, providing optimal balance between discipline and progressive inquiry.
+                                    Structured academic learning tailored specifically for developmental stage {selected.age}, providing optimal balance between discipline, critical inquiry, and co-curricular enrichment.
                                 </p>
                             </div>
 
                             {/* Subjects Grid */}
                             <div>
-                                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block mb-2.5 flex items-center gap-1.5">
-                                    <BookOpen size={13} className="text-blue-600" />
+                                <span className="text-xs font-semibold uppercase tracking-wider text-[#0b192c] block mb-2.5 flex items-center gap-1.5">
+                                    <BookOpen size={13} className="text-[#8c7355]" />
                                     Prescribed Core Modules:
                                 </span>
-                                <div className="flex flex-wrap gap-1.5">
+                                <div className="flex flex-wrap gap-2">
                                     {selected.subjects.map((s, idx) => (
                                         <span 
                                             key={idx}
-                                            className="text-xs font-medium px-2.5 py-1 bg-slate-50 text-slate-800 rounded-md border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 transition-colors"
+                                            className="text-xs font-medium px-3 py-1 bg-[#faf8f5] text-slate-800 rounded-md border border-[#e8e4dc] hover:border-[#c5a880] transition-colors"
                                         >
                                             {s}
                                         </span>
@@ -181,14 +181,14 @@ const GradeFinder = () => {
                             </div>
 
                             {/* Key Learning Milestones */}
-                            <div className="pt-4 border-t border-slate-100">
-                                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block mb-2.5">
-                                    Key Learning Milestones:
+                            <div className="pt-4 border-t border-[#e8e4dc]">
+                                <span className="text-xs font-semibold uppercase tracking-wider text-[#0b192c] block mb-2.5">
+                                    Core Learning Milestones:
                                 </span>
                                 <ul className="space-y-2 text-xs text-slate-600">
                                     {selected.milestones.map((m, idx) => (
                                         <li key={idx} className="flex items-start gap-2">
-                                            <Check size={13} className="text-blue-600 mt-0.5 shrink-0" strokeWidth={2.5} />
+                                            <Check size={14} className="text-emerald-600 mt-0.5 shrink-0" strokeWidth={2.5} />
                                             <span>{m}</span>
                                         </li>
                                     ))}
@@ -197,40 +197,41 @@ const GradeFinder = () => {
                         </div>
 
                         {/* Right Summary Box */}
-                        <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-6 space-y-5">
-                            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 pb-3 border-b border-slate-200">
-                                Quick Enrollment Metrics
+                        <div className="lg:col-span-5 bg-[#faf8f5] border border-[#e8e4dc] rounded-xl p-6 space-y-5">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b192c] pb-3 border-b border-[#e8e4dc] flex items-center gap-2">
+                                <Award size={14} className="text-[#c5a880]" />
+                                Enrollment Specifications
                             </h4>
 
                             <div className="space-y-3.5 text-xs">
                                 <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
                                     <span className="text-slate-500 font-medium">Eligible Age Bracket</span>
-                                    <span className="font-semibold text-slate-900">{selected.age}</span>
+                                    <span className="font-semibold text-[#0b192c]">{selected.age}</span>
                                 </div>
                                 <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
                                     <span className="text-slate-500 font-medium">Daily School Timing</span>
-                                    <span className="font-semibold text-slate-900 flex items-center gap-1">
-                                        <Clock size={12} className="text-blue-600" />
+                                    <span className="font-semibold text-[#0b192c] flex items-center gap-1">
+                                        <Clock size={12} className="text-[#8c7355]" />
                                         {selected.timing}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                                    <span className="text-slate-500 font-medium">Mentor to Student Ratio</span>
-                                    <span className="font-semibold text-slate-900 flex items-center gap-1">
-                                        <Users size={12} className="text-blue-600" />
+                                    <span className="text-slate-500 font-medium">Student to Mentor Ratio</span>
+                                    <span className="font-semibold text-[#0b192c] flex items-center gap-1">
+                                        <Users size={12} className="text-[#8c7355]" />
                                         {selected.ratio}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center py-1">
                                     <span className="text-slate-500 font-medium">Annual Academic Tuition</span>
-                                    <span className="font-bold text-slate-900 text-sm">{selected.annualFee}</span>
+                                    <span className="font-bold text-[#0b192c] text-sm">{selected.annualFee}</span>
                                 </div>
                             </div>
 
-                            <div className="pt-4 border-t border-slate-200 space-y-2">
+                            <div className="pt-4 border-t border-[#e8e4dc] space-y-2.5">
                                 <Link 
                                     to="/admissions" 
-                                    className="btn-primary w-full text-xs text-center justify-center py-2.5"
+                                    className="btn-gold w-full text-xs text-center justify-center py-2.5"
                                 >
                                     <span>Apply for {selected.name.split('(')[0].trim()}</span>
                                     <ArrowRight size={13} />
