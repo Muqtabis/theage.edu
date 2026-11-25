@@ -15,8 +15,10 @@ import {
     MapPin,
     Users
 } from 'lucide-react';
-import heroBg from '../assets/theageheader.jpg';
 import { useSiteContent } from '../context/ContentContext';
+import InteractiveHeroSlider from '../components/InteractiveHeroSlider';
+import AnimatedStatCounter from '../components/AnimatedStatCounter';
+import TuitionRangeSlider from '../components/TuitionRangeSlider';
 import GradeFinder from '../components/GradeFinder';
 import CampusFacilitySwitcher from '../components/CampusFacilitySwitcher';
 import TestimonialsSlider from '../components/TestimonialsSlider';
@@ -104,93 +106,15 @@ const HomePage = () => {
     const nextSlide = () => setCurrentIndex(prev => (prev + 1) % Math.max(1, slideshowPhotos.length));
     const prevSlide = () => setCurrentIndex(prev => (prev - 1 + slideshowPhotos.length) % Math.max(1, slideshowPhotos.length));
 
-    const heroImageSource = home.heroImageUrl || heroBg;
-
     return (
         <div className="font-sans text-slate-800 bg-white selection:bg-blue-600 selection:text-white">
             
             {/* ==========================================
-                1. APPLE-STYLE MINIMALIST HERO
+                1. INTERACTIVE MULTI-SLIDE HERO
             ========================================== */}
-            <section className="relative w-full pt-12 pb-20 sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-32 bg-gradient-to-b from-slate-50/80 via-white to-white overflow-hidden border-b border-slate-200/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                        
-                        {/* Hero Text Column */}
-                        <div className="lg:col-span-7 max-w-2xl">
-                            {/* Admissions Badge */}
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 mb-6 text-xs font-medium">
-                                <span className="w-2 h-2 rounded-full bg-blue-600" />
-                                <span>{home.heroBadge || general.admissionsBadge || 'Admissions Open 2026–27: Nursery to Grade XII'}</span>
-                            </div>
-
-                            {/* Headline */}
-                            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.08] mb-6">
-                                <span>{home.heroTitleLine1 || 'Future Ready.'}</span> <br />
-                                <span className="text-blue-600">{home.heroTitleHighlight || 'Values Driven.'}</span>
-                            </h1>
-
-                            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8 max-w-xl">
-                                {home.heroSubtitle || 'A distinguished K-12 institution in Basavakalyan cultivating academic mastery, ethical conviction, and civic leadership.'}
-                            </p>
-
-                            {/* CTAs */}
-                            <div className="flex flex-wrap items-center gap-3.5">
-                                <Link 
-                                    to="/admissions" 
-                                    className="btn-primary"
-                                >
-                                    <span>{home.ctaApplyText || 'Apply for Admission'}</span>
-                                    <ArrowRight size={15} />
-                                </Link>
-                                
-                                <Link 
-                                    to="/academics" 
-                                    className="btn-secondary"
-                                >
-                                    <span>Explore All 17 Classes</span>
-                                </Link>
-                            </div>
-
-                            {/* Quick Stats Badges */}
-                            <div className="mt-10 pt-6 border-t border-slate-200 flex flex-wrap gap-4 text-xs text-slate-600">
-                                <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-md border border-slate-200">
-                                    <Award size={13} className="text-blue-600" />
-                                    100% Board Results
-                                </span>
-                                <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-md border border-slate-200">
-                                    <Users size={13} className="text-blue-600" />
-                                    1:20 Teacher Ratio
-                                </span>
-                                <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-md border border-slate-200">
-                                    <MapPin size={13} className="text-blue-600" />
-                                    Basavakalyan Campus
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Hero Image in Clean Device Frame */}
-                        <div className="lg:col-span-5 relative">
-                            <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-100 aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 group">
-                                <img 
-                                    src={heroImageSource} 
-                                    alt="The Age School Campus" 
-                                    className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500" 
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
-                                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-3 border border-slate-200/80 flex items-center justify-between text-xs">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-blue-600" />
-                                        <span className="font-semibold text-slate-900">Main Academic Campus</span>
-                                    </div>
-                                    <span className="text-slate-500 font-mono text-[11px]">Est. 2012</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
+            <InteractiveHeroSlider 
+                admissionsBadge={home.heroBadge || general.admissionsBadge} 
+            />
 
             {/* ==========================================
                 OFFICIAL NOTICE TICKER (Sleek Slate Strip)
@@ -207,80 +131,31 @@ const HomePage = () => {
                     </div>
                     <Link 
                         to="/news" 
-                        className="shrink-0 text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                        className="shrink-0 text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
                     >
                         <span>Official Gazette</span>
-                        <ArrowRight size={13} />
+                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                 </div>
             </div>
 
             {/* ==========================================
-                2. MINIMALIST INSTITUTIONAL METRICS (4 Uniform Cards)
+                2. ANIMATED STATS COUNTER WITH HOVER INSIGHTS
             ========================================== */}
-            <section className="bg-white py-16 px-4 sm:px-8 border-b border-slate-200/80">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                        
-                        <div className="card-minimal p-6">
-                            <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
-                                {home.statsStudents || '500+'}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">
-                                Enrolled Scholars
-                            </span>
-                            <span className="text-[11px] text-slate-400 block">
-                                Nursery to Grade XII
-                            </span>
-                        </div>
-
-                        <div className="card-minimal p-6">
-                            <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
-                                {home.statsPassRate || '100%'}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">
-                                Board Pass Record
-                            </span>
-                            <span className="text-[11px] text-slate-400 block">
-                                KSEAB SSLC & PUC Board
-                            </span>
-                        </div>
-
-                        <div className="card-minimal p-6">
-                            <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
-                                {home.statsFaculty || '35+'}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">
-                                Dedicated Faculty
-                            </span>
-                            <span className="text-[11px] text-slate-400 block">
-                                Post-Graduate Educators
-                            </span>
-                        </div>
-
-                        <div className="card-minimal p-6">
-                            <span className="text-3xl sm:text-4xl font-bold text-slate-900 block mb-1">
-                                {home.statsYears || '12+'}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">
-                                Years of Excellence
-                            </span>
-                            <span className="text-[11px] text-slate-400 block">
-                                Chartered 2012 in Basavakalyan
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
+            <AnimatedStatCounter />
 
             {/* ==========================================
-                3. INTERACTIVE GRADE & CURRICULUM FINDER
+                3. INTERACTIVE GRADE RANGE SLIDER
+            ========================================== */}
+            <TuitionRangeSlider />
+
+            {/* ==========================================
+                4. INTERACTIVE GRADE & CURRICULUM FINDER
             ========================================== */}
             <GradeFinder />
 
             {/* ==========================================
-                4. PRINCIPLES OF EXCELLENCE (4 Pillars)
+                5. PRINCIPLES OF EXCELLENCE (4 Pillars with Hover Glow)
             ========================================== */}
             <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="max-w-2xl mb-12 sm:mb-16">
@@ -326,7 +201,7 @@ const HomePage = () => {
                         return (
                             <div 
                                 key={pi} 
-                                className="card-minimal p-6 sm:p-7 flex flex-col justify-between group"
+                                className="card-interactive p-6 sm:p-7 flex flex-col justify-between group cursor-default"
                             >
                                 <div>
                                     <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
@@ -350,7 +225,7 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                5. ACADEMIC WINGS & CLASS STRUCTURE
+                6. ACADEMIC WINGS & CLASS STRUCTURE
             ========================================== */}
             <section className="py-20 bg-slate-50/70 border-y border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -422,7 +297,7 @@ const HomePage = () => {
                         ].map((div, i) => (
                             <div 
                                 key={i} 
-                                className="card-minimal p-6 sm:p-7 flex flex-col justify-between group"
+                                className="card-interactive p-6 sm:p-7 flex flex-col justify-between group"
                             >
                                 <div>
                                     <div className="flex items-center justify-between mb-3 text-[10px] font-medium uppercase tracking-wider text-slate-500">
@@ -445,7 +320,7 @@ const HomePage = () => {
                                         {div.classes.map((cName, ci) => (
                                             <span 
                                                 key={ci} 
-                                                className="text-[11px] font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 px-2.5 py-1 rounded-md border border-slate-200 transition-colors cursor-default"
+                                                className="text-[11px] font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-400 px-2.5 py-1 rounded-md border border-slate-200 transition-colors cursor-default"
                                             >
                                                 {cName}
                                             </span>
@@ -453,7 +328,7 @@ const HomePage = () => {
                                     </div>
                                     <Link 
                                         to="/academics" 
-                                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1.5 transition-colors"
+                                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1.5 transition-colors group-hover:gap-2"
                                     >
                                         <span>View Syllabus & Timings</span>
                                         <ArrowRight size={13} />
@@ -466,12 +341,12 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                6. INTERACTIVE CAMPUS FACILITIES SWITCHER
+                7. INTERACTIVE CAMPUS FACILITIES SWITCHER
             ========================================== */}
             <CampusFacilitySwitcher />
 
             {/* ==========================================
-                7. CAMPUS MOMENTS (Clean Showcase)
+                8. CAMPUS MOMENTS (Showcase Carousel)
             ========================================== */}
             <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="flex justify-between items-end mb-8 sm:mb-12">
@@ -485,14 +360,14 @@ const HomePage = () => {
                         <div className="flex gap-2">
                             <button 
                                 onClick={prevSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                                 aria-label="Previous image"
                             >
                                 <ChevronLeft size={16} />
                             </button>
                             <button 
                                 onClick={nextSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+                                className="w-9 h-9 border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                                 aria-label="Next image"
                             >
                                 <ChevronRight size={16} />
@@ -501,7 +376,7 @@ const HomePage = () => {
                     )}
                 </div>
 
-                <div className="relative h-[320px] sm:h-[420px] md:h-[480px] w-full border border-slate-200 bg-slate-900 overflow-hidden rounded-2xl group">
+                <div className="relative h-[320px] sm:h-[420px] md:h-[480px] w-full border border-slate-200 bg-slate-900 overflow-hidden rounded-2xl group img-zoom-box">
                     {isGalleryLoading ? (
                         <div className="w-full h-full flex items-center justify-center text-slate-400">
                             <Loader2 size={28} className="animate-spin text-blue-400" />
@@ -511,7 +386,7 @@ const HomePage = () => {
                             <img 
                                 src={slideshowPhotos[currentIndex]?.src} 
                                 alt={slideshowPhotos[currentIndex]?.title || 'Campus Moment'} 
-                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102" 
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104" 
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-end p-6 sm:p-10">
                                 <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-400 mb-1">Campus Record</span>
@@ -536,24 +411,24 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                8. INTERACTIVE TESTIMONIALS SLIDER
+                9. INTERACTIVE TESTIMONIALS SLIDER
             ========================================== */}
             <TestimonialsSlider />
 
             {/* ==========================================
-                9. INTERACTIVE FAQ ACCORDION
+                10. INTERACTIVE FAQ ACCORDION
             ========================================== */}
             <FaqAccordion />
 
             {/* ==========================================
-                10. DISPATCHES & CALENDAR (Clean Slate Split)
+                11. DISPATCHES & CALENDAR (Clean Slate Split)
             ========================================== */}
             <section className="py-20 bg-slate-50/70 border-t border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                         
                         {/* Notice & Bulletins Column */}
-                        <div className="lg:col-span-7 card-minimal p-6 sm:p-8 flex flex-col justify-between">
+                        <div className="lg:col-span-7 card-interactive p-6 sm:p-8 flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-2">
@@ -596,7 +471,7 @@ const HomePage = () => {
                         </div>
 
                         {/* Calendar / Events Column */}
-                        <div className="lg:col-span-5 card-minimal p-6 sm:p-8 flex flex-col justify-between">
+                        <div className="lg:col-span-5 card-interactive p-6 sm:p-8 flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-2">
@@ -638,7 +513,7 @@ const HomePage = () => {
                             <div className="pt-6 mt-6 border-t border-slate-100">
                                 <Link 
                                     to="/contact" 
-                                    className="btn-secondary w-full text-center text-xs"
+                                    className="btn-secondary w-full text-center text-xs justify-center"
                                 >
                                     Inquire with Administration Desk
                                 </Link>

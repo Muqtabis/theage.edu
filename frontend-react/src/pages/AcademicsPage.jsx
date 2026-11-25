@@ -256,10 +256,10 @@ const AcademicsPage = () => {
                             return (
                                 <div 
                                     key={item.id} 
-                                    className={`border transition-all rounded-xl overflow-hidden ${
+                                    className={`card-interactive transition-all rounded-xl overflow-hidden ${
                                         isExpanded 
-                                            ? 'bg-white border-blue-600 shadow-xs' 
-                                            : 'bg-white border-slate-200 hover:border-slate-300'
+                                            ? 'border-blue-600 shadow-md ring-1 ring-blue-500/20 bg-white' 
+                                            : 'hover:border-blue-300 bg-white'
                                     }`}
                                 >
                                     {/* CARD HEADER */}

@@ -94,7 +94,7 @@ const StudentLifePage = () => {
                     ].map((act, i) => (
                         <div 
                             key={i} 
-                            className="card-minimal p-6 sm:p-7 flex flex-col justify-between group"
+                            className="card-interactive p-6 sm:p-7 flex flex-col justify-between group"
                         >
                             <div>
                                 <span className="text-xs font-mono font-bold text-blue-600 block mb-3">{act.num}.</span>
@@ -106,7 +106,7 @@ const StudentLifePage = () => {
                                     {act.tags.map((t, ti) => (
                                         <span 
                                             key={ti} 
-                                            className="text-[11px] font-medium px-2.5 py-0.5 border border-slate-200 rounded-md bg-slate-50 text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-colors"
+                                            className="text-[11px] font-medium px-2.5 py-0.5 border border-slate-200 rounded-md bg-slate-50 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
                                         >
                                             {t}
                                         </span>
@@ -154,7 +154,7 @@ const StudentLifePage = () => {
                         ].map((h, hi) => (
                             <div 
                                 key={hi} 
-                                className="card-minimal p-6 flex flex-col justify-between group"
+                                className="card-interactive p-6 flex flex-col justify-between group"
                             >
                                 <div>
                                     <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 inline-block mb-3">
@@ -190,7 +190,7 @@ const StudentLifePage = () => {
                             { title: "Athletic Grounds & Courts", desc: "Expansive play area for cricket, football, volleyball, badminton, kho-kho, yoga, and track events.", icon: "05" },
                             { title: "Health Care & RO Purified Water", desc: "On-campus primary infirmary, periodic pediatric health checkups, and commercial RO drinking water.", icon: "06" }
                         ].map((fac, fi) => (
-                            <div key={fi} className="card-minimal p-6 group">
+                            <div key={fi} className="card-interactive p-6 group">
                                 <span className="text-[11px] font-mono font-bold text-blue-600 block mb-2">{fac.icon} / INFRASTRUCTURE</span>
                                 <h4 className="font-bold text-sm text-slate-900 mb-1.5 group-hover:text-blue-600 transition-colors">{fac.title}</h4>
                                 <p className="text-slate-600 leading-relaxed text-xs">{fac.desc}</p>
@@ -224,13 +224,13 @@ const StudentLifePage = () => {
                                 <Link 
                                     key={album._id} 
                                     to={`/gallery/${album._id}`}
-                                    className="card-minimal flex flex-col justify-between overflow-hidden group"
+                                    className="card-interactive flex flex-col justify-between overflow-hidden group img-zoom-box"
                                 >
                                     <div className="aspect-16/10 bg-slate-100 overflow-hidden relative border-b border-slate-100">
                                         <img 
                                             src={album.coverImage || "https://placehold.co/600x400"} 
                                             alt={album.title} 
-                                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" 
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-104" 
                                         />
                                         <div className="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-xs text-white px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-md">
                                             {album.images?.length || 0} Photos
@@ -243,7 +243,7 @@ const StudentLifePage = () => {
                                         <p className="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed">
                                             {album.description}
                                         </p>
-                                        <span className="text-xs font-semibold text-blue-600 inline-flex items-center gap-1">
+                                        <span className="text-xs font-semibold text-blue-600 inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
                                             <span>Open Collection</span>
                                             <ArrowRight size={13} />
                                         </span>
