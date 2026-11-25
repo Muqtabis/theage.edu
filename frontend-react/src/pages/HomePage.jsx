@@ -110,7 +110,7 @@ const HomePage = () => {
     const prevSlide = () => setCurrentIndex(prev => (prev - 1 + slideshowPhotos.length) % Math.max(1, slideshowPhotos.length));
 
     return (
-        <div className="font-sans text-[#0b192c] bg-[#faf8f5] selection:bg-[#c5a880]/30 selection:text-[#0b192c]">
+        <div className="font-sans text-slate-900 bg-white selection:bg-blue-100 selection:text-blue-900">
             
             {/* ==========================================
                 1. FULL-WIDTH CINEMATIC HERO SLIDER
@@ -121,21 +121,21 @@ const HomePage = () => {
             />
 
             {/* ==========================================
-                OFFICIAL NOTICE MARQUEE TICKER
+                OFFICIAL NOTICE MARQUEE TICKER (BRIGHT GRADIENT)
             ========================================== */}
-            <div className="bg-[#0b192c] text-white py-3 px-4 sm:px-8 border-b border-[#c5a880]/30">
+            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white py-3 px-4 sm:px-8 shadow-sm">
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
-                        <span className="shrink-0 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 bg-[#c5a880] text-[#071322] rounded-full">
+                        <span className="shrink-0 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 bg-amber-400 text-slate-950 rounded-full shadow-2xs">
                             OFFICIAL GAZETTE
                         </span>
-                        <p className="text-xs font-medium text-slate-200 truncate">
+                        <p className="text-xs font-medium text-white truncate">
                             {general.noticeMarquee || 'ADMISSIONS OPEN FOR SESSION 2026-2027: Pre-Nursery to Grade XII (Science & Commerce) • Schedule Campus Tour'}
                         </p>
                     </div>
                     <Link 
                         to="/news" 
-                        className="shrink-0 text-xs font-bold text-[#c5a880] hover:text-white flex items-center gap-1 group"
+                        className="shrink-0 text-xs font-bold text-amber-200 hover:text-white flex items-center gap-1 group transition-colors"
                     >
                         <span>Official Gazette</span>
                         <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
@@ -158,11 +158,11 @@ const HomePage = () => {
             ========================================== */}
             <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="max-w-2xl mb-14">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center gap-1.5">
-                        <Sparkles size={14} className="text-[#c5a880]" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center gap-1.5">
+                        <Sparkles size={14} className="text-blue-600" />
                         Pillars of Excellence
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#0b192c] tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-slate-900 tracking-tight">
                         A Framework Built on Academic Supremacy & Moral Bearing.
                     </h2>
                     <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-3">
@@ -177,46 +177,54 @@ const HomePage = () => {
                             title: home.bento1Title || 'Applied STEM & Technology',
                             desc: home.bento1Desc || 'Modern robotics, laboratory experimentation, and computational thinking starting from the primary years.',
                             tag: 'Laboratory Studies',
+                            color: 'bg-blue-100 text-blue-600',
+                            tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
                         },
                         {
                             icon: Shield,
                             title: home.bento2Title || 'Character & Moral Values',
                             desc: home.bento2Desc || 'Integrity, humility, empathy, and social responsibility woven into the daily rhythm of campus life.',
                             tag: 'Ethical Guidance',
+                            color: 'bg-amber-100 text-amber-600',
+                            tagColor: 'bg-amber-50 text-amber-700 border-amber-200'
                         },
                         {
                             icon: Compass,
                             title: home.bento3Title || 'Global Perspective',
                             desc: home.bento3Desc || 'A state curriculum elevated with national standards, preparing scholars for higher education and competitive examinations.',
                             tag: 'Scholastic Breadth',
+                            color: 'bg-purple-100 text-purple-600',
+                            tagColor: 'bg-purple-50 text-purple-700 border-purple-200'
                         },
                         {
                             icon: GraduationCap,
                             title: home.bento4Title || 'Individual Mentorship',
                             desc: home.bento4Desc || 'Every child is recognized as unique. Personalized academic interventions ensure no student is left behind.',
                             tag: 'Ratio 1:20',
+                            color: 'bg-emerald-100 text-emerald-600',
+                            tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
                         }
                     ].map((pillar, pi) => {
                         const Icon = pillar.icon;
                         return (
                             <div 
                                 key={pi} 
-                                className="academic-card p-6 sm:p-7 flex flex-col justify-between group cursor-default"
+                                className="academic-card p-6 sm:p-7 flex flex-col justify-between group cursor-default shadow-sm hover:shadow-md"
                             >
                                 <div>
-                                    <div className="w-11 h-11 rounded-lg bg-[#0b192c] text-[#c5a880] flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform">
-                                        <Icon size={22} strokeWidth={2} />
+                                    <div className={`w-12 h-12 rounded-xl ${pillar.color} flex items-center justify-center mb-6 shadow-xs group-hover:scale-105 transition-transform`}>
+                                        <Icon size={24} strokeWidth={2} />
                                     </div>
-                                    <h3 className="text-lg font-serif font-bold text-[#0b192c] group-hover:text-[#8c7355] transition-colors mb-2.5">
+                                    <h3 className="text-lg font-serif font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
                                         {pillar.title}
                                     </h3>
                                     <p className="text-xs text-slate-600 leading-relaxed">
                                         {pillar.desc}
                                     </p>
                                 </div>
-                                <div className="pt-6 mt-6 border-t border-[#e8e4dc] text-[11px] font-semibold text-slate-500 flex items-center justify-between">
-                                    <span className="px-2.5 py-0.5 rounded-md bg-[#faf8f5] text-[#0b192c] border border-[#e8e4dc]">{pillar.tag}</span>
-                                    <ArrowRight size={13} className="text-[#c5a880] group-hover:translate-x-1 transition-transform" />
+                                <div className="pt-6 mt-6 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                                    <span className={`px-2.5 py-0.5 rounded-full border ${pillar.tagColor}`}>{pillar.tag}</span>
+                                    <ArrowRight size={13} className="text-blue-600 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>
                         );
@@ -235,15 +243,15 @@ const HomePage = () => {
             <CampusFacilitySwitcher onOpenModal={() => setIsModalOpen(true)} />
 
             {/* ==========================================
-                7. THE FOUR HOUSES SYSTEM
+                7. THE FOUR HOUSES SYSTEM (VIBRANT & COLORFUL)
             ========================================== */}
-            <section className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]">
+            <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="max-w-2xl mb-12">
-                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2">
                             House Tradition
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c]">
+                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900">
                             The Four Houses System
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-600 mt-2">
@@ -256,38 +264,46 @@ const HomePage = () => {
                             { 
                                 name: "Ashoka House", 
                                 motto: "Courage & Righteousness", 
-                                color: "border-amber-400 bg-amber-50/40 text-amber-900",
+                                border: "border-red-200 hover:border-red-400",
+                                badge: "bg-red-50 text-red-700 border-red-200",
+                                mottoColor: "text-red-700",
                                 desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." 
                             },
                             { 
                                 name: "Tagore House", 
                                 motto: "Creativity & Wisdom", 
-                                color: "border-blue-400 bg-blue-50/40 text-blue-900",
+                                border: "border-amber-200 hover:border-amber-400",
+                                badge: "bg-amber-50 text-amber-700 border-amber-200",
+                                mottoColor: "text-amber-700",
                                 desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." 
                             },
                             { 
                                 name: "Raman House", 
                                 motto: "Inquiry & Scientific Truth", 
-                                color: "border-emerald-400 bg-emerald-50/40 text-emerald-900",
+                                border: "border-blue-200 hover:border-blue-400",
+                                badge: "bg-blue-50 text-blue-700 border-blue-200",
+                                mottoColor: "text-blue-700",
                                 desc: "Championing empirical logic, innovation, mathematics, and technological marvels." 
                             },
                             { 
                                 name: "Kalam House", 
                                 motto: "Vision & Dedication", 
-                                color: "border-purple-400 bg-purple-50/40 text-purple-900",
+                                border: "border-emerald-200 hover:border-emerald-400",
+                                badge: "bg-emerald-50 text-emerald-700 border-emerald-200",
+                                mottoColor: "text-emerald-700",
                                 desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." 
                             }
                         ].map((h, hi) => (
                             <div 
                                 key={hi} 
-                                className="academic-card p-6 flex flex-col justify-between group"
+                                className={`academic-card p-6 flex flex-col justify-between group border ${h.border} shadow-sm hover:shadow-md`}
                             >
                                 <div>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#0b192c] text-[#c5a880] inline-block mb-3">
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border inline-block mb-3 ${h.badge}`}>
                                         House Division
                                     </span>
-                                    <h3 className="font-serif font-bold text-xl text-[#0b192c] mb-1 group-hover:text-[#8c7355] transition-colors">{h.name}</h3>
-                                    <p className="text-xs text-[#8c7355] font-semibold italic mb-3">"{h.motto}"</p>
+                                    <h3 className="font-serif font-bold text-xl text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{h.name}</h3>
+                                    <p className={`text-xs font-semibold italic mb-3 ${h.mottoColor}`}>"{h.motto}"</p>
                                     <p className="text-xs text-slate-600 leading-relaxed">{h.desc}</p>
                                 </div>
                             </div>
@@ -302,23 +318,23 @@ const HomePage = () => {
             <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="flex justify-between items-end mb-8 sm:mb-12">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2">
                             Campus Chronicle
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-serif font-black text-[#0b192c]">Life & Learning in Pictures</h2>
+                        <h2 className="text-2xl sm:text-4xl font-serif font-black text-slate-900">Life & Learning in Pictures</h2>
                     </div>
                     {slideshowPhotos.length > 1 && (
                         <div className="flex gap-2">
                             <button 
                                 onClick={prevSlide} 
-                                className="w-9 h-9 border border-[#e8e4dc] bg-white rounded-lg flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                                className="w-9 h-9 border border-slate-200 bg-white rounded-xl flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                                 aria-label="Previous photo"
                             >
                                 <ChevronLeft size={16} />
                             </button>
                             <button 
                                 onClick={nextSlide} 
-                                className="w-9 h-9 border border-[#e8e4dc] bg-white rounded-lg flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                                className="w-9 h-9 border border-slate-200 bg-white rounded-xl flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                                 aria-label="Next photo"
                             >
                                 <ChevronRight size={16} />
@@ -327,10 +343,10 @@ const HomePage = () => {
                     )}
                 </div>
 
-                <div className="relative h-[340px] sm:h-[440px] md:h-[500px] w-full border-2 border-[#e8e4dc] bg-[#071322] overflow-hidden rounded-2xl group img-zoom-box shadow-lg">
+                <div className="relative h-[340px] sm:h-[440px] md:h-[500px] w-full border border-slate-200 bg-slate-100 overflow-hidden rounded-2xl group img-zoom-box shadow-lg">
                     {isGalleryLoading ? (
                         <div className="w-full h-full flex items-center justify-center text-slate-400">
-                            <Loader2 size={32} className="animate-spin text-[#c5a880]" />
+                            <Loader2 size={32} className="animate-spin text-blue-600" />
                         </div>
                     ) : slideshowPhotos.length > 0 ? (
                         <div className="relative w-full h-full overflow-hidden">
@@ -339,14 +355,14 @@ const HomePage = () => {
                                 alt={slideshowPhotos[currentIndex]?.title || 'Campus Moment'} 
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104" 
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/90 via-[#071322]/20 to-transparent flex flex-col justify-end p-6 sm:p-10">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#c5a880] mb-1">Campus Record</span>
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-10">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1">Campus Record</span>
                                 <h3 className="text-xl sm:text-3xl font-serif font-bold text-white mb-2">
                                     {slideshowPhotos[currentIndex]?.title || 'Campus Life'}
                                 </h3>
                                 <Link 
                                     to="/student-life" 
-                                    className="text-xs font-semibold text-[#c5a880] hover:text-white transition-colors inline-flex items-center gap-1.5"
+                                    className="text-xs font-semibold text-amber-300 hover:text-white transition-colors inline-flex items-center gap-1.5"
                                 >
                                     <span>Browse All Collections</span>
                                     <ArrowRight size={13} />
@@ -354,7 +370,7 @@ const HomePage = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
+                        <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs">
                             Campus photo moments will appear here once albums are published.
                         </div>
                     )}
@@ -369,36 +385,36 @@ const HomePage = () => {
             {/* ==========================================
                 10. DISPATCHES & CALENDAR
             ========================================== */}
-            <section className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]">
+            <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                         
                         {/* Notice & Bulletins Column */}
-                        <div className="lg:col-span-7 academic-card p-6 sm:p-8 flex flex-col justify-between">
+                        <div className="lg:col-span-7 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white shadow-sm">
                             <div>
-                                <div className="flex items-center justify-between pb-3 border-b border-[#e8e4dc] mb-6">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0b192c] flex items-center gap-2">
-                                        <Award size={14} className="text-[#c5a880]" />
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                                        <Award size={14} className="text-blue-600" />
                                         Official School Bulletins
                                     </span>
-                                    <Link to="/news" className="text-xs font-bold text-[#8c7355] hover:text-[#0b192c]">
+                                    <Link to="/news" className="text-xs font-bold text-blue-600 hover:text-blue-800">
                                         View All
                                     </Link>
                                 </div>
 
                                 {latestNews ? (
                                     <div className="space-y-3">
-                                        <div className="flex items-center gap-1.5 text-xs text-[#8c7355] font-semibold">
+                                        <div className="flex items-center gap-1.5 text-xs text-blue-600 font-semibold">
                                             <Clock size={12} />
                                             <span>{latestNews.date || 'Recent Notification'}</span>
                                         </div>
-                                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0b192c] hover:text-[#8c7355] transition-colors">
+                                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 hover:text-blue-600 transition-colors">
                                             {latestNews.title}
                                         </h3>
                                         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
                                             {latestNews.content}
                                         </p>
-                                        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8c7355] hover:text-[#0b192c] transition-colors pt-2">
+                                        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors pt-2">
                                             <span>Read Full Dispatch</span>
                                             <ArrowRight size={13} />
                                         </Link>
@@ -408,28 +424,28 @@ const HomePage = () => {
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-[#e8e4dc] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+                            <div className="pt-6 mt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
                                 <span>Published under Directorate of Academics</span>
-                                <Link to="/news" className="font-semibold text-slate-700 hover:text-[#0b192c]">
+                                <Link to="/news" className="font-semibold text-slate-700 hover:text-blue-600">
                                     Archives & Circulars →
                                 </Link>
                             </div>
                         </div>
 
                         {/* Calendar / Events Column */}
-                        <div className="lg:col-span-5 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white">
+                        <div className="lg:col-span-5 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white shadow-sm">
                             <div>
-                                <div className="flex items-center justify-between mb-6 pb-3 border-b border-[#e8e4dc]">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0b192c] flex items-center gap-2">
-                                        <Calendar size={14} className="text-[#c5a880]" />
+                                <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                                        <Calendar size={14} className="text-blue-600" />
                                         Upcoming Academic Dates
                                     </span>
                                 </div>
 
                                 {nearestEvent ? (
                                     <div className="space-y-4">
-                                        <div className="flex items-center gap-4 p-4 bg-[#faf8f5] border border-[#e8e4dc] rounded-xl">
-                                            <div className="w-14 h-14 rounded-lg bg-[#0b192c] text-[#c5a880] flex flex-col items-center justify-center shrink-0 border border-[#c5a880]/40">
+                                        <div className="flex items-center gap-4 p-4 bg-blue-50/50 border border-blue-100 rounded-2xl">
+                                            <div className="w-14 h-14 rounded-xl bg-blue-600 text-white flex flex-col items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
                                                 <span className="text-xl font-serif font-bold leading-none">
                                                     {new Date(nearestEvent.eventDate).getDate()}
                                                 </span>
@@ -438,11 +454,11 @@ const HomePage = () => {
                                                 </span>
                                             </div>
                                             <div>
-                                                <span className="text-sm font-bold text-[#0b192c] block leading-tight">
+                                                <span className="text-sm font-bold text-slate-900 block leading-tight">
                                                     {nearestEvent.title}
                                                 </span>
                                                 <span className="text-xs text-slate-500 flex items-center gap-1 mt-1">
-                                                    <MapPin size={11} className="text-[#c5a880] shrink-0" />
+                                                    <MapPin size={11} className="text-blue-600 shrink-0" />
                                                     {nearestEvent.location || 'Main Campus Auditorium'}
                                                 </span>
                                             </div>
@@ -450,13 +466,13 @@ const HomePage = () => {
                                     </div>
                                 ) : (
                                     <div className="py-6">
-                                        <h4 className="text-sm font-bold text-[#0b192c] mb-1">Term Examination Dates</h4>
+                                        <h4 className="text-sm font-bold text-slate-900 mb-1">Term Examination Dates</h4>
                                         <p className="text-xs text-slate-500">Scheduled events and parent-teacher consultations will be announced here.</p>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-[#e8e4dc]">
+                            <div className="pt-6 mt-6 border-t border-slate-100">
                                 <Link 
                                     to="/contact" 
                                     className="btn-secondary w-full text-center text-xs justify-center"

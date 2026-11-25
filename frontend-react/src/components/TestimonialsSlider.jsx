@@ -56,13 +56,13 @@ const TestimonialsSlider = () => {
     }, [isPaused]);
 
     const next = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    const prev = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    const prev = () => setCurrentIndex((prev + 1) % testimonials.length);
 
     const current = testimonials[currentIndex];
 
     return (
         <section 
-            className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]"
+            className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -71,11 +71,11 @@ const TestimonialsSlider = () => {
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center gap-1.5">
-                            <Sparkles size={14} className="text-[#c5a880]" />
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center gap-1.5">
+                            <Sparkles size={14} className="text-blue-600" />
                             Voices of Our Community
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c] tracking-tight">
+                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight">
                             Parent & Scholar Experiences
                         </h2>
                     </div>
@@ -84,14 +84,14 @@ const TestimonialsSlider = () => {
                     <div className="flex items-center gap-2">
                         <button
                             onClick={prev}
-                            className="w-9 h-9 rounded-lg border border-[#e8e4dc] bg-white flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                            className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                             aria-label="Previous testimonial"
                         >
                             <ChevronLeft size={16} />
                         </button>
                         <button
                             onClick={next}
-                            className="w-9 h-9 rounded-lg border border-[#e8e4dc] bg-white flex items-center justify-center text-[#0b192c] hover:bg-[#faf8f5] hover:border-[#c5a880] transition-colors cursor-pointer shadow-2xs"
+                            className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                             aria-label="Next testimonial"
                         >
                             <ChevronRight size={16} />
@@ -100,28 +100,28 @@ const TestimonialsSlider = () => {
                 </div>
 
                 {/* Card */}
-                <div className="academic-card p-7 sm:p-10 md:p-12 bg-white relative overflow-hidden">
-                    <Quote size={56} className="absolute top-6 right-6 text-[#c5a880]/15 pointer-events-none" />
+                <div className="academic-card p-7 sm:p-10 md:p-12 bg-white relative overflow-hidden shadow-md">
+                    <Quote size={64} className="absolute top-6 right-6 text-blue-600/10 pointer-events-none" />
 
-                    <div className="flex items-center gap-1 mb-6 text-[#c5a880]">
+                    <div className="flex items-center gap-1 mb-6 text-amber-400">
                         {[...Array(5)].map((_, i) => (
-                            <Star key={i} size={17} fill="currentColor" />
+                            <Star key={i} size={18} fill="currentColor" />
                         ))}
-                        <span className="text-xs font-bold text-[#8c7355] ml-2">5.0 Parent Rating</span>
+                        <span className="text-xs font-bold text-amber-700 ml-2">5.0 Parent Rating</span>
                     </div>
 
-                    <p className="text-base sm:text-xl font-serif italic text-[#0b192c] leading-relaxed mb-8 max-w-4xl">
+                    <p className="text-base sm:text-xl font-serif italic text-slate-800 leading-relaxed mb-8 max-w-4xl">
                         "{current.quote}"
                     </p>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#e8e4dc]">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100">
                         <div>
-                            <h4 className="font-serif font-bold text-[#0b192c] text-base sm:text-lg">{current.author}</h4>
+                            <h4 className="font-serif font-bold text-slate-900 text-base sm:text-lg">{current.author}</h4>
                             <p className="text-xs text-slate-500 font-medium">
-                                {current.role} • <span className="text-[#8c7355] font-bold">{current.grade}</span>
+                                {current.role} • <span className="text-blue-600 font-bold">{current.grade}</span>
                             </p>
                         </div>
-                        <span className="text-xs font-mono text-[#8c7355] bg-[#faf8f5] px-3 py-1 rounded-md border border-[#e8e4dc] self-start sm:self-auto font-semibold">
+                        <span className="text-xs font-mono text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200 self-start sm:self-auto font-semibold">
                             {current.year}
                         </span>
                     </div>
@@ -133,7 +133,7 @@ const TestimonialsSlider = () => {
                                 key={idx}
                                 onClick={() => setCurrentIndex(idx)}
                                 className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                    idx === currentIndex ? 'w-8 bg-[#c5a880]' : 'w-2 bg-slate-200 hover:bg-slate-300'
+                                    idx === currentIndex ? 'w-8 bg-blue-600' : 'w-2 bg-slate-200 hover:bg-slate-300'
                                 }`}
                                 aria-label={`Go to slide ${idx + 1}`}
                             />

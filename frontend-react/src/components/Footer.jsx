@@ -8,7 +8,8 @@ import {
   MapPin, 
   Mail, 
   Phone, 
-  Shield 
+  Shield,
+  Award 
 } from 'lucide-react';
 import logo from '../assets/theagelogo.jpg';
 import { useSiteContent } from '../context/ContentContext';
@@ -19,7 +20,7 @@ const Footer = () => {
   const general = content?.general || {};
 
   return (
-    <footer className="bg-[#071322] text-slate-300 pt-16 pb-12 border-t border-[#1e2f47] font-sans relative">
+    <footer className="bg-slate-50 text-slate-600 pt-16 pb-12 border-t border-slate-200 font-sans relative">
       <div className="container mx-auto px-4 sm:px-8 max-w-7xl">
         
         {/* Main Grid */}
@@ -31,19 +32,19 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="The Age School Crest" 
-                className="h-11 w-11 object-contain rounded-lg border border-[#c5a880]/40 bg-white p-0.5 shadow-md group-hover:border-[#c5a880] transition-colors" 
+                className="h-11 w-11 object-contain rounded-xl border border-blue-100 bg-white p-0.5 shadow-xs group-hover:scale-105 transition-transform" 
               /> 
               <div className="flex flex-col">
-                <span className="text-lg font-serif font-bold text-white tracking-tight leading-tight group-hover:text-[#c5a880] transition-colors">
+                <span className="text-lg font-serif font-bold text-slate-900 tracking-tight leading-tight group-hover:text-blue-600 transition-colors">
                   {general.schoolName || 'The Age School'}
                 </span>
-                <span className="text-[10px] text-[#c5a880] uppercase tracking-widest font-semibold">
+                <span className="text-[10px] text-blue-600 uppercase tracking-widest font-bold">
                   Basavakalyan • Karnataka
                 </span>
               </div>
             </Link>
             
-            <p className="text-slate-400 text-xs leading-relaxed font-sans">
+            <p className="text-slate-500 text-xs leading-relaxed font-sans">
               {general.tagline || 'Cultivating intellectual clarity, disciplined moral conviction, and leadership in the heart of Karnataka.'}
             </p>
 
@@ -57,40 +58,40 @@ const Footer = () => {
 
           {/* COLUMN 2: Directory */}
           <div>
-            <h4 className="font-serif font-semibold text-white mb-4 text-sm tracking-wide flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+            <h4 className="font-serif font-semibold text-slate-900 mb-4 text-sm tracking-wide flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               Academic Directory
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300">
-              <li><Link to="/home" className="hover:text-[#c5a880] transition-colors">Home Page</Link></li>
-              <li><Link to="/about" className="hover:text-[#c5a880] transition-colors">About Our Vision & Faculty</Link></li>
-              <li><Link to="/academics" className="hover:text-[#c5a880] transition-colors">All 17 Classes & Curriculum</Link></li>
-              <li><Link to="/admissions" className="hover:text-[#c5a880] transition-colors">Admissions & Fee Schedule</Link></li>
-              <li><Link to="/student-life" className="hover:text-[#c5a880] transition-colors">Campus Life & Houses</Link></li>
-              <li><Link to="/news" className="hover:text-[#c5a880] transition-colors">Gazette & Notifications</Link></li>
+            <ul className="space-y-2.5 text-xs text-slate-600">
+              <li><Link to="/home" className="hover:text-blue-600 transition-colors">Home Page</Link></li>
+              <li><Link to="/about" className="hover:text-blue-600 transition-colors">About Our Vision & Faculty</Link></li>
+              <li><Link to="/academics" className="hover:text-blue-600 transition-colors">All 17 Classes & Curriculum</Link></li>
+              <li><Link to="/admissions" className="hover:text-blue-600 transition-colors">Admissions & Fee Schedule</Link></li>
+              <li><Link to="/student-life" className="hover:text-blue-600 transition-colors">Campus Life & Houses</Link></li>
+              <li><Link to="/news" className="hover:text-blue-600 transition-colors">Gazette & Notifications</Link></li>
             </ul>
           </div>
 
           {/* COLUMN 3: Administrative Desk */}
           <div>
-            <h4 className="font-serif font-semibold text-white mb-4 text-sm tracking-wide flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+            <h4 className="font-serif font-semibold text-slate-900 mb-4 text-sm tracking-wide flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               Campus Desk
             </h4>
-            <ul className="space-y-3 text-xs text-slate-300">
+            <ul className="space-y-3 text-xs text-slate-600">
               <li className="flex items-start gap-2.5">
-                <MapPin size={15} className="mt-0.5 text-[#c5a880] shrink-0" />
+                <MapPin size={15} className="mt-0.5 text-blue-600 shrink-0" />
                 <span>{general.address || 'Basavakalyan, Bidar Dist., Karnataka, India - 585327'}</span>
               </li>
               <li>
-                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-[#c5a880] transition-colors">
-                  <Phone size={15} className="text-[#c5a880] shrink-0" />
+                <a href={`tel:${general.phone || '+911234567890'}`} className="flex items-center gap-2.5 hover:text-blue-600 transition-colors">
+                  <Phone size={15} className="text-blue-600 shrink-0" />
                   <span>{general.phone || '(+91) 12345 67890'}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-[#c5a880] transition-colors">
-                  <Mail size={15} className="text-[#c5a880] shrink-0" />
+                <a href={`mailto:${general.email || 'info@theageschool.edu'}`} className="flex items-center gap-2.5 hover:text-blue-600 transition-colors">
+                  <Mail size={15} className="text-blue-600 shrink-0" />
                   <span>{general.email || 'info@theageschool.edu'}</span>
                 </a>
               </li>
@@ -99,43 +100,43 @@ const Footer = () => {
 
           {/* COLUMN 4: Recognition & Affiliation */}
           <div className="space-y-3">
-            <h4 className="font-serif font-semibold text-white mb-2 text-sm tracking-wide flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+            <h4 className="font-serif font-semibold text-slate-900 mb-2 text-sm tracking-wide flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               Institutional Accreditation
             </h4>
             
-            <div className="bg-[#0b192c] p-4 border border-[#c5a880]/30 rounded-xl shadow-inner">
-              <span className="text-[10px] text-[#c5a880] uppercase tracking-wider font-semibold block mb-1">
+            <div className="bg-white p-4 border border-blue-200/80 rounded-2xl shadow-xs">
+              <span className="text-[10px] text-blue-700 uppercase tracking-wider font-bold block mb-1">
                 Official Recognition
               </span>
-              <p className="text-xs font-semibold text-white">
+              <p className="text-xs font-bold text-slate-900">
                 {general.affiliation || 'Department of School Education, Karnataka'}
               </p>
-              <p className="text-[11px] text-slate-400 font-mono mt-1">
+              <p className="text-[11px] text-slate-500 font-mono mt-1">
                 {general.affiliationCode || 'Code: 29050220001'}
               </p>
             </div>
 
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className="text-[11px] text-slate-500 leading-relaxed">
               Karnataka State Board recognized institution preparing scholars for SSLC and Pre-University examinations.
             </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[#1e2f47] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
           <p>&copy; {currentYear} {general.schoolName || 'The Age School'}. All rights reserved.</p>
           <div className="flex gap-5 items-center">
-            <Link to="/contact" className="hover:text-[#c5a880] transition-colors">Inquiries</Link>
-            <span className="w-1 h-1 bg-slate-700 rounded-full" />
-            <Link to="/admissions" className="hover:text-[#c5a880] transition-colors">Admissions 2026-27</Link>
-            <span className="w-1 h-1 bg-slate-700 rounded-full" />
+            <Link to="/contact" className="hover:text-blue-600 transition-colors">Inquiries</Link>
+            <span className="w-1 h-1 bg-slate-300 rounded-full" />
+            <Link to="/admissions" className="hover:text-blue-600 transition-colors">Admissions 2026-27</Link>
+            <span className="w-1 h-1 bg-slate-300 rounded-full" />
             <Link 
               to="/login" 
-              className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5 text-slate-400"
+              className="hover:text-blue-600 transition-colors flex items-center gap-1.5 text-slate-500"
               title="Authorized Personnel Access"
             >
-              <Shield size={12} className="text-[#c5a880]" />
+              <Shield size={12} className="text-blue-600" />
               <span>Staff Login</span>
             </Link>
           </div>
@@ -151,7 +152,7 @@ const SocialLink = ({ href, icon }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer" 
-    className="w-8 h-8 rounded-lg bg-[#0b192c] border border-[#1e2f47] text-slate-300 flex items-center justify-center transition-all hover:text-[#c5a880] hover:border-[#c5a880]/50 hover:bg-[#12233b]"
+    className="w-8 h-8 rounded-xl bg-white border border-slate-200 text-slate-600 flex items-center justify-center transition-all hover:text-white hover:bg-blue-600 hover:border-blue-600 shadow-2xs"
   >
     {icon}
   </a>

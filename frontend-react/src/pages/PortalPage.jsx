@@ -529,10 +529,10 @@ const PortalPage = () => {
         <div className="min-h-screen bg-slate-100 font-sans text-slate-800 pb-20 selection:bg-indigo-100 selection:text-indigo-900">
             
             {/* TOP BAR */}
-            <div className="bg-[#0b192c] text-white border-b border-[#c5a880]/30">
+            <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white shadow-sm">
                 <div className="container mx-auto px-6 py-4 max-w-7xl flex flex-wrap justify-between items-center gap-4">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-sm bg-[#c5a880] text-[#07111e] flex items-center justify-center font-bold shadow-xs">
+                        <div className="w-10 h-10 rounded-xl bg-white text-blue-700 flex items-center justify-center font-bold shadow-xs">
                             A
                         </div>
                         <div>
@@ -634,7 +634,7 @@ const PortalPage = () => {
                             <button 
                                 onClick={() => handleSaveCms(cmsSection)}
                                 disabled={uploading}
-                                className="px-6 py-2.5 bg-[#c5a880] hover:bg-[#b89463] text-[#07111e] rounded-xs text-xs font-bold uppercase tracking-wider shadow-xs flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm shadow-blue-500/20 flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                             >
                                 {uploading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
                                 <span>Save {cmsSection.toUpperCase()} Changes</span>
@@ -654,9 +654,9 @@ const PortalPage = () => {
                                 <button
                                     key={sub.id}
                                     onClick={() => setCmsSection(sub.id)}
-                                    className={`px-4 py-2 text-xs font-bold transition ${
+                                    className={`px-4 py-2 text-xs font-bold transition rounded-lg ${
                                         cmsSection === sub.id 
-                                            ? 'bg-[#0b192c] text-white' 
+                                            ? 'bg-blue-600 text-white shadow-xs' 
                                             : 'text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200'
                                     }`}
                                 >
@@ -1358,7 +1358,7 @@ const PortalPage = () => {
                                 <button 
                                     type="submit" 
                                     disabled={uploading}
-                                    className="w-full py-3 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition disabled:opacity-50 cursor-pointer"
+                                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition disabled:opacity-50 cursor-pointer"
                                 >
                                     {uploading ? "Uploading..." : "Schedule Event"}
                                 </button>
@@ -1469,7 +1469,7 @@ const PortalPage = () => {
                                 <button 
                                     type="submit" 
                                     disabled={uploading}
-                                    className="w-full py-3 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition disabled:opacity-50 cursor-pointer"
+                                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition disabled:opacity-50 cursor-pointer"
                                 >
                                     {uploading ? "Publishing to Cloud..." : "Publish Article"}
                                 </button>
@@ -1602,7 +1602,7 @@ const PortalPage = () => {
                                     <button 
                                         type="submit" 
                                         disabled={uploading}
-                                        className="w-full py-2.5 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition disabled:opacity-50"
+                                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition disabled:opacity-50 cursor-pointer"
                                     >
                                         {uploading ? "Uploading to Cloudinary..." : "Upload Photos"}
                                     </button>
@@ -1709,7 +1709,7 @@ const PortalPage = () => {
                                 <button 
                                     type="submit" 
                                     disabled={uploading}
-                                    className="w-full py-3 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition disabled:opacity-50"
+                                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition disabled:opacity-50 cursor-pointer"
                                 >
                                     {uploading ? "Uploading File..." : "Publish Document"}
                                 </button>
@@ -1817,7 +1817,7 @@ const PortalPage = () => {
 
                                 <button 
                                     type="submit" 
-                                    className="w-full py-3 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition cursor-pointer"
+                                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition cursor-pointer"
                                 >
                                     Add Faculty Member
                                 </button>
@@ -1920,7 +1920,7 @@ const PortalPage = () => {
 
                                 <button 
                                     type="submit" 
-                                    className="w-full py-3 bg-[#0b192c] hover:bg-[#1e3e62] text-white font-bold rounded-xl text-xs shadow-md transition cursor-pointer"
+                                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md shadow-blue-500/20 transition cursor-pointer"
                                 >
                                     Enroll Student Record
                                 </button>

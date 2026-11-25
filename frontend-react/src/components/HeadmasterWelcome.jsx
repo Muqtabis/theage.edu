@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Quote, ArrowRight, Award, CheckCircle2 } from 'lucide-react';
+import { Quote, ArrowRight, Award, CheckCircle2, Sparkles } from 'lucide-react';
 
 const HeadmasterWelcome = () => {
     return (
-        <section className="py-20 sm:py-28 bg-[#faf8f5] border-b border-[#e8e4dc]">
+        <section className="py-20 sm:py-28 bg-gradient-to-b from-white via-amber-50/20 to-white border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     
@@ -12,24 +12,24 @@ const HeadmasterWelcome = () => {
                     <div className="lg:col-span-5 relative">
                         <div className="relative mx-auto max-w-md lg:max-w-none">
                             {/* Decorative Background Frame */}
-                            <div className="absolute -inset-4 border-2 border-[#c5a880]/30 rounded-2xl transform -rotate-1 pointer-events-none" />
+                            <div className="absolute -inset-3.5 border-2 border-amber-200 rounded-3xl transform -rotate-1 pointer-events-none" />
                             
-                            <div className="relative rounded-xl overflow-hidden border-2 border-[#c5a880] shadow-xl bg-white aspect-[4/5] img-zoom-box">
+                            <div className="relative rounded-2xl overflow-hidden border-2 border-amber-300/80 shadow-xl bg-white aspect-[4/5] img-zoom-box">
                                 <img 
                                     src="https://images.unsplash.com/photo-1544531327-c820ad9d46dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                                     alt="Director of The Age School" 
                                     className="w-full h-full object-cover object-top"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/90 via-[#071322]/20 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                                 
                                 <div className="absolute bottom-5 left-5 right-5 text-white">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#c5a880] block mb-1">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-300 block mb-1">
                                         Executive Leadership
                                     </span>
                                     <h4 className="font-serif font-bold text-xl text-white">
                                         Dr. Sarah Mitchell, Ph.D.
                                     </h4>
-                                    <p className="text-xs text-slate-300">
+                                    <p className="text-xs text-slate-200 font-medium">
                                         President & Head of Academics
                                     </p>
                                 </div>
@@ -39,12 +39,12 @@ const HeadmasterWelcome = () => {
 
                     {/* Editorial Message Column */}
                     <div className="lg:col-span-7 space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#c5a880]/40 text-[#8c7355] text-xs font-semibold shadow-2xs">
-                            <Award size={14} className="text-[#c5a880]" />
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold shadow-2xs">
+                            <Award size={14} className="text-amber-600" />
                             <span>Directorate Welcome Message</span>
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#0b192c] tracking-tight leading-[1.15]">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-slate-900 tracking-tight leading-[1.15]">
                             “Education is not merely about syllabus mastery. It is the formation of moral character.”
                         </h2>
 
@@ -56,18 +56,18 @@ const HeadmasterWelcome = () => {
                             Whether guiding a child through their first phonics in Nursery or preparing a senior scholar for SSLC Board distinction and Pre-University competitive entrance examinations, every teacher on our campus is a dedicated mentor. We welcome you to experience our vibrant community firsthand.
                         </p>
 
-                        {/* Three Pillars Bullet List */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#e8e4dc] text-xs">
-                            <div>
-                                <strong className="text-[#0b192c] block font-bold mb-1">Uncompromising Rigor</strong>
+                        {/* Three Pillars Highlight Cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-4 text-xs">
+                            <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3.5">
+                                <strong className="text-blue-900 block font-bold mb-1">Uncompromising Rigor</strong>
                                 <span className="text-slate-600 text-[11px] leading-tight block">100% board distinction with personalized doubt remediation.</span>
                             </div>
-                            <div>
-                                <strong className="text-[#0b192c] block font-bold mb-1">Moral Conviction</strong>
+                            <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3.5">
+                                <strong className="text-amber-900 block font-bold mb-1">Moral Conviction</strong>
                                 <span className="text-slate-600 text-[11px] leading-tight block">Civic responsibility and social humility woven into daily rhythm.</span>
                             </div>
-                            <div>
-                                <strong className="text-[#0b192c] block font-bold mb-1">Trilingual Fluency</strong>
+                            <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3.5">
+                                <strong className="text-emerald-900 block font-bold mb-1">Trilingual Fluency</strong>
                                 <span className="text-slate-600 text-[11px] leading-tight block">English, Kannada, and Hindi mastery for global opportunities.</span>
                             </div>
                         </div>

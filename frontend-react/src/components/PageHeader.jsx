@@ -1,14 +1,14 @@
 import React from 'react';
 
 const PageHeader = ({ title, description }) => (
-    <section className="relative py-24 md:py-32 bg-[#0b192c] text-white border-b border-[#c5a880]/20 text-center">
+    <section className="relative py-20 md:py-28 bg-gradient-to-b from-blue-50/70 via-indigo-50/40 to-white text-slate-900 border-b border-slate-200/80 text-center relative overflow-hidden">
         <div className="container relative z-10 mx-auto px-6 max-w-4xl">
-            <span className="w-12 h-0.5 bg-[#c5a880] mx-auto mb-6 block" />
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4 tracking-tight">
+            <span className="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mb-6 rounded-full block" />
+            <h1 className="text-4xl md:text-5xl font-serif font-black text-slate-900 mb-4 tracking-tight">
                 {title}
             </h1>
             {description && (
-                <p className="text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
                     {description}
                 </p>
             )}

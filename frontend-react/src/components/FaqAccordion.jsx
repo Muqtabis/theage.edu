@@ -37,16 +37,16 @@ const FaqAccordion = () => {
     };
 
     return (
-        <section className="py-20 sm:py-28 bg-white border-b border-[#e8e4dc]">
+        <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
             <div className="max-w-4xl mx-auto px-4 sm:px-8">
                 
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-[#8c7355] block mb-2 flex items-center justify-center gap-1.5">
-                        <HelpCircle size={14} className="text-[#c5a880]" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center justify-center gap-1.5">
+                        <HelpCircle size={14} className="text-blue-600" />
                         Admissions Guidance
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0b192c] tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight">
                         Frequently Asked Questions
                     </h2>
                     <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-lg mx-auto leading-relaxed">
@@ -61,10 +61,10 @@ const FaqAccordion = () => {
                         return (
                             <div 
                                 key={idx}
-                                className={`border transition-all duration-200 rounded-xl overflow-hidden ${
+                                className={`border transition-all duration-200 rounded-2xl overflow-hidden ${
                                     isOpen 
-                                        ? 'border-[#c5a880] bg-[#faf8f5] shadow-xs' 
-                                        : 'border-[#e8e4dc] bg-white hover:border-[#c5a880]/60'
+                                        ? 'border-blue-300 bg-blue-50/20 shadow-xs' 
+                                        : 'border-slate-200 bg-white hover:border-blue-200'
                                 }`}
                             >
                                 <button
@@ -72,18 +72,18 @@ const FaqAccordion = () => {
                                     className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                                     aria-expanded={isOpen}
                                 >
-                                    <span className="font-serif font-bold text-sm sm:text-base text-[#0b192c] leading-snug">
+                                    <span className="font-serif font-bold text-sm sm:text-base text-slate-900 leading-snug">
                                         {item.q}
                                     </span>
                                     <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                                        isOpen ? 'bg-[#c5a880] text-[#071322] rotate-180' : 'bg-slate-100 text-slate-600'
+                                        isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-600'
                                     }`}>
                                         <ChevronDown size={14} />
                                     </span>
                                 </button>
 
                                 {isOpen && (
-                                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-[#e8e4dc]/70">
+                                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-slate-100">
                                         {item.a}
                                     </div>
                                 )}
@@ -93,13 +93,17 @@ const FaqAccordion = () => {
                 </div>
 
                 {/* Direct Action */}
-                <div className="mt-12 p-6 sm:p-8 rounded-xl border border-[#c5a880]/40 bg-[#faf8f5] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-2xs">
+                <div className="mt-12 p-6 sm:p-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-blue-50/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
                     <div>
-                        <h4 className="font-serif font-bold text-base text-[#0b192c]">Have a specific enrollment inquiry?</h4>
+                        <h4 className="font-serif font-bold text-base text-slate-900">Have a specific enrollment inquiry?</h4>
                         <p className="text-xs text-slate-600 mt-1">Our admissions desk is available Monday through Saturday from 08:30 to 16:30 IST.</p>
                     </div>
-                    <Link to="/contact" className="btn-gold text-xs shrink-0">
-                        <span>Contact Admissions Desk</span>
+
+                    <Link 
+                        to="/contact" 
+                        className="btn-primary text-xs shrink-0"
+                    >
+                        <span>Connect with Admissions Desk</span>
                         <ArrowRight size={13} />
                     </Link>
                 </div>

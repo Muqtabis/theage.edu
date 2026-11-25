@@ -1,6 +1,6 @@
 /* =========================================
-   THE AGE SCHOOL — PRESTIGIOUS ACADEMIC IDENTITY
-   Oxford Royal Navy (#0b192c) + Antique Burnished Gold (#c5a880) + Pure Alabaster (#faf8f5)
+   THE AGE SCHOOL — VIBRANT & BRIGHT EDUCATIONAL DESIGN
+   Luminous White & Cloud (#ffffff / #f8fafc) + Royal Sapphire Blue (#1d4ed8 / #2563eb) + Sunburst Amber (#f59e0b)
    ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
 
@@ -12,14 +12,15 @@
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     scroll-behavior: smooth;
-    color: #0b192c;
-    background-color: #faf8f5;
+    color: #0f172a;
+    background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4 {
     letter-spacing: -0.02em;
+    color: #0f172a;
   }
 
   .font-serif {
@@ -29,154 +30,157 @@
 }
 
 /* =========================================
-   PRESTIGIOUS ACADEMIC BUTTONS & UTILITIES
+   VIBRANT & BRIGHT EDUCATIONAL BUTTONS
    ========================================= */
 
-/* Burnished Antique Gold CTA */
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #c5a880 0%, #b89058 100%);
-  color: #071322;
-  font-weight: 700;
-  font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 14px -2px rgba(197, 168, 128, 0.45);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-.btn-gold:hover {
-  background: linear-gradient(135deg, #d4b890 0%, #c5a880 100%);
-  box-shadow: 0 8px 24px -4px rgba(197, 168, 128, 0.6);
-  transform: translateY(-2px);
-}
-.btn-gold:active {
-  transform: translateY(0);
-}
-
-/* Royal Oxford Navy Primary */
+/* Royal Sapphire Blue Primary CTA */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #0b192c;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.875rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(197, 168, 128, 0.4);
-  box-shadow: 0 4px 12px -2px rgba(11, 25, 44, 0.35);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px -2px rgba(37, 99, 235, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 .btn-primary:hover {
-  background-color: #122744;
-  border-color: #c5a880;
-  box-shadow: 0 8px 20px -2px rgba(11, 25, 44, 0.5);
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  box-shadow: 0 8px 22px -2px rgba(37, 99, 235, 0.45);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 .btn-primary:active {
   transform: translateY(0);
 }
 
-/* Frosted Glass Hero CTA */
+/* Sunburst Amber Golden CTA */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 14px -2px rgba(245, 158, 11, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-gold:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 8px 22px -2px rgba(245, 158, 11, 0.5);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Luminous Translucent Hero Glass Button */
 .btn-glass {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
-  color: #ffffff;
-  font-weight: 600;
+  color: #0f172a;
+  font-weight: 700;
   font-size: 0.875rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0.625rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 .btn-glass:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: #ffffff;
+  background: #ffffff;
+  color: #1d4ed8;
+  border-color: #93c5fd;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
 }
 .btn-glass:active {
   transform: translateY(0);
 }
 
-/* Clean Outline Button */
+/* Crisp Clean Outline Button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   background-color: #ffffff;
-  color: #0b192c;
-  border: 1px solid #e2e8f0;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.65rem 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   transition: all 0.25s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   cursor: pointer;
 }
 .btn-secondary:hover {
-  background-color: #faf8f5;
-  border-color: #c5a880;
-  color: #8c7355;
+  background-color: #f8fafc;
+  border-color: #2563eb;
+  color: #1d4ed8;
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(11, 25, 44, 0.06);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08);
 }
 
-/* Academic Heritage Card */
+/* Academic White Cards with Radiant Soft Shadows */
 .academic-card {
   background-color: #ffffff;
-  border: 1px solid rgba(197, 168, 128, 0.25);
-  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px -2px rgba(11, 25, 44, 0.04);
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
   position: relative;
   overflow: hidden;
 }
 .academic-card:hover {
-  border-color: #c5a880;
-  box-shadow: 0 16px 32px -8px rgba(11, 25, 44, 0.09), 0 4px 12px -2px rgba(197, 168, 128, 0.15);
+  border-color: #93c5fd;
+  box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
   transform: translateY(-3px);
 }
 
-/* Legacy Card Minimal */
 .card-minimal {
   background-color: #ffffff;
-  border: 1px solid #e8e4dc;
-  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.03);
 }
 .card-minimal:hover {
-  border-color: #c5a880;
-  box-shadow: 0 12px 28px -6px rgba(11, 25, 44, 0.06);
+  border-color: #93c5fd;
+  box-shadow: 0 12px 24px -6px rgba(37, 99, 235, 0.08);
   transform: translateY(-2px);
 }
 
-/* Card Interactive (Hover Spotlight) */
 .card-interactive {
   background-color: #ffffff;
-  border: 1px solid rgba(197, 168, 128, 0.25);
+  border: 1px solid #e2e8f0;
   border-radius: 0.875rem;
   position: relative;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
 }
 .card-interactive:hover {
-  border-color: #c5a880;
-  box-shadow: 0 16px 36px -8px rgba(11, 25, 44, 0.1), 0 4px 16px -2px rgba(197, 168, 128, 0.2);
+  border-color: #93c5fd;
+  box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.12);
   transform: translateY(-3px);
 }
 
@@ -192,24 +196,25 @@
   transform: scale(1.05);
 }
 
-/* Subtle Scrollbar */
+/* Subtle Clean Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #faf8f5; 
+  background: #f8fafc; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4cfc7;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c5a880;
+  background: #94a3b8;
 }
 
 html, body {
   overflow-x: hidden;
+  background-color: #ffffff;
 }
 
 :root {

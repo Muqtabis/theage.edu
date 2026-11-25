@@ -241,22 +241,22 @@ const AboutPage = () => {
             {/* ==========================================
                 5. CHRONOLOGICAL MILESTONES
             ========================================== */}
-            <section className="py-20 bg-slate-950 text-white">
+            <section className="py-20 bg-slate-50 border-t border-slate-200 text-slate-800">
                 <div className="max-w-4xl mx-auto px-4 sm:px-8">
                     <div className="text-center max-w-xl mx-auto mb-14">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 block mb-2">Historical Record</span>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-white">Foundations & Milestones</h2>
+                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">Historical Record</span>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Foundations & Milestones</h2>
                     </div>
 
                     <div className="space-y-4">
                         {timeline.map((item, idx) => (
-                            <div key={idx} className="p-6 bg-slate-900 border border-slate-800 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-slate-700 transition-colors">
-                                <div className="text-2xl font-bold text-blue-400 md:w-28 shrink-0">
+                            <div key={idx} className="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-blue-300 shadow-xs hover:shadow-md transition-all">
+                                <div className="text-2xl font-bold text-blue-600 md:w-28 shrink-0">
                                     {item.year}
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-base font-bold text-white mb-1">{item.title}</h3>
-                                    <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                                    <h3 className="text-base font-bold text-slate-900 mb-1">{item.title}</h3>
+                                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
                                 </div>
                             </div>
                         ))}
