@@ -52,32 +52,32 @@ const AdmissionsPage = () => {
         <div className="font-sans text-slate-800 bg-white selection:bg-blue-600 selection:text-white">
             
             {/* HERO */}
-            <section className="bg-slate-50 border-b border-slate-200/80 py-16 sm:py-24 text-center">
+            <section className="bg-slate-50 border-b border-slate-200/80 py-8 sm:py-14 text-center">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 inline-flex items-center gap-2 mb-4 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-2xs">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 inline-flex items-center gap-1.5 mb-3 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-2xs">
                         <GraduationCap size={15} className="text-blue-600" />
                         <span>{admissions.heroBadge || general.admissionsBadge || 'Admissions Directory 2026–27'}</span>
                     </span>
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 tracking-tight">
                         {admissions.heroTitle || 'Begin Your Journey Here'}
                     </h1>
-                    <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                    <p className="text-slate-600 text-xs sm:text-base max-w-xl mx-auto leading-relaxed">
                         {admissions.heroSubtitle || 'We welcome curious, conscientious learners seeking disciplined scholarship, moral formation, and lifelong character.'}
                     </p>
                 </div>
             </section>
 
             {/* ADMISSION ROADMAP (4 Steps) */}
-            <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="max-w-2xl mb-12 sm:mb-16">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
+            <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="max-w-2xl mb-6 sm:mb-8">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-1">
                         Transparent Protocol
                     </span>
-                    <h2 className="text-3xl font-bold text-slate-900">The Four-Step Enrollment Procedure</h2>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-2">A structured admission protocol designed to understand and support every learner.</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">The Four-Step Enrollment Procedure</h2>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1">A structured admission protocol designed to understand and support every learner.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {[
                         { 
                             id: 1, 

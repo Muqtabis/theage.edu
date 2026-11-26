@@ -98,17 +98,17 @@ const AboutPage = () => {
             {/* ==========================================
                 2. LEADERSHIP STATEMENTS
             ========================================== */}
-            <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="max-w-2xl mx-auto text-center mb-14">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">
+            <section className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="max-w-2xl mx-auto text-center mb-6 sm:mb-8">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-1">
                         Institutional Governance
                     </span>
-                    <h2 className="text-3xl font-bold text-slate-900">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
                         Statements from Leadership
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
                     
                     {/* President Card */}
                     <div className="card-minimal p-7 sm:p-8 flex flex-col justify-between group">
@@ -186,14 +186,14 @@ const AboutPage = () => {
             {/* ==========================================
                 3. CORE VALUES & PHILOSOPHY
             ========================================== */}
-            <section className="py-20 bg-slate-50/70 border-y border-slate-200/80">
+            <section className="py-8 sm:py-14 bg-slate-50/70 border-y border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="max-w-2xl mb-12">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-2">Pillars</span>
-                        <h2 className="text-3xl font-bold text-slate-900">The Four Core Commitments</h2>
+                    <div className="max-w-2xl mb-6 sm:mb-8">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-1">Pillars</span>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">The Four Core Commitments</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                         {[
                             { title: "Intellectual Rigor", desc: "Setting ambitious expectations and fostering independent curiosity with dedicated faculty mentoring." },
                             { title: "Ethical Integrity", desc: "Instilling deep moral responsibility, community civic pride, and uncompromising honesty in every interaction." },

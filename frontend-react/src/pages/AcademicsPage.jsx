@@ -99,37 +99,37 @@ const AcademicsPage = () => {
         <div className="font-sans text-slate-800 bg-white w-full overflow-x-hidden selection:bg-blue-600 selection:text-white">
             
             {/* HERO SECTION */}
-            <section className="bg-slate-50 border-b border-slate-200/80 py-16 sm:py-24 text-center">
+            <section className="bg-slate-50 border-b border-slate-200/80 py-8 sm:py-14 text-center">
                 <div className="max-w-4xl mx-auto px-4 sm:px-8">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-800 text-xs font-medium mb-5 shadow-2xs">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-800 text-xs font-medium mb-3 sm:mb-4 shadow-2xs">
                         <GraduationCap size={15} className="text-blue-600" />
                         <span>{academics.heroBadge || 'Comprehensive Academic Framework'}</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 tracking-tight">
+                    <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 tracking-tight">
                         {academics.heroTitle || 'Curriculum & Class Directory'}
                     </h1>
                     
-                    <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8">
+                    <p className="text-slate-600 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-6">
                         {academics.heroSubtitle || "From foundational early childhood in Pre-Nursery to secondary board mastery and senior PUC streams, explore every grade's learning outcomes, daily timings, and subjects."}
                     </p>
 
-                    <div className="flex flex-wrap items-center justify-center gap-3">
+                    <div className="flex flex-wrap items-center justify-center gap-2.5">
                         <a 
                             href="#class-directory" 
-                            className="btn-primary text-xs"
+                            className="btn-primary text-xs py-2 px-4"
                         >
                             Explore All 17 Classes
                         </a>
                         <a 
                             href="#daily-routine" 
-                            className="btn-secondary text-xs"
+                            className="btn-secondary text-xs py-2 px-4"
                         >
                             Daily Schedule
                         </a>
                         <a 
                             href="#board-gazette" 
-                            className="btn-secondary text-xs"
+                            className="btn-secondary text-xs py-2 px-4"
                         >
                             Official Gazette
                         </a>
@@ -138,29 +138,29 @@ const AcademicsPage = () => {
             </section>
 
             {/* INSTITUTIONAL METRICS STRIP */}
-            <section className="bg-white border-b border-slate-200/80 py-8 px-4 sm:px-8">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-                    <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-3xl font-bold text-slate-900 block mb-0.5">17</span>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Distinct Grades</span>
+            <section className="bg-white border-b border-slate-200/80 py-5 sm:py-7 px-4 sm:px-8">
+                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 text-center">
+                    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-2xl sm:text-3xl font-bold text-slate-900 block mb-0.5">17</span>
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500">Distinct Grades</span>
                     </div>
-                    <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-3xl font-bold text-slate-900 block mb-0.5">1:20</span>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Student-Mentor Ratio</span>
+                    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-2xl sm:text-3xl font-bold text-slate-900 block mb-0.5">1:20</span>
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500">Student Ratio</span>
                     </div>
-                    <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-3xl font-bold text-slate-900 block mb-0.5">100%</span>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Board Pass Record</span>
+                    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-2xl sm:text-3xl font-bold text-slate-900 block mb-0.5">100%</span>
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500">Board Distinction</span>
                     </div>
-                    <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-3xl font-bold text-slate-900 block mb-0.5">3-Lang</span>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">English, Kannada & Hindi</span>
+                    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-2xl sm:text-3xl font-bold text-slate-900 block mb-0.5">3-Lang</span>
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500">Fluency</span>
                     </div>
                 </div>
             </section>
 
             {/* EXPANDING CLASS STRUCTURE DIRECTORY */}
-            <section id="class-directory" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-8">
+            <section id="class-directory" className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-5 border-b border-slate-200 gap-4">
                     <div>
                         <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 block mb-1">

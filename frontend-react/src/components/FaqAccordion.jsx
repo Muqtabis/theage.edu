@@ -37,31 +37,31 @@ const FaqAccordion = () => {
     };
 
     return (
-        <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+        <section className="py-8 sm:py-14 bg-white border-b border-slate-200/80">
             <div className="max-w-4xl mx-auto px-4 sm:px-8">
                 
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center justify-center gap-1.5">
+                <div className="text-center mb-6 sm:mb-8">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1.5 flex items-center justify-center gap-1.5">
                         <HelpCircle size={14} className="text-blue-600" />
                         Admissions Guidance
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-slate-900 tracking-tight">
                         Frequently Asked Questions
                     </h2>
-                    <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-lg mx-auto leading-relaxed">
+                    <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-lg mx-auto leading-relaxed">
                         Clear institutional answers regarding admissions criteria, safe bus transport, curriculum rigor, and campus daily rhythms.
                     </p>
                 </div>
 
                 {/* Accordion List */}
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                     {faqItems.map((item, idx) => {
                         const isOpen = openIndex === idx;
                         return (
                             <div 
                                 key={idx}
-                                className={`border transition-all duration-200 rounded-2xl overflow-hidden ${
+                                className={`border transition-all duration-200 rounded-xl overflow-hidden ${
                                     isOpen 
                                         ? 'border-blue-300 bg-blue-50/20 shadow-xs' 
                                         : 'border-slate-200 bg-white hover:border-blue-200'
@@ -69,21 +69,21 @@ const FaqAccordion = () => {
                             >
                                 <button
                                     onClick={() => toggle(idx)}
-                                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
+                                    className="w-full p-3.5 sm:p-5 text-left flex items-center justify-between gap-3 cursor-pointer"
                                     aria-expanded={isOpen}
                                 >
-                                    <span className="font-serif font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                    <span className="font-serif font-bold text-xs sm:text-sm md:text-base text-slate-900 leading-snug">
                                         {item.q}
                                     </span>
-                                    <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                                    <span className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 ${
                                         isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-600'
                                     }`}>
-                                        <ChevronDown size={14} />
+                                        <ChevronDown size={13} />
                                     </span>
                                 </button>
 
                                 {isOpen && (
-                                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-slate-100">
+                                    <div className="px-4 sm:px-5 pb-4 pt-1 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-slate-100">
                                         {item.a}
                                     </div>
                                 )}
@@ -93,7 +93,7 @@ const FaqAccordion = () => {
                 </div>
 
                 {/* Direct Action */}
-                <div className="mt-12 p-6 sm:p-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-blue-50/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
+                <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-blue-50/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
                     <div>
                         <h4 className="font-serif font-bold text-base text-slate-900">Have a specific enrollment inquiry?</h4>
                         <p className="text-xs text-slate-600 mt-1">Our admissions desk is available Monday through Saturday from 08:30 to 16:30 IST.</p>

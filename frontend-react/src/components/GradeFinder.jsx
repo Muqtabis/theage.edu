@@ -110,27 +110,27 @@ const GradeFinder = () => {
     const selected = gradeData.find(g => g.id === selectedId) || gradeData[0];
 
     return (
-        <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+        <section className="py-8 sm:py-14 bg-white border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center gap-1.5">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1.5 flex items-center gap-1.5">
                             <Sparkles size={14} className="text-blue-600" />
                             Academic Matrix (All 17 Classes)
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-slate-900 tracking-tight">
                             Explore Curriculum by Academic Wing
                         </h2>
-                        <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-xl leading-relaxed">
+                        <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
                             Select a stage below to inspect eligible age criteria, daily timings, student-teacher ratio, and core learning outcomes.
                         </p>
                     </div>
 
                     <Link 
                         to="/academics" 
-                        className="btn-secondary text-xs self-start md:self-auto"
+                        className="btn-secondary text-xs self-start md:self-auto py-2 px-3.5"
                     >
                         <span>All 17 Classes Directory</span>
                         <ArrowRight size={13} />
@@ -138,14 +138,14 @@ const GradeFinder = () => {
                 </div>
 
                 {/* Segmented Grade Selector Buttons */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2.5 mb-5 sm:mb-6 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
                     {gradeData.map((g) => {
                         const active = g.id === selectedId;
                         return (
                             <button
                                 key={g.id}
                                 onClick={() => setSelectedId(g.id)}
-                                className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                                className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                                     active
                                         ? 'bg-blue-600 text-white border border-blue-600 shadow-md shadow-blue-500/25 font-bold'
                                         : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-slate-50'
@@ -158,11 +158,11 @@ const GradeFinder = () => {
                 </div>
 
                 {/* Interactive Dynamic Display Card */}
-                <div className="academic-card p-6 sm:p-8 md:p-10 bg-white">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="academic-card p-4 sm:p-6 md:p-8 bg-white shadow-xs">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                         
                         {/* Left Details */}
-                        <div className="lg:col-span-7 space-y-6">
+                        <div className="lg:col-span-7 space-y-4 sm:space-y-5">
                             <div className="flex flex-wrap items-center gap-2">
                                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
                                     {selected.wing}

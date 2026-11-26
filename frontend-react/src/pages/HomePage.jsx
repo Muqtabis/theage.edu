@@ -14,7 +14,8 @@ import {
     Award,
     MapPin,
     Users,
-    Sparkles
+    Sparkles,
+    CheckCircle2
 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import InteractiveHeroSlider from '../components/InteractiveHeroSlider';
@@ -123,9 +124,9 @@ const HomePage = () => {
             {/* ==========================================
                 OFFICIAL NOTICE MARQUEE TICKER (BRIGHT GRADIENT)
             ========================================== */}
-            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white py-3 px-4 sm:px-8 shadow-sm">
-                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
+            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white py-2.5 sm:py-3 px-3 sm:px-8 shadow-sm">
+                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 overflow-hidden w-full sm:w-auto">
                         <span className="shrink-0 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 bg-amber-400 text-slate-950 rounded-full shadow-2xs">
                             OFFICIAL GAZETTE
                         </span>
@@ -149,28 +150,34 @@ const HomePage = () => {
             <HeadmasterWelcome />
 
             {/* ==========================================
-                3. ANIMATED METRICS BANNER
+                3. ANIMATED METRICS BANNER (HIGH DENSITY 2x2)
             ========================================== */}
             <AnimatedStatCounter />
 
             {/* ==========================================
-                4. INSTITUTIONAL PHILOSOPHY & PILLARS
+                4. INSTITUTIONAL PHILOSOPHY & PILLARS (FILLED & RICH)
             ========================================== */}
-            <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="max-w-2xl mb-14">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center gap-1.5">
-                        <Sparkles size={14} className="text-blue-600" />
-                        Pillars of Excellence
-                    </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-slate-900 tracking-tight">
-                        A Framework Built on Academic Supremacy & Moral Bearing.
-                    </h2>
-                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-3">
-                        We balance disciplined scholarship with creative inquiry, ensuring students master foundational concepts while developing independent critical judgment.
-                    </p>
+            <section className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
+                    <div className="max-w-2xl">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1.5 flex items-center gap-1.5">
+                            <Sparkles size={14} className="text-blue-600" />
+                            Pillars of Academic Supremacy
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-slate-900 tracking-tight">
+                            Holistic Framework Built on Rigor & Bearing.
+                        </h2>
+                    </div>
+                    <Link 
+                        to="/about" 
+                        className="btn-secondary text-xs self-start md:self-auto py-2 px-3.5"
+                    >
+                        <span>Read Full Philosophy</span>
+                        <ArrowRight size={13} />
+                    </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {[
                         {
                             icon: BookOpen,
@@ -178,7 +185,8 @@ const HomePage = () => {
                             desc: home.bento1Desc || 'Modern robotics, laboratory experimentation, and computational thinking starting from the primary years.',
                             tag: 'Laboratory Studies',
                             color: 'bg-blue-100 text-blue-600',
-                            tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
+                            tagColor: 'bg-blue-50 text-blue-700 border-blue-200',
+                            bullets: ['Physics, Chemistry & Bio labs', 'Hands-on Arduino robotics', 'Math Olympiad mentorship']
                         },
                         {
                             icon: Shield,
@@ -186,7 +194,8 @@ const HomePage = () => {
                             desc: home.bento2Desc || 'Integrity, humility, empathy, and social responsibility woven into the daily rhythm of campus life.',
                             tag: 'Ethical Guidance',
                             color: 'bg-amber-100 text-amber-600',
-                            tagColor: 'bg-amber-50 text-amber-700 border-amber-200'
+                            tagColor: 'bg-amber-50 text-amber-700 border-amber-200',
+                            bullets: ['Daily moral assembly discourse', 'Community service outreach', 'Respect & personal discipline']
                         },
                         {
                             icon: Compass,
@@ -194,7 +203,8 @@ const HomePage = () => {
                             desc: home.bento3Desc || 'A state curriculum elevated with national standards, preparing scholars for higher education and competitive examinations.',
                             tag: 'Scholastic Breadth',
                             color: 'bg-purple-100 text-purple-600',
-                            tagColor: 'bg-purple-50 text-purple-700 border-purple-200'
+                            tagColor: 'bg-purple-50 text-purple-700 border-purple-200',
+                            bullets: ['Trilingual fluency training', 'National debate competitions', 'Competitive entrance prep']
                         },
                         {
                             icon: GraduationCap,
@@ -202,29 +212,45 @@ const HomePage = () => {
                             desc: home.bento4Desc || 'Every child is recognized as unique. Personalized academic interventions ensure no student is left behind.',
                             tag: 'Ratio 1:20',
                             color: 'bg-emerald-100 text-emerald-600',
-                            tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                            tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                            bullets: ['Remedial doubt sessions', 'Regular parent consultations', 'Dedicated house wardens']
                         }
                     ].map((pillar, pi) => {
                         const Icon = pillar.icon;
                         return (
                             <div 
                                 key={pi} 
-                                className="academic-card p-6 sm:p-7 flex flex-col justify-between group cursor-default shadow-sm hover:shadow-md"
+                                className="academic-card p-4 sm:p-5 flex flex-col justify-between group cursor-default shadow-xs hover:shadow-md transition-all"
                             >
                                 <div>
-                                    <div className={`w-12 h-12 rounded-xl ${pillar.color} flex items-center justify-center mb-6 shadow-xs group-hover:scale-105 transition-transform`}>
-                                        <Icon size={24} strokeWidth={2} />
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className={`w-10 h-10 rounded-xl ${pillar.color} flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform`}>
+                                            <Icon size={20} strokeWidth={2} />
+                                        </div>
+                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${pillar.tagColor}`}>{pillar.tag}</span>
                                     </div>
-                                    <h3 className="text-lg font-serif font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
+
+                                    <h3 className="text-base font-serif font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
                                         {pillar.title}
                                     </h3>
-                                    <p className="text-xs text-slate-600 leading-relaxed">
+                                    <p className="text-xs text-slate-600 leading-relaxed mb-3">
                                         {pillar.desc}
                                     </p>
+
+                                    {/* Sub-bullets to fill space meaningfully with rich curriculum facts */}
+                                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                                        {pillar.bullets.map((b, bi) => (
+                                            <div key={bi} className="flex items-center gap-1.5 text-[11px] text-slate-600">
+                                                <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
+                                                <span>{b}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="pt-6 mt-6 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
-                                    <span className={`px-2.5 py-0.5 rounded-full border ${pillar.tagColor}`}>{pillar.tag}</span>
-                                    <ArrowRight size={13} className="text-blue-600 group-hover:translate-x-1 transition-transform" />
+
+                                <div className="pt-3 mt-3 border-t border-slate-100 text-[11px] font-semibold text-blue-600 flex items-center justify-between">
+                                    <span>Learn curriculum details</span>
+                                    <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>
                         );
@@ -243,23 +269,26 @@ const HomePage = () => {
             <CampusFacilitySwitcher onOpenModal={() => setIsModalOpen(true)} />
 
             {/* ==========================================
-                7. THE FOUR HOUSES SYSTEM (VIBRANT & COLORFUL)
+                7. THE FOUR HOUSES SYSTEM (COMPACT 2x2 ON MOBILE)
             ========================================== */}
-            <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+            <section className="py-8 sm:py-14 bg-slate-50 border-b border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="max-w-2xl mb-12">
-                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2">
-                            House Tradition
-                        </span>
-                        <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900">
-                            The Four Houses System
-                        </h2>
-                        <p className="text-xs sm:text-sm text-slate-600 mt-2">
-                            Every scholar is initiated into one of our four institutional houses, fostering healthy competition, leadership, and lifelong fellowship.
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
+                        <div>
+                            <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1">
+                                House System & Heraldic Pride
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl font-serif font-black text-slate-900">
+                                The Four Houses Tradition
+                            </h2>
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-600 max-w-md">
+                            Every scholar is initiated into one of four houses, fostering healthy competition, leadership, and lifelong fellowship.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* 2-column on mobile, 4-column on desktop - FILLS SPACE PERFECTLY */}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
                         {[
                             { 
                                 name: "Ashoka House", 
@@ -267,7 +296,9 @@ const HomePage = () => {
                                 border: "border-red-200 hover:border-red-400",
                                 badge: "bg-red-50 text-red-700 border-red-200",
                                 mottoColor: "text-red-700",
-                                desc: "Instilling moral leadership, resilience, and unyielding fortitude in service to society." 
+                                accent: "bg-red-500",
+                                desc: "Moral leadership, resilience, and unyielding fortitude in service to society.",
+                                values: ["Bravery", "Social Honor", "Integrity"]
                             },
                             { 
                                 name: "Tagore House", 
@@ -275,7 +306,9 @@ const HomePage = () => {
                                 border: "border-amber-200 hover:border-amber-400",
                                 badge: "bg-amber-50 text-amber-700 border-amber-200",
                                 mottoColor: "text-amber-700",
-                                desc: "Celebrating artistic self-expression, literary fluency, and open-minded inquiry." 
+                                accent: "bg-amber-500",
+                                desc: "Artistic self-expression, literary fluency, and open-minded inquiry.",
+                                values: ["Literature", "Fine Arts", "Eloquence"]
                             },
                             { 
                                 name: "Raman House", 
@@ -283,7 +316,9 @@ const HomePage = () => {
                                 border: "border-blue-200 hover:border-blue-400",
                                 badge: "bg-blue-50 text-blue-700 border-blue-200",
                                 mottoColor: "text-blue-700",
-                                desc: "Championing empirical logic, innovation, mathematics, and technological marvels." 
+                                accent: "bg-blue-600",
+                                desc: "Empirical logic, innovation, mathematics, and technological marvels.",
+                                values: ["Empirical Logic", "STEM", "Discovery"]
                             },
                             { 
                                 name: "Kalam House", 
@@ -291,20 +326,35 @@ const HomePage = () => {
                                 border: "border-emerald-200 hover:border-emerald-400",
                                 badge: "bg-emerald-50 text-emerald-700 border-emerald-200",
                                 mottoColor: "text-emerald-700",
-                                desc: "Nurturing soaring aspirations, scientific patriotism, humility, and steadfast diligence." 
+                                accent: "bg-emerald-600",
+                                desc: "Soaring aspirations, scientific patriotism, humility, and steadfast diligence.",
+                                values: ["Humility", "Diligence", "Patriotism"]
                             }
                         ].map((h, hi) => (
                             <div 
                                 key={hi} 
-                                className={`academic-card p-6 flex flex-col justify-between group border ${h.border} shadow-sm hover:shadow-md`}
+                                className={`academic-card p-3.5 sm:p-5 flex flex-col justify-between group border ${h.border} shadow-xs hover:shadow-md transition-all`}
                             >
                                 <div>
-                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border inline-block mb-3 ${h.badge}`}>
-                                        House Division
-                                    </span>
-                                    <h3 className="font-serif font-bold text-xl text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{h.name}</h3>
-                                    <p className={`text-xs font-semibold italic mb-3 ${h.mottoColor}`}>"{h.motto}"</p>
-                                    <p className="text-xs text-slate-600 leading-relaxed">{h.desc}</p>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className={`w-2.5 h-2.5 rounded-full ${h.accent}`} />
+                                        <span className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${h.badge}`}>
+                                            House
+                                        </span>
+                                    </div>
+                                    <h3 className="font-serif font-bold text-base sm:text-lg text-slate-900 mb-0.5 group-hover:text-blue-600 transition-colors leading-tight">
+                                        {h.name}
+                                    </h3>
+                                    <p className={`text-[11px] sm:text-xs font-semibold italic mb-2 ${h.mottoColor}`}>"{h.motto}"</p>
+                                    <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mb-3">{h.desc}</p>
+                                </div>
+
+                                <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+                                    {h.values.map((val, vi) => (
+                                        <span key={vi} className="text-[9px] sm:text-[10px] font-medium bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded-md">
+                                            {val}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
                         ))}
@@ -313,40 +363,40 @@ const HomePage = () => {
             </section>
 
             {/* ==========================================
-                8. CAMPUS MOMENTS (PHOTO SLIDER)
+                8. CAMPUS MOMENTS (PHOTO SLIDER - COMPACT)
             ========================================== */}
-            <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="flex justify-between items-end mb-8 sm:mb-12">
+            <section className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="flex justify-between items-end mb-4 sm:mb-6">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1">
                             Campus Chronicle
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-serif font-black text-slate-900">Life & Learning in Pictures</h2>
+                        <h2 className="text-2xl sm:text-3xl font-serif font-black text-slate-900">Life & Learning in Pictures</h2>
                     </div>
                     {slideshowPhotos.length > 1 && (
-                        <div className="flex gap-2">
+                        <div className="flex gap-1.5">
                             <button 
                                 onClick={prevSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-xl flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
+                                className="w-8 h-8 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                                 aria-label="Previous photo"
                             >
-                                <ChevronLeft size={16} />
+                                <ChevronLeft size={15} />
                             </button>
                             <button 
                                 onClick={nextSlide} 
-                                className="w-9 h-9 border border-slate-200 bg-white rounded-xl flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
+                                className="w-8 h-8 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer shadow-2xs"
                                 aria-label="Next photo"
                             >
-                                <ChevronRight size={16} />
+                                <ChevronRight size={15} />
                             </button>
                         </div>
                     )}
                 </div>
 
-                <div className="relative h-[340px] sm:h-[440px] md:h-[500px] w-full border border-slate-200 bg-slate-100 overflow-hidden rounded-2xl group img-zoom-box shadow-lg">
+                <div className="relative h-[260px] sm:h-[360px] md:h-[420px] w-full border border-slate-200 bg-slate-100 overflow-hidden rounded-2xl group img-zoom-box shadow-md">
                     {isGalleryLoading ? (
                         <div className="w-full h-full flex items-center justify-center text-slate-400">
-                            <Loader2 size={32} className="animate-spin text-blue-600" />
+                            <Loader2 size={28} className="animate-spin text-blue-600" />
                         </div>
                     ) : slideshowPhotos.length > 0 ? (
                         <div className="relative w-full h-full overflow-hidden">
@@ -355,16 +405,16 @@ const HomePage = () => {
                                 alt={slideshowPhotos[currentIndex]?.title || 'Campus Moment'} 
                                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104" 
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-10">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1">Campus Record</span>
-                                <h3 className="text-xl sm:text-3xl font-serif font-bold text-white mb-2">
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent flex flex-col justify-end p-4 sm:p-8">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-0.5">Campus Record</span>
+                                <h3 className="text-lg sm:text-2xl font-serif font-bold text-white mb-1.5">
                                     {slideshowPhotos[currentIndex]?.title || 'Campus Life'}
                                 </h3>
                                 <Link 
                                     to="/student-life" 
-                                    className="text-xs font-semibold text-amber-300 hover:text-white transition-colors inline-flex items-center gap-1.5"
+                                    className="text-xs font-semibold text-amber-300 hover:text-white transition-colors inline-flex items-center gap-1"
                                 >
-                                    <span>Browse All Collections</span>
+                                    <span>Browse All Photo Collections</span>
                                     <ArrowRight size={13} />
                                 </Link>
                             </div>
@@ -383,49 +433,49 @@ const HomePage = () => {
             <TestimonialsSlider />
 
             {/* ==========================================
-                10. DISPATCHES & CALENDAR
+                10. DISPATCHES & CALENDAR (COMPACT & PACKED)
             ========================================== */}
-            <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+            <section className="py-8 sm:py-14 bg-slate-50 border-b border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
                         
                         {/* Notice & Bulletins Column */}
-                        <div className="lg:col-span-7 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white shadow-sm">
+                        <div className="lg:col-span-7 academic-card p-5 sm:p-6 flex flex-col justify-between bg-white shadow-xs">
                             <div>
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                                <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 mb-4">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                                         <Award size={14} className="text-blue-600" />
                                         Official School Bulletins
                                     </span>
                                     <Link to="/news" className="text-xs font-bold text-blue-600 hover:text-blue-800">
-                                        View All
+                                        View All Circulars
                                     </Link>
                                 </div>
 
                                 {latestNews ? (
-                                    <div className="space-y-3">
-                                        <div className="flex items-center gap-1.5 text-xs text-blue-600 font-semibold">
+                                    <div className="space-y-2">
+                                        <div className="flex items-center gap-1 text-[11px] text-blue-600 font-semibold">
                                             <Clock size={12} />
                                             <span>{latestNews.date || 'Recent Notification'}</span>
                                         </div>
-                                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                                        <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-900 hover:text-blue-600 transition-colors leading-snug">
                                             {latestNews.title}
                                         </h3>
-                                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
                                             {latestNews.content}
                                         </p>
-                                        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors pt-2">
+                                        <Link to="/news" className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors pt-1">
                                             <span>Read Full Dispatch</span>
-                                            <ArrowRight size={13} />
+                                            <ArrowRight size={12} />
                                         </Link>
                                     </div>
                                 ) : (
-                                    <p className="text-xs text-slate-500 py-8">Official bulletins will be posted here as they are published.</p>
+                                    <p className="text-xs text-slate-500 py-4">Official bulletins will be posted here as they are published.</p>
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
-                                <span>Published under Directorate of Academics</span>
+                            <div className="pt-4 mt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+                                <span>Directorate of Academics</span>
                                 <Link to="/news" className="font-semibold text-slate-700 hover:text-blue-600">
                                     Archives & Circulars →
                                 </Link>
@@ -433,31 +483,31 @@ const HomePage = () => {
                         </div>
 
                         {/* Calendar / Events Column */}
-                        <div className="lg:col-span-5 academic-card p-6 sm:p-8 flex flex-col justify-between bg-white shadow-sm">
+                        <div className="lg:col-span-5 academic-card p-5 sm:p-6 flex flex-col justify-between bg-white shadow-xs">
                             <div>
-                                <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                                <div className="flex items-center justify-between mb-4 pb-2.5 border-b border-slate-100">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                                         <Calendar size={14} className="text-blue-600" />
-                                        Upcoming Academic Dates
+                                        Academic Calendar & Dates
                                     </span>
                                 </div>
 
                                 {nearestEvent ? (
-                                    <div className="space-y-4">
-                                        <div className="flex items-center gap-4 p-4 bg-blue-50/50 border border-blue-100 rounded-2xl">
-                                            <div className="w-14 h-14 rounded-xl bg-blue-600 text-white flex flex-col items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
-                                                <span className="text-xl font-serif font-bold leading-none">
+                                    <div className="space-y-3">
+                                        <div className="flex items-center gap-3 p-3 bg-blue-50/50 border border-blue-100 rounded-xl">
+                                            <div className="w-12 h-12 rounded-lg bg-blue-600 text-white flex flex-col items-center justify-center shrink-0 shadow-xs">
+                                                <span className="text-lg font-serif font-bold leading-none">
                                                     {new Date(nearestEvent.eventDate).getDate()}
                                                 </span>
-                                                <span className="text-[10px] font-bold uppercase tracking-tight mt-0.5">
+                                                <span className="text-[9px] font-bold uppercase tracking-tight mt-0.5">
                                                     {new Date(nearestEvent.eventDate).toLocaleString('default', { month: 'short' })}
                                                 </span>
                                             </div>
                                             <div>
-                                                <span className="text-sm font-bold text-slate-900 block leading-tight">
+                                                <span className="text-xs sm:text-sm font-bold text-slate-900 block leading-tight">
                                                     {nearestEvent.title}
                                                 </span>
-                                                <span className="text-xs text-slate-500 flex items-center gap-1 mt-1">
+                                                <span className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
                                                     <MapPin size={11} className="text-blue-600 shrink-0" />
                                                     {nearestEvent.location || 'Main Campus Auditorium'}
                                                 </span>
@@ -465,17 +515,17 @@ const HomePage = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="py-6">
-                                        <h4 className="text-sm font-bold text-slate-900 mb-1">Term Examination Dates</h4>
-                                        <p className="text-xs text-slate-500">Scheduled events and parent-teacher consultations will be announced here.</p>
+                                    <div className="py-4">
+                                        <h4 className="text-xs font-bold text-slate-900 mb-0.5">Term Examination Dates</h4>
+                                        <p className="text-[11px] text-slate-500">Scheduled events and parent consultations announced here.</p>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-slate-100">
+                            <div className="pt-4 mt-4 border-t border-slate-100">
                                 <Link 
                                     to="/contact" 
-                                    className="btn-secondary w-full text-center text-xs justify-center"
+                                    className="btn-secondary w-full text-center text-xs justify-center py-2"
                                 >
                                     Inquire with Administration Desk
                                 </Link>

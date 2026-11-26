@@ -101,25 +101,25 @@ const CampusFacilitySwitcher = ({ onOpenModal }) => {
     const active = facilities.find(f => f.id === activeId) || facilities[0];
 
     return (
-        <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+        <section className="py-8 sm:py-14 bg-slate-50 border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 
                 {/* Header */}
-                <div className="max-w-2xl mb-10">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-2 flex items-center gap-1.5">
+                <div className="max-w-2xl mb-5 sm:mb-6">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 block mb-1.5 flex items-center gap-1.5">
                         <Sparkles size={14} className="text-blue-600" />
                         Campus Habitat & Infrastructure
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-slate-900 tracking-tight">
                         Engineered for Immersive Learning & Scholar Safety
                     </h2>
-                    <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                    <p className="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">
                         Explore our purpose-built campus infrastructure supporting rigorous academics, scientific inquiry, physical wellness, and safe daily transit.
                     </p>
                 </div>
 
                 {/* Segmented Facility Controller */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2.5 mb-5 sm:mb-6 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
                     {facilities.map((fac) => {
                         const Icon = fac.icon;
                         const isCurrent = fac.id === activeId;
@@ -127,7 +127,7 @@ const CampusFacilitySwitcher = ({ onOpenModal }) => {
                             <button
                                 key={fac.id}
                                 onClick={() => setActiveId(fac.id)}
-                                className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                                className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all duration-200 cursor-pointer ${
                                     isCurrent
                                         ? 'bg-blue-600 text-white border border-blue-600 shadow-md shadow-blue-500/25 font-bold'
                                         : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-slate-50'
@@ -141,8 +141,8 @@ const CampusFacilitySwitcher = ({ onOpenModal }) => {
                 </div>
 
                 {/* Showcase Card */}
-                <div className="academic-card p-6 sm:p-8 md:p-10 bg-white shadow-md">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div className="academic-card p-4 sm:p-6 md:p-8 bg-white shadow-xs">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
                         
                         {/* Visual Image */}
                         <div className="lg:col-span-6 relative">

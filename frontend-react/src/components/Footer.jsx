@@ -20,11 +20,11 @@ const Footer = () => {
   const general = content?.general || {};
 
   return (
-    <footer className="bg-slate-50 text-slate-600 pt-16 pb-12 border-t border-slate-200 font-sans relative">
+    <footer className="bg-slate-50 text-slate-600 pt-10 sm:pt-14 pb-8 sm:pb-10 border-t border-slate-200 font-sans relative">
       <div className="container mx-auto px-4 sm:px-8 max-w-7xl">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-10">
           
           {/* COLUMN 1: Masthead & Crest */}
           <div className="space-y-4">
